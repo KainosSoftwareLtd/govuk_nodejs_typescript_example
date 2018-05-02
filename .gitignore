@@ -44,3 +44,10 @@ errorShots
 
 # ts
 dist
+
+# govuk assets
+govuk_modules
+views/govuk_template.html
+
+# generated styles
+public/stylesheets

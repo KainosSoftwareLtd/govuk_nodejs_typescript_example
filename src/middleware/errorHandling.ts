@@ -15,6 +15,6 @@ export function attachErrorHandling (app: express.Application) {
 
     // render the error page
     res.status(err.status || 500)
-    res.render('error')
+    res.render(err.status !== 404 ? 'includes/error' : 'includes/error-404')
   })
 }

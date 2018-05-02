@@ -4,8 +4,7 @@ import * as path from 'path'
 import * as logger from 'morgan'
 import * as cookieParser from 'cookie-parser'
 import * as bodyParser from 'body-parser'
-import * as sassMiddleware from 'node-sass-middleware'
-
+import * as favicon from 'serve-favicon'
 import { TYPES } from './types'
 import { iocContainer } from './ioc'
 import { IndexController } from './controllers/indexController'
@@ -25,13 +24,18 @@ app.use(logger('dev'))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cookieParser())
-app.use(sassMiddleware({
-  src: path.join(__dirname, 'public'),
-  dest: path.join(__dirname, 'public'),
-  indentedSyntax: true, // true = .sass and false = .scss
-  sourceMap: true
-}))
-app.use(express.static(path.join(__dirname, '../public')))
+app.use('/public', express.static(path.join(__dirname, '../public')))
+app.use('/public', express.static(path.join(__dirname, '../govuk_modules', 'govuk_template')))
+app.use('/public', express.static(path.join(__dirname, '../govuk_modules', 'govuk_frontend_toolkit')))
+app.use(favicon(path.join(__dirname, '../govuk_modules', 'govuk_template', 'images', 'favicon.ico')))
+
+// Add variables that are available in all views.
+app.use(function (req, res, next) {
+  res.locals.asset_path = '/public/'
+  res.locals.serviceName = 'Example service' // TODO replace with service name
+  res.locals.releaseVersion = 'v0.1' // TODO replace with package.json version
+  next()
+})
 
 // Attach routes
 const indexController = iocContainer.get<IndexController>(TYPES.IndexController)

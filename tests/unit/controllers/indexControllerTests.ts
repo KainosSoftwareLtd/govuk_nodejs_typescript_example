@@ -7,6 +7,7 @@ import * as path from 'path'
 import * as bodyParser from 'body-parser'
 import { TYPES } from '../../../src/types'
 import { iocContainer } from '../../../src/ioc'
+import { attachErrorHandling } from '../../../src/middleware/errorHandling'
 import { IndexController } from '../../../src/controllers/indexController'
 
 describe('IndexController', function () {
@@ -24,23 +25,7 @@ describe('IndexController', function () {
 
     request = supertest(app)
 
-    // catch 404 and forward to error handler
-    app.use(function(req, res, next) {
-      let err = new Error('Not Found')
-      err['status'] = 404
-      next(err)
-    })
-
-    // error handler
-    app.use(function(err, req, res, next) {
-      // set locals, only providing error in development
-      res.locals.message = err.message
-      res.locals.error = req.app.get('env') === 'development' ? err : {}
-
-      // render the error page
-      res.status(err.status || 500)
-      res.render('error')
-    })
+    attachErrorHandling(app)
   })
 
   describe('GET /', function () {

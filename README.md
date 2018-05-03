@@ -39,7 +39,7 @@ NodeJS is great for writing applications, but the looseness of dynamic typing an
   * CQRS - TODO
   * Request sanitisation - TODO
   * vulnerbility checks - TODO NCP
-* gzip - added [compression](https://www.npmjs.com/package/compression) TODO
+* gzip - added [compression](https://www.npmjs.com/package/compression)
 * dependency injection - TODO example of service in controller
 * validation - TODO example of GDS validation
 * testing

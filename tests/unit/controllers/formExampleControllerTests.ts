@@ -8,11 +8,11 @@ import * as bodyParser from 'body-parser'
 import { TYPES } from '../../../src/types'
 import { iocContainer } from '../../../src/ioc'
 import { attachErrorHandling } from '../../../src/middleware/errorHandling'
-import { IndexController } from '../../../src/controllers/indexController'
+import { FormExampleController } from '../../../src/controllers/formExampleController'
 
-describe('IndexController', function () {
+describe('FormExampleController', function () {
   let request
-  let indexController
+  let formExampleController
 
   beforeEach(function () {
     const app = express()
@@ -20,21 +20,21 @@ describe('IndexController', function () {
     expressNunjucks(app, { noCache: true })
     app.use(bodyParser.urlencoded({ extended: false }))
 
-    indexController = iocContainer.get<IndexController>(TYPES.IndexController)
-    indexController.attachRoutes(app)
+    formExampleController = iocContainer.get<FormExampleController>(TYPES.FormExampleController)
+    formExampleController.attachRoutes(app)
 
     request = supertest(app)
 
     attachErrorHandling(app)
   })
 
-  describe('GET /', function () {
-    it('should return index response', () => {
+  describe('GET /form-example', function () {
+    it('should return form response', () => {
       return request
-        .get('/')
+        .get('/form-example')
         .expect(200)
         .then(res => {
-          expect(res.text).to.contain('This is an example service')
+          expect(res.text).to.contain('Enter your details')
         })
     })
   })

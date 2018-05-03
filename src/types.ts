@@ -1,3 +1,4 @@
 export const TYPES = {
-  IndexController: Symbol.for('IndexController')
+  IndexController: Symbol.for('IndexController'),
+  FormExampleController: Symbol.for('FormExampleController')
 }

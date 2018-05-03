@@ -9,6 +9,7 @@ import * as compression from 'compression'
 import { TYPES } from './types'
 import { iocContainer } from './ioc'
 import { IndexController } from './controllers/indexController'
+import { FormExampleController } from './controllers/formExampleController'
 import { attachErrorHandling } from './middleware/errorHandling'
 import { attachSecurityHeaders } from './middleware/securityHeaders'
 
@@ -44,7 +45,10 @@ app.use(function (req, res, next) {
 
 // Attach routes
 const indexController = iocContainer.get<IndexController>(TYPES.IndexController)
+const formExampleController = iocContainer.get<FormExampleController>(TYPES.FormExampleController)
+
 indexController.attachRoutes(app)
+formExampleController.attachRoutes(app)
 
 attachErrorHandling(app)
 

@@ -17,6 +17,7 @@ npm start # http://localhost:3000
 * `src/app.ts` - Main Express application script which sets up middleware and controllers
 * `src/ioc.ts` - [Inversify IoC container](https://www.npmjs.com/package/inversify), dependency injection for everything defined in `src/types.ts`
 * `src/controllers` - controllers
+* `src/middleware` - custom request chain middleware such as error handling and security
 * `public` - folder for static assets
 * `views` - folder for nunjunks views
 * `tests` - unit and e2e tests
@@ -30,12 +31,16 @@ npm start # http://localhost:3000
 
 NodeJS is great for writing applications, but the looseness of dynamic typing and lack of type definitions makes it easer for developers to write messy code and get lost in others work in a larger application. This often only becomes apparent after an application reaches a certain size/complexity. TypeScript gives developers a more consistent way to write larger applications, while still allowing the full flexibility of JavaScript if necessary.
 
+## How to use
+
+Clone or copy the source into your own project. There are sections marked with `TODO` which you will need to update for your service.
+
 ## Features
 
 * GDS styles - added npm modules for GOV.UK styles and package.json script `generate-assets` to update and compile SASS
 * CI - automated build and deployment via Travis into Heroku - TODO
 * security
-  * headers - added [helmet](https://www.npmjs.com/package/helmet) TODO
+  * headers - added [helmet](https://www.npmjs.com/package/helmet)
   * CQRS - TODO
   * Request sanitisation - TODO
   * vulnerbility checks - TODO NCP

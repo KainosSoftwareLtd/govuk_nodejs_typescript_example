@@ -10,6 +10,7 @@ import { TYPES } from './types'
 import { iocContainer } from './ioc'
 import { IndexController } from './controllers/indexController'
 import { attachErrorHandling } from './middleware/errorHandling'
+import { attachSecurityHeaders } from './middleware/securityHeaders'
 
 const app = express()
 const isDev = app.get('env') === 'development'
@@ -20,6 +21,8 @@ expressNunjucks(app, {
   watch: isDev,
   noCache: isDev
 })
+
+attachSecurityHeaders(app) // Helmet security headers and CSP
 
 app.use(compression()) // GZIP compression
 app.use(logger('dev'))

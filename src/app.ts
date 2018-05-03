@@ -5,6 +5,7 @@ import * as logger from 'morgan'
 import * as cookieParser from 'cookie-parser'
 import * as bodyParser from 'body-parser'
 import * as favicon from 'serve-favicon'
+import * as compression from 'compression'
 import { TYPES } from './types'
 import { iocContainer } from './ioc'
 import { IndexController } from './controllers/indexController'
@@ -20,6 +21,7 @@ expressNunjucks(app, {
   noCache: isDev
 })
 
+app.use(compression()) // GZIP compression
 app.use(logger('dev'))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))

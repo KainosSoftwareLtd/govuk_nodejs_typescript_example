@@ -1,0 +1,108 @@
+{% extends "includes/layout.html" %}
+
+{% block page_title %}
+{% if serviceName %} {{ serviceName }} {% endif %}
+{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+
+    {% include "includes/phase_banner_beta.html" %}
+
+    <div class="grid-row">
+        <div class="column-two-thirds">
+
+            <h1 class="heading-xlarge">
+              <span class="heading-secondary">Example form</span>
+              Enter your details
+            </h1>
+
+            <div class="panel panel-border-wide">
+              <p>
+                Go to <a href="http://govuk-elements.herokuapp.com/form-elements/">govuk-elements</a> for full examples of form controls and validation error display.
+              </p>
+            </div>
+
+            <form>
+              <div class="form-group">
+                <label class="form-label-bold" for="full-name">Full name</label>
+                <input class="form-control" id="full-name" type="text" name="full-name">
+              </div>
+
+              <div class="form-group">
+                <fieldset>
+                  <legend>
+                    <span class="form-label-bold">
+                      What is your date of birth?
+                    </span>
+                    <span class="form-hint">For example, 31 3 1980</span>
+                  </legend>
+                  <div class="form-date">
+                    <div class="form-group form-group-day">
+                      <label class="form-label" for="dob-day">Day</label>
+                      <input class="form-control" id="dob-day" name="dob-day" type="number" pattern="[0-9]*">
+                    </div>
+                    <div class="form-group form-group-month">
+                      <label class="form-label" for="dob-month">Month</label>
+                      <input class="form-control" id="dob-month" name="dob-month" type="number" pattern="[0-9]*">
+                    </div>
+                    <div class="form-group form-group-year">
+                      <label class="form-label" for="dob-year">Year</label>
+                      <input class="form-control" id="dob-year" name="dob-year" type="number" pattern="[0-9]*">
+                    </div>
+                  </div>
+                </fieldset>
+              </div>
+
+              <div class="form-group">
+                  <fieldset>
+
+                    <legend>
+                      <span class="form-label-bold">
+                        How do you want to be contacted?
+                      </span>
+                    </legend>
+
+                    <div class="multiple-choice" data-target="contact-by-email">
+                      <input id="example-contact-by-email" type="radio" name="radio-contact-group" value="Yes">
+                      <label for="example-contact-by-email">Email</label>
+                    </div>
+                    <div class="panel panel-border-narrow js-hidden" id="contact-by-email">
+                      <label class="form-label" for="contact-email">Email address</label>
+                      <input class="form-control" name="contact-email" type="text" id="contact-email">
+                    </div>
+
+                    <div class="multiple-choice" data-target="contact-by-phone">
+                      <input id="example-contact-by-phone" type="radio" name="radio-contact-group" value="No">
+                      <label for="example-contact-by-phone">Phone</label>
+                    </div>
+                    <div class="panel panel-border-narrow js-hidden" id="contact-by-phone">
+                      <label class="form-label" for="contact-phone">Phone number</label>
+                      <input class="form-control" name="contact-phone" type="text" id="contact-phone">
+                    </div>
+
+                    <div class="multiple-choice" data-target="contact-by-text">
+                      <input id="example-contact-by-text" type="radio" name="radio-contact-group" value="No">
+                      <label for="example-contact-by-text">Text message</label>
+                    </div>
+                    <div class="panel panel-border-narrow js-hidden" id="contact-by-text">
+                      <label class="form-label" for="contact-text-message">Mobile phone number</label>
+                      <input class="form-control" name="contact-text-message" type="text" id="contact-text-message">
+                    </div>
+
+                  </fieldset>
+                </div>
+
+                <div class="form-group">
+                  <button class="button">Save and continue</button>
+                </div>
+            </form>
+
+        </div>
+
+    </div>
+
+</main>
+
+{% endblock %}

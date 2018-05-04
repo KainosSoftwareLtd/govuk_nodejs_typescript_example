@@ -1,0 +1,39 @@
+{% extends "includes/layout.html" %}
+
+{% block page_title %}
+{% if serviceName %} {{ serviceName }} {% endif %}
+{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+
+    {% include "includes/phase_banner_beta.html" %}
+
+    <div class="grid-row">
+        <div class="column-two-thirds">
+
+            <h1 class="heading-xlarge">
+                {% if serviceName %} {{ serviceName }} {% endif %}
+            </h1>
+
+            <p>This is an example service, you would put the service description here.</p>
+
+            <p>
+                <a class="button button-start" href="/form-example" role="button">Start now</a>
+            </p>
+
+            <h2 class="heading-medium">Before you start</h2>
+            <p>You’ll need to have:</p>
+            <ul class="list list-bullet">
+                <li>Your details</li>
+                <li>Some things</li>
+            </uL>
+
+        </div>
+
+    </div>
+
+</main>
+
+{% endblock %}

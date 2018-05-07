@@ -1,0 +1,63 @@
+{% extends "includes/layout.html" %}
+
+{% block page_title %}
+{% if serviceName %} {{ serviceName }} {% endif %}
+{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+
+    {% include "includes/phase_banner_beta.html" %}
+
+    <div class="grid-row">
+        <div class="column-two-thirds">
+
+                <h1 class="heading-xlarge">
+                        <span class="heading-secondary">Example summary</span>
+                        Summary details
+                </h1>
+
+                <table>
+                    <caption class="heading-small">Example form summary</caption>
+                    <tbody>
+                        <tr>
+                           <td>Full name</td>
+                           <td>{{ form['full-name'] }}</td>
+                        </tr>
+                        <tr>
+                            <td>Date of birth</td>
+                            <td>{{ form.dob }}</td>
+                        </tr>
+                        <tr>
+                            <td>How do you want to be contacted?</td>
+                            <td>{{ form['preferred-contact-method'] }}</td>
+                        </tr>
+
+                        {% if form['email-address'] %}
+                        <tr>
+                            <td>Email address</td>
+                            <td>{{ form['email-address'] }}</td>
+                        </tr>
+                        {% endif %}
+                    
+                        {% if form['phone-number'] %}
+                        <tr>
+                            <td>Phone number</td>
+                            <td>{{ form['phone-number'] }}</td>
+                        </tr>
+                        {% endif %}
+                        
+                        {% if form['mobile-phone-number'] %}
+                        <tr>
+                            <td>Mobile phone number</td>
+                            <td>{{ form['mobile-phone-number'] }}</td>
+                        </tr>
+                        {% endif %}
+                    </tbody>
+                </table>
+        </div>
+    </div>
+</main>
+
+{% endblock %}

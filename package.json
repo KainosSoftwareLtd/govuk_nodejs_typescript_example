@@ -6,11 +6,12 @@
     "build": "npm run clean && tsc",
     "clean": "rimraf dist",
     "lint": "tslint --project tslint.json",
-    "start": "npm run build && node ./bin/www",
+    "start": "npm run build && json-server -p 4000 db.json && node ./bin/www",
     "test": "npm run lint && mocha tests/unit/**/*.ts --require ts-node/register",
     "generate-assets": "gulp generate-assets"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "body-parser": "~1.18.2",
     "compression": "^1.7.2",
     "cookie-parser": "~1.4.3",
@@ -37,6 +38,7 @@
     "chai": "^4.1.2",
     "gulp": "^3.9.1",
     "gulp-sass": "^4.0.1",
+    "json-server": "^0.12.2",
     "mocha": "^5.1.1",
     "node-sass": "^4.9.0",
     "supertest": "^3.0.0",

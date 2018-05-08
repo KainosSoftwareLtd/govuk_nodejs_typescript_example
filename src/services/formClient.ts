@@ -1,7 +1,7 @@
 import { injectable, inject } from 'inversify'
 import axios from 'axios'
 import { TYPES } from '../types'
-import { Form, FormCreationRequest } from '../models/formModels'
+import { FormCreationRequest } from '../models/formModels'
 
 export interface FormClientInterface {
     create(userCreationRequest: FormCreationRequest)

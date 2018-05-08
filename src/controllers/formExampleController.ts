@@ -3,7 +3,6 @@ import { injectable, inject } from 'inversify'
 import { TYPES } from '../types'
 import { FormCreationRequest, PreferredContactMethod } from '../models/formModels'
 import { FormClientInterface } from '../services/formClient'
-import * as bodyParser from 'body-parser'
 
 
 @injectable()
@@ -33,7 +32,7 @@ export class FormExampleController {
       'email-address': req.body['contact-email'],
       'phone-number': req.body['contact-phone'],
       'mobile-phone-number': req.body['contact-text-message'],
-    }
+      }
       let result = await this.formClient.create(formCreationRequest)
       if (result) {
         let id = result

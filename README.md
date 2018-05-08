@@ -52,4 +52,4 @@ Clone or copy the source into your own project. There are sections marked with `
   * browser testing - TODO
 * logging - TODO decorators?
 * metrics - TODO
-* Sample VSCode launch.json - TODO plus instructions
+* Sample VSCode launch.json - see `.sample-vscode`, copy the `launch.json` to `.vscode` for example build configurations to debug the application and run individual mocha tests

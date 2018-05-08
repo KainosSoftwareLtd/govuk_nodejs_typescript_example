@@ -1,5 +1,7 @@
 # Example gov.uk TypeScript web application
 
+[![Build Status](https://travis-ci.org/KainosSoftwareLtd/govuk_nodejs_typescript_example.svg?branch=master)](https://travis-ci.org/KainosSoftwareLtd/govuk_nodejs_typescript_example)
+
 This is an example NodeJS [TypeScript](https://www.typescriptlang.org/) application which includes the [GOV.UK front-end toolkit](https://github.com/alphagov/govuk_frontend_toolkit) but has been modified to be production ready. It is intended as an example and template for gov.uk beta node applications.
 
 ## Run
@@ -38,7 +40,7 @@ Clone or copy the source into your own project. There are sections marked with `
 ## Features
 
 * GDS styles - added npm modules for GOV.UK styles and package.json script `generate-assets` to update and compile SASS
-* CI - automated build and deployment via Travis into Heroku - TODO
+* CI - automated build and deployment via Travis, see `.travis.yml`
 * security
   * headers - added [helmet](https://www.npmjs.com/package/helmet)
   * CQRS - TODO

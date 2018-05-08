@@ -45,7 +45,7 @@ Clone or copy the source into your own project. There are sections marked with `
   * Request sanitisation - TODO
   * vulnerbility checks - TODO NCP
 * gzip - added [compression](https://www.npmjs.com/package/compression)
-* dependency injection - TODO example of service in controller
+* dependency injection - example of service in controller - AM created service that calls fake api (npm server-json). Posts form data and displays a summary of form input. Added service to IOC and used inversify to facilitate dependency injection into formExampleController. Mocked service in tests using npm ts-mockito
 * validation - TODO example of GDS validation
 * testing
   * unit testing including mocking dependencies TODO

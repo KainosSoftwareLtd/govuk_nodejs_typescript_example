@@ -4,7 +4,7 @@ import { FormExampleModel } from '../models/formExampleModel'
 import { validate } from 'class-validator'
 import { convertValidationErrorsToViewErrors } from '../validators/validationHelper'
 import { TYPES } from '../types'
-import { FormCreationRequest, PreferredContactMethod } from '../models/formModels'
+
 import { FormClientInterface } from '../services/formClient'
 
 @injectable()
@@ -32,14 +32,9 @@ export class FormExampleController {
       req.body.contactSmsNumber
     )
 
-    validate(formExampleModel).then(errors => {
-      if (errors.length > 0) {
-        return Promise.resolve(res.status(400).render('formExample.html', { data: req.body, errors: convertValidationErrorsToViewErrors(errors) }))
-      }
-    })
-
     // continue with call to service
     try {
+      await validate(formExampleModel)
       let result = await this.formClient.create(formExampleModel)
       if (result) {
         let id = result
@@ -48,7 +43,11 @@ export class FormExampleController {
         next(new Error('Problem saving form, please try again'))
       }
     } catch (error) {
-      next(error)
+      if (error.length > 0) {
+        res.status(400).render('formExample.html', { data: req.body, errors: convertValidationErrorsToViewErrors(error) })
+      } else {
+        next(error)
+      }
     }
   }
 
@@ -57,7 +56,7 @@ export class FormExampleController {
     try {
       let form = await this.formClient.get(+req.params.id)
       if (form) {
-        return Promise.resolve(res.render('summaryFormExample.html', { form }))
+        return res.render('summaryFormExample.html', { form })
       } else {
         res.status(404)
         next()

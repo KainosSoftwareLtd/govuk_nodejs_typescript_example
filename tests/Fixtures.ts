@@ -1,13 +1,16 @@
-import { Form, PreferredContactMethod } from '../src/models/formModels'
+import { Form, ContactOption } from '../src/models/formExampleModel'
 
 
 export const FORM1: Form = {
-    'full-name': 'first full name',
-    dob: '31 3 1980',
-    'preferred-contact-method': PreferredContactMethod.Email,
-    'email-address': 'emailaddress@exampleform.com',
-    'phone-number': '',
-    'mobile-phone-number': '',
-    id: 1
+  id: 1,
+  fullName:  'full name',
+  dobDay: 31,
+  dobMonth: 3,
+  dobYear: 1980,
+  dob: new Date(),
+  preferredContactOption: ContactOption.email,
+  contactEmail: 'contactemail@testing.com',
+  contactPhone: '',
+  contactSmsNumber: ''
   }
 

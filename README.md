@@ -1,6 +1,6 @@
 # Example gov.uk TypeScript web application
 
-[![Build Status](https://travis-ci.org/KainosSoftwareLtd/govuk_nodejs_typescript_example.svg?branch=master)](https://travis-ci.org/KainosSoftwareLtd/govuk_nodejs_typescript_example)
+[![Build Status](https://travis-ci.org/KainosSoftwareLtd/govuk_nodejs_typescript_example.svg?branch=master)](https://travis-ci.org/KainosSoftwareLtd/govuk_nodejs_typescript_example) [![NSP Status](https://nodesecurity.io/orgs/kainosnodeexamples/projects/9cbfc674-5539-4e40-bea0-c088fbfe4581/badge)](https://nodesecurity.io/orgs/kainosnodeexamples/projects/9cbfc674-5539-4e40-bea0-c088fbfe4581)
 
 This is an example NodeJS [TypeScript](https://www.typescriptlang.org/) application which includes the [GOV.UK front-end toolkit](https://github.com/alphagov/govuk_frontend_toolkit) but has been modified to be production ready. It is intended as an example and template for gov.uk beta node applications.
 
@@ -47,7 +47,7 @@ Clone or copy the source into your own project. There are sections marked with `
   * headers - added [helmet](https://www.npmjs.com/package/helmet)
   * CQRS - TODO
   * Request sanitisation - TODO
-  * vulnerbility checks - TODO NCP
+  * vulnerbility checks - NSP, see badge and run locally with `npm run audit` (replace with `npm audit` after [NPM 6 release](https://medium.com/npm-inc/announcing-npm-6-5d0b1799a905))
 * gzip - added [compression](https://www.npmjs.com/package/compression)
 * dependency injection - TODO example of service in controller
 * validation - see `FormExampleController.ts`, `FormExampleModel.ts` and `formExample.html` for example of form post endpoint that displays GDS styled validation errors against fields (with links) using validation decorators ([class-validator](https://www.npmjs.com/package/class-validator))

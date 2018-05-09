@@ -8,7 +8,8 @@
     "lint": "tslint --project tslint.json",
     "start": "npm run build && node ./bin/www",
     "test": "npm run lint && mocha tests/unit/**/*.ts --require ts-node/register",
-    "generate-assets": "gulp generate-assets"
+    "generate-assets": "gulp generate-assets",
+    "audit": "nsp check"
   },
   "dependencies": {
     "body-parser": "~1.18.2",
@@ -40,6 +41,7 @@
     "gulp-sass": "^4.0.1",
     "mocha": "^5.1.1",
     "node-sass": "^4.9.0",
+    "nsp": "^3.2.1",
     "supertest": "^3.0.0",
     "ts-node": "^6.0.2",
     "tslint": "^5.9.1",

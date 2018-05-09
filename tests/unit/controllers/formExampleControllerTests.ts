@@ -18,6 +18,7 @@ describe('FormExampleController', function () {
     const app = express()
     app.set('views', path.join(__dirname, '../../../views'))
     expressNunjucks(app, { noCache: true })
+    app.use(bodyParser.json())
     app.use(bodyParser.urlencoded({ extended: false }))
 
     formExampleController = iocContainer.get<FormExampleController>(TYPES.FormExampleController)
@@ -35,6 +36,24 @@ describe('FormExampleController', function () {
         .expect(200)
         .then(res => {
           expect(res.text).to.contain('Enter your details')
+        })
+    })
+  })
+
+  describe('POST /form-example', function () {
+    it('should return redirect for valid post', () => {
+      return request
+        .post('/form-example')
+        .send({ 'fullName': 'Joe Bloggs' })
+        .expect(302)
+        .expect('location', `/`)
+    })
+    it('should return form response for invalid post', () => {
+      return request
+        .post('/form-example')
+        .expect(400)
+        .then(res => {
+          expect(res.text).to.contain('There was a problem')
         })
     })
   })

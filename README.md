@@ -20,6 +20,8 @@ npm start # http://localhost:3000
 * `src/ioc.ts` - [Inversify IoC container](https://www.npmjs.com/package/inversify), dependency injection for everything defined in `src/types.ts`
 * `src/controllers` - controllers
 * `src/middleware` - custom request chain middleware such as error handling and security
+* `src/models` - models with validation decorators using [class-validator](https://www.npmjs.com/package/class-validator)
+* `src/validators` - custom validators and helpers
 * `public` - folder for static assets
 * `views` - folder for nunjunks views
 * `tests` - unit and e2e tests
@@ -48,7 +50,7 @@ Clone or copy the source into your own project. There are sections marked with `
   * vulnerbility checks - TODO NCP
 * gzip - added [compression](https://www.npmjs.com/package/compression)
 * dependency injection - TODO example of service in controller
-* validation - TODO example of GDS validation
+* validation - see `FormExampleController.ts`, `FormExampleModel.ts` and `formExample.html` for example of form post endpoint that displays GDS styled validation errors against fields (with links) using validation decorators ([class-validator](https://www.npmjs.com/package/class-validator))
 * testing
   * unit testing including mocking dependencies TODO
   * browser testing - TODO

@@ -9,11 +9,13 @@
     "start": "npm run build && node ./bin/www",
     "fakeApi": "json-server -p 4000 db.json",
     "test": "npm run lint && mocha tests/unit/**/*.ts --require ts-node/register",
-    "generate-assets": "gulp generate-assets"
+    "generate-assets": "gulp generate-assets",
+    "audit": "nsp check"
   },
   "dependencies": {
     "axios": "^0.18.0",
     "body-parser": "~1.18.2",
+    "class-validator": "^0.8.5",
     "compression": "^1.7.2",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
@@ -42,6 +44,7 @@
     "json-server": "^0.12.2",
     "mocha": "^5.1.1",
     "node-sass": "^4.9.0",
+    "nsp": "^3.2.1",
     "supertest": "^3.0.0",
     "ts-mockito": "^2.3.0",
     "ts-node": "^6.0.2",

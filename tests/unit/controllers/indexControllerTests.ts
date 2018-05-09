@@ -18,6 +18,7 @@ describe('IndexController', function () {
     const app = express()
     app.set('views', path.join(__dirname, '../../../views'))
     expressNunjucks(app, { noCache: true })
+    app.use(bodyParser.json())
     app.use(bodyParser.urlencoded({ extended: false }))
 
     indexController = iocContainer.get<IndexController>(TYPES.IndexController)

@@ -1,10 +1,10 @@
 import { injectable, inject } from 'inversify'
 import axios from 'axios'
 import { TYPES } from '../types'
-import { FormCreationRequest } from '../models/formModels'
+import { FormExampleModel } from '../models/formExampleModel'
 
 export interface FormClientInterface {
-    create(userCreationRequest: FormCreationRequest)
+    create(formExampleModel: FormExampleModel)
     get(id: number)
 }
 
@@ -15,8 +15,8 @@ export class FormClient implements FormClientInterface {
     this.url = formClientUrl
   }
 
-    public async create(formCreationRequest: FormCreationRequest) {
-        return axios.post(`${this.url}/exampleForm`, formCreationRequest)
+    public async create(formExampleModel: FormExampleModel) {
+        return axios.post(`${this.url}/exampleForm`, formExampleModel)
           .then((response) => {
             return response.data.id
           })

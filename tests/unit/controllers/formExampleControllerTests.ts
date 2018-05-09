@@ -8,10 +8,10 @@ import * as bodyParser from 'body-parser'
 import { mock, instance, when, verify, anything, capture } from 'ts-mockito'
 import { TYPES } from '../../../src/types'
 import { iocContainer } from '../../../src/ioc'
-import { Form } from '../../../src/models/formModels'
 import { FormClient } from '../../../src/services/formClient'
 import { attachErrorHandling } from '../../../src/middleware/errorHandling'
 import { FormExampleController } from '../../../src/controllers/formExampleController'
+import { Form } from '../../../src/models/formExampleModel'
 import { FORM1 } from '../../Fixtures'
 
 describe('FormExampleController', function () {
@@ -24,6 +24,7 @@ describe('FormExampleController', function () {
     const app = express()
     app.set('views', path.join(__dirname, '../../../views'))
     expressNunjucks(app, { noCache: true })
+    app.use(bodyParser.json())
     app.use(bodyParser.urlencoded({ extended: false }))
 
     mockFormClient = mock(FormClient)
@@ -108,6 +109,23 @@ describe('FormExampleController', function () {
         })
         .type('form')
         .expect(500)
+    })
+
+    it('should return redirect for valid post', () => {
+      return request
+        .post('/form-example')
+        .send({ 'fullName': 'Joe Bloggs' })
+        .expect(302)
+        .expect('location', `/`)
+    })
+
+    it('should return form response for invalid post', () => {
+      return request
+        .post('/form-example')
+        .expect(400)
+        .then(res => {
+          expect(res.text).to.contain('There was a problem')
+        })
     })
   })
 

@@ -13,6 +13,8 @@
     <div class="grid-row">
         <div class="column-two-thirds">
 
+            {% include "includes/validation-error-messages.html" %}
+
             <h1 class="heading-xlarge">
               <span class="heading-secondary">Example form</span>
               Enter your details
@@ -24,10 +26,13 @@
               </p>
             </div>
 
-            <form method="post" action="form-example">
+            <form method="POST" action="form-example">
               <div class="form-group">
-                <label class="form-label-bold" for="full-name">Full name</label>
-                <input class="form-control" id="full-name" type="text" name="full-name">
+                <label class="form-label-bold" for="fullName">Full name</label>
+                {% if errors['fullName'][0] %}
+                <span class="error-message" id="error-fullName">{{ errors['fullName'][0] }}</span>
+                {% endif %}
+                <input class="form-control" id="fullName" type="text" name="fullName" value="{{ data['fullName'] }}">
               </div>
 
               <div class="form-group">
@@ -40,16 +45,16 @@
                   </legend>
                   <div class="form-date">
                     <div class="form-group form-group-day">
-                      <label class="form-label" for="dob-day">Day</label>
-                      <input class="form-control" id="dob-day" name="dob-day" type="number" pattern="[0-9]*">
+                      <label class="form-label" for="dobDay">Day</label>
+                      <input class="form-control" id="dobDay" name="dobDay" type="number" pattern="[0-9]*">
                     </div>
                     <div class="form-group form-group-month">
-                      <label class="form-label" for="dob-month">Month</label>
-                      <input class="form-control" id="dob-month" name="dob-month" type="number" pattern="[0-9]*">
+                      <label class="form-label" for="dobMonth">Month</label>
+                      <input class="form-control" id="dobMonth" name="dobMonth" type="number" pattern="[0-9]*">
                     </div>
                     <div class="form-group form-group-year">
-                      <label class="form-label" for="dob-year">Year</label>
-                      <input class="form-control" id="dob-year" name="dob-year" type="number" pattern="[0-9]*">
+                      <label class="form-label" for="dobYear">Year</label>
+                      <input class="form-control" id="dobYear" name="dobYear" type="number" pattern="[0-9]*">
                     </div>
                   </div>
                 </fieldset>
@@ -65,30 +70,30 @@
                     </legend>
 
                     <div class="multiple-choice" data-target="contact-by-email">
-                      <input id="example-contact-by-email" type="radio" name="radio-contact-group" value="Yes">
+                      <input id="example-contact-by-email" type="radio" name="preferredContactOption" value="email">
                       <label for="example-contact-by-email">Email</label>
                     </div>
                     <div class="panel panel-border-narrow js-hidden" id="contact-by-email">
-                      <label class="form-label" for="contact-email">Email address</label>
-                      <input class="form-control" name="contact-email" type="text" id="contact-email">
+                      <label class="form-label" for="contactEmail">Email address</label>
+                      <input class="form-control" name="contactEmail" type="text" id="contactEmail">
                     </div>
 
                     <div class="multiple-choice" data-target="contact-by-phone">
-                      <input id="example-contact-by-phone" type="radio" name="radio-contact-group" value="No">
+                      <input id="example-contact-by-phone" type="radio" name="preferredContactOption" value="phone">
                       <label for="example-contact-by-phone">Phone</label>
                     </div>
                     <div class="panel panel-border-narrow js-hidden" id="contact-by-phone">
-                      <label class="form-label" for="contact-phone">Phone number</label>
-                      <input class="form-control" name="contact-phone" type="text" id="contact-phone">
+                      <label class="form-label" for="contactPhone">Phone number</label>
+                      <input class="form-control" name="contactPhone" type="text" id="contactPhone">
                     </div>
 
                     <div class="multiple-choice" data-target="contact-by-text">
-                      <input id="example-contact-by-text" type="radio" name="radio-contact-group" value="No">
+                      <input id="example-contact-by-text" type="radio" name="preferredContactOption" value="sms">
                       <label for="example-contact-by-text">Text message</label>
                     </div>
                     <div class="panel panel-border-narrow js-hidden" id="contact-by-text">
-                      <label class="form-label" for="contact-text-message">Mobile phone number</label>
-                      <input class="form-control" name="contact-text-message" type="text" id="contact-text-message">
+                      <label class="form-label" for="contactSmsNumber">Mobile phone number</label>
+                      <input class="form-control" name="contactSmsNumber" type="text" id="contactSmsNumber">
                     </div>
 
                   </fieldset>

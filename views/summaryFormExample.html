@@ -23,7 +23,7 @@
                     <tbody>
                         <tr>
                            <td>Full name</td>
-                           <td>{{ form['full-name'] }}</td>
+                           <td>{{ form.fullName }}</td>
                         </tr>
                         <tr>
                             <td>Date of birth</td>
@@ -31,27 +31,27 @@
                         </tr>
                         <tr>
                             <td>How do you want to be contacted?</td>
-                            <td>{{ form['preferred-contact-method'] }}</td>
+                            <td>{{ form.preferredContactOption }}</td>
                         </tr>
 
-                        {% if form['email-address'] %}
+                        {% if form.contactEmail %}
                         <tr>
                             <td>Email address</td>
-                            <td>{{ form['email-address'] }}</td>
+                            <td>{{ form.contactEmail }}</td>
                         </tr>
                         {% endif %}
                     
-                        {% if form['phone-number'] %}
+                        {% if form.contactPhone %}
                         <tr>
                             <td>Phone number</td>
-                            <td>{{ form['phone-number'] }}</td>
+                            <td>{{ form.contactPhone }}</td>
                         </tr>
                         {% endif %}
                         
-                        {% if form['mobile-phone-number'] %}
+                        {% if form.contactSmsNumber %}
                         <tr>
                             <td>Mobile phone number</td>
-                            <td>{{ form['mobile-phone-number'] }}</td>
+                            <td>{{ form.contactSmsNumber }}</td>
                         </tr>
                         {% endif %}
                     </tbody>

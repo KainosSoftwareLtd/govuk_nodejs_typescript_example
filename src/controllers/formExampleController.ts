@@ -1,9 +1,11 @@
 import * as express from 'express'
 import { injectable, inject } from 'inversify'
+import { FormExampleModel } from '../models/formExampleModel'
+import { validate } from 'class-validator'
+import { convertValidationErrorsToViewErrors } from '../validators/validationHelper'
 import { TYPES } from '../types'
 import { FormCreationRequest, PreferredContactMethod } from '../models/formModels'
 import { FormClientInterface } from '../services/formClient'
-
 
 @injectable()
 export class FormExampleController {
@@ -18,22 +20,27 @@ export class FormExampleController {
     return Promise.resolve(res.render('formExample.html', { data: {} }))
   }
 
-  // post the form
   public async post(req, res, next) {
-    try {
-      let day = req.body['dob-day']
-      let month = req.body['dob-month']
-      let year = req.body['dob-year']
+    let formExampleModel = new FormExampleModel(
+      req.body.fullName,
+      req.body.dobDay,
+      req.body.dobMonth,
+      req.body.dobYear,
+      req.body.preferredContactOption,
+      req.body.contactEmail,
+      req.body.contactPhone,
+      req.body.contactSmsNumber
+    )
 
-      let formCreationRequest: FormCreationRequest = {
-      'full-name': req.body['full-name'],
-      dob: day.concat(month, year),
-      'preferred-contact-method': PreferredContactMethod.Email,
-      'email-address': req.body['contact-email'],
-      'phone-number': req.body['contact-phone'],
-      'mobile-phone-number': req.body['contact-text-message'],
+    validate(formExampleModel).then(errors => {
+      if (errors.length > 0) {
+        return Promise.resolve(res.status(400).render('formExample.html', { data: req.body, errors: convertValidationErrorsToViewErrors(errors) }))
       }
-      let result = await this.formClient.create(formCreationRequest)
+    })
+
+    // continue with call to service
+    try {
+      let result = await this.formClient.create(formExampleModel)
       if (result) {
         let id = result
         res.redirect(`/form-example/${id}`)

@@ -8,6 +8,7 @@ This is an example NodeJS [TypeScript](https://www.typescriptlang.org/) applicat
 npm install # install dependencies
 npm run generate-assets # pulls govuk assets and generates SASS
 npm start # http://localhost:3000
+npm run fakeApi # http://localhost:4000
 ```
 
 ## Overview

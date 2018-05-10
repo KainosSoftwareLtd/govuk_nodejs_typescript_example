@@ -1,7 +1,7 @@
 import * as express from 'express'
 import { injectable, inject } from 'inversify'
 import { FormExampleModel } from '../models/formExampleModel'
-import { validate } from 'class-validator'
+import { validate, ValidationError } from 'class-validator'
 import { convertValidationErrorsToViewErrors } from '../validators/validationHelper'
 import { TYPES } from '../types'
 
@@ -17,7 +17,7 @@ export class FormExampleController {
 
   // display the form
   public async get(req, res, next) {
-    return Promise.resolve(res.render('formExample.html', { data: {} }))
+    return await res.render('formExample.html', { data: {} })
   }
 
   public async post(req, res, next) {
@@ -32,23 +32,22 @@ export class FormExampleController {
       req.body.contactSmsNumber
     )
 
-    // continue with call to service
-    try {
-      await validate(formExampleModel)
-      let result = await this.formClient.create(formExampleModel)
-      if (result) {
-        let id = result
-        res.redirect(`/form-example/${id}`)
+    const createForm = async () => {
+      let formId = await this.formClient.create(formExampleModel)
+      if (formId) {
+        res.redirect(`/form-example/${formId}`)
       } else {
         next(new Error('Problem saving form, please try again'))
       }
-    } catch (error) {
-      if (error.length > 0) {
-        res.status(400).render('formExample.html', { data: req.body, errors: convertValidationErrorsToViewErrors(error) })
-      } else {
-        next(error)
-      }
     }
+
+    return validate(formExampleModel).then(errors => {
+      if (errors.length > 0) {
+        return res.status(400).render('formExample.html', { data: req.body, errors: convertValidationErrorsToViewErrors(errors) })
+      } else {
+        createForm()
+      }
+    })
   }
 
   // display the results of the input

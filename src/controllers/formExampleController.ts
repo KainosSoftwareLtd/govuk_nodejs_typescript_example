@@ -1,7 +1,7 @@
 import * as express from 'express'
 import { injectable, inject } from 'inversify'
 import { FormExampleModel } from '../models/formExampleModel'
-import { validate, ValidationError } from 'class-validator'
+import { validate } from 'class-validator'
 import { convertValidationErrorsToViewErrors } from '../validators/validationHelper'
 import { TYPES } from '../types'
 

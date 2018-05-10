@@ -25,7 +25,9 @@ npm run fakeApi # http://localhost:4000
 * `src/validators` - custom validators and helpers
 * `public` - folder for static assets
 * `views` - folder for nunjunks views
-* `tests` - unit and e2e tests
+-* `tests/unit` - unit tests using mocha, chai and supertest, run with `npm test`	+* `tests` - unit and e2e tests
+-* `tests/e2e` - browser tests using [webdriver.io](http://webdriver.io/), gulp and mocha, run with `npm run test-e2e` (needs application running locally)	
+-* `tests/wdio.conf` - e2e browser tests configuration file
 * `dist` - folder for Javascript compiled from TypeScript
 * `gulpfile.js` - [gulp](https://gulpjs.com/) tasks to generate assets from govuk resources
 * `tsconfig.json` - TypeScript config for `tsc` compile used to generate Javascript
@@ -54,7 +56,7 @@ Clone or copy the source into your own project. There are sections marked with `
 * validation - see `FormExampleController.ts`, `FormExampleModel.ts` and `formExample.html` for example of form post endpoint that displays GDS styled validation errors against fields (with links) using validation decorators ([class-validator](https://www.npmjs.com/package/class-validator))
 * testing
   * unit testing including mocking dependencies TODO
-  * browser testing - TODO
+  * browser testing - using [webdriver.io](http://webdriver.io/) to create browser tests, the configuration can be extended to call into remote selenium grids and services like [Saucelabs](https://saucelabs.com/) and [BrowserStack](https://www.browserstack.com/)
 * logging - TODO decorators?
 * metrics - TODO
 * Sample VSCode launch.json - see `.sample-vscode`, copy the `launch.json` to `.vscode` for example build configurations to debug the application and run individual mocha tests

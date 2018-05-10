@@ -5,7 +5,7 @@ import { injectable } from 'inversify'
 export class IndexController {
 
   public async get(req, res, next) {
-    return Promise.resolve(res.render('index.html'))
+    return await res.render('index.html')
   }
 
   public attachRoutes(app: express.Application) {

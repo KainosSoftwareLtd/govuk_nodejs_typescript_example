@@ -43,18 +43,24 @@
                     </span>
                     <span class="form-hint">For example, 31 3 1980</span>
                   </legend>
+                  {% if errors['dob'][0]  %}
+                        <span class="error-message" id="error-fullName">{{ errors['dob'][0] }}</span>
+                        {% endif %}
                   <div class="form-date">
                     <div class="form-group form-group-day">
+                        
                       <label class="form-label" for="dobDay">Day</label>
-                      <input class="form-control" id="dobDay" name="dobDay" type="number" pattern="[0-9]*">
+                      
+                      <input class="form-control" id="dobDay" name="dobDay" type="number" pattern="[0-9]*" value="{{ data['dobDay'] }}">
                     </div>
                     <div class="form-group form-group-month">
                       <label class="form-label" for="dobMonth">Month</label>
-                      <input class="form-control" id="dobMonth" name="dobMonth" type="number" pattern="[0-9]*">
+                      
+                      <input class="form-control" id="dobMonth" name="dobMonth" type="number" pattern="[0-9]*" value="{{ data['dobMonth'] }}">
                     </div>
                     <div class="form-group form-group-year">
                       <label class="form-label" for="dobYear">Year</label>
-                      <input class="form-control" id="dobYear" name="dobYear" type="number" pattern="[0-9]*">
+                      <input class="form-control" id="dobYear" name="dobYear" type="number" pattern="[0-9]*" value="{{ data['dobYear'] }}">
                     </div>
                   </div>
                 </fieldset>
@@ -67,33 +73,36 @@
                       <span class="form-label-bold">
                         How do you want to be contacted?
                       </span>
+                      {% if errors['preferredContactOption'][0] %}
+                        <span class="error-message" id="error-fullName">{{ errors['preferredContactOption'][0] }}</span>
+                        {% endif %}
                     </legend>
 
                     <div class="multiple-choice" data-target="contact-by-email">
-                      <input id="example-contact-by-email" type="radio" name="preferredContactOption" value="email">
+                      <input id="example-contact-by-email" type="radio" name="preferredContactOption" value="email" {% if data.preferredContactOption == "email" %} checked {% endif %}>
                       <label for="example-contact-by-email">Email</label>
                     </div>
                     <div class="panel panel-border-narrow js-hidden" id="contact-by-email">
                       <label class="form-label" for="contactEmail">Email address</label>
-                      <input class="form-control" name="contactEmail" type="text" id="contactEmail">
+                      <input class="form-control" name="contactEmail" type="text" id="contactEmail" value="{{ data['contactEmail'] }}">
                     </div>
 
                     <div class="multiple-choice" data-target="contact-by-phone">
-                      <input id="example-contact-by-phone" type="radio" name="preferredContactOption" value="phone">
+                      <input id="example-contact-by-phone" type="radio" name="preferredContactOption" value="phone" {% if data.preferredContactOption == "phone" %} checked {% endif %}>
                       <label for="example-contact-by-phone">Phone</label>
                     </div>
                     <div class="panel panel-border-narrow js-hidden" id="contact-by-phone">
                       <label class="form-label" for="contactPhone">Phone number</label>
-                      <input class="form-control" name="contactPhone" type="text" id="contactPhone">
+                      <input class="form-control" name="contactPhone" type="text" id="contactPhone" value="{{ data['contactPhone'] }}">
                     </div>
 
                     <div class="multiple-choice" data-target="contact-by-text">
-                      <input id="example-contact-by-text" type="radio" name="preferredContactOption" value="sms">
+                      <input id="example-contact-by-text" type="radio" name="preferredContactOption" value="sms" {% if data.preferredContactOption == "sms" %} checked {% endif %}>
                       <label for="example-contact-by-text">Text message</label>
                     </div>
                     <div class="panel panel-border-narrow js-hidden" id="contact-by-text">
                       <label class="form-label" for="contactSmsNumber">Mobile phone number</label>
-                      <input class="form-control" name="contactSmsNumber" type="text" id="contactSmsNumber">
+                      <input class="form-control" name="contactSmsNumber" type="text" id="contactSmsNumber" value="{{ data['contactSmsNumber'] }}">
                     </div>
 
                   </fieldset>

@@ -34,21 +34,21 @@
                             <td>{{ form.preferredContactOption }}</td>
                         </tr>
 
-                        {% if form.contactEmail %}
+                        {% if form.preferredContactOption == "email" %}
                         <tr>
                             <td>Email address</td>
                             <td>{{ form.contactEmail }}</td>
                         </tr>
                         {% endif %}
                     
-                        {% if form.contactPhone %}
+                        {% if form.preferredContactOption == "phone" %}
                         <tr>
                             <td>Phone number</td>
                             <td>{{ form.contactPhone }}</td>
                         </tr>
                         {% endif %}
                         
-                        {% if form.contactSmsNumber %}
+                        {% if form.preferredContactOption == "sms" %}
                         <tr>
                             <td>Mobile phone number</td>
                             <td>{{ form.contactSmsNumber }}</td>

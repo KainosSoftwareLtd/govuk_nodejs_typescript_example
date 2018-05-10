@@ -1,31 +1,31 @@
-import { MaxLength, IsNotEmpty } from 'class-validator'
+import { MaxLength, IsNotEmpty, IsInt, Min, Max, IsDate } from 'class-validator'
 
 export class FormExampleModel {
-  @MaxLength(50, { message: 'Your full name is too long' }) // TODO move validation error messages to constants format
+  @MaxLength(50) // TODO move validation error messages to constants format
   @IsNotEmpty({ message: 'Your full name is required' }) // last decorator is first error displayed (FILO stack, only one displayed per field)
   fullName: string
 
-  // @IsInt()
-  // @Min(1)
-  // @Max(31)
+  @IsInt()
+  @Min(1)
+  @Max(31)
   dobDay: number
 
-  // @IsInt()
-  // @Min(1)
-  // @Max(12)
+  @IsInt()
+  @Min(1)
+  @Max(12)
   dobMonth: number
 
-  // @IsInt()
-  // @Min(1900)
-  // @Max(2018)
+  @IsInt()
+  @Min(1900)
+  @Max(new Date().getFullYear())
   dobYear: number
 
   // TODO extend example to show child date class and display of date validation error messages
-  // @IsNotEmpty()
-  // @IsDate()
+  @IsNotEmpty()
+  @IsDate()
   dob: Date
 
-  // @IsNotEmpty()
+  @IsNotEmpty()
   preferredContactOption: ContactOption
 
   // TODO extend example to show required-if validation

@@ -23,9 +23,9 @@ export class FormExampleController {
   public async post(req, res, next) {
     let formExampleModel = new FormExampleModel(
       req.body.fullName,
-      req.body.dobDay,
-      req.body.dobMonth,
-      req.body.dobYear,
+      parseInt(req.body.dobDay, 10),
+      parseInt(req.body.dobMonth, 10),
+      parseInt(req.body.dobYear, 10),
       req.body.preferredContactOption,
       req.body.contactEmail,
       req.body.contactPhone,

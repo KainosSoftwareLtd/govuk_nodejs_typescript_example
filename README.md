@@ -25,8 +25,8 @@ npm run fakeApi # http://localhost:4000
 * `src/validators` - custom validators and helpers
 * `public` - folder for static assets
 * `views` - folder for nunjunks views
--* `tests/unit` - unit tests using mocha, chai and supertest, run with `npm test`	+* `tests` - unit and e2e tests
--* `tests/e2e` - browser tests using [webdriver.io](http://webdriver.io/), gulp and mocha, run with `npm run test-e2e` (needs application running locally)	
+-* `tests/unit` - unit tests using mocha, chai and supertest, run with `npm test`
+-* `tests/e2e` - browser tests using [webdriver.io](http://webdriver.io/), gulp and mocha, run with `npm run test-e2e` (needs application running locally)
 -* `tests/wdio.conf` - e2e browser tests configuration file
 * `dist` - folder for Javascript compiled from TypeScript
 * `gulpfile.js` - [gulp](https://gulpjs.com/) tasks to generate assets from govuk resources

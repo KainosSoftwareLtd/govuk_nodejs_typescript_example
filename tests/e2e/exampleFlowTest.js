@@ -5,16 +5,16 @@ describe('Example flow test', () => {
   it('should allow submission on FormExample', () => {
     return browser.url('/')
 
-    // Index
+      // Index
       .waitForExist('#start')
       .click('#start')
 
-    // FormExample
+      // FormExample
       .waitForExist('#fullName')
       .setValue('#fullName', 'Joe Bloggs')
       .click('#save-and-continue')
 
-    // Index
+      // Index
       .waitForExist('#start')
   })
 })

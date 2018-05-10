@@ -43,9 +43,13 @@
                     </span>
                     <span class="form-hint">For example, 31 3 1980</span>
                   </legend>
-                  {% if errors['dob'][0]  %}
-                        <span class="error-message" id="error-fullName">{{ errors['dob'][0] }}</span>
-                        {% endif %}
+
+                  {% if errors['dob'][0] %} <span class="error-message" id="error-dob">{{ errors['dob'][0] }}</span>
+                  {% elif errors['dobDay'][0] %} <span class="error-message" id="error-dobDay">{{ errors['dobDay'][0] }}</span>
+                  {% elif errors['dobMonth'][0] %} <span class="error-message" id="error-dobMonth">{{ errors['dobMonth'][0] }}</span>
+                  {% elif errors['dobYear'][0] %} <span class="error-message" id="error-dobYear">{{ errors['dobYear'][0] }}</span>
+                  {% endif %}
+
                   <div class="form-date">
                     <div class="form-group form-group-day">
                         
@@ -74,8 +78,8 @@
                         How do you want to be contacted?
                       </span>
                       {% if errors['preferredContactOption'][0] %}
-                        <span class="error-message" id="error-fullName">{{ errors['preferredContactOption'][0] }}</span>
-                        {% endif %}
+                        <span class="error-message" id="error-preferredContactOption">{{ errors['preferredContactOption'][0] }}</span>
+                      {% endif %}
                     </legend>
 
                     <div class="multiple-choice" data-target="contact-by-email">
@@ -84,6 +88,9 @@
                     </div>
                     <div class="panel panel-border-narrow js-hidden" id="contact-by-email">
                       <label class="form-label" for="contactEmail">Email address</label>
+                      {% if errors['contactEmail'][0] %}
+                        <span class="error-message" id="error-contactEmail">{{ errors['contactEmail'][0] }}</span>
+                      {% endif %}
                       <input class="form-control" name="contactEmail" type="text" id="contactEmail" value="{{ data['contactEmail'] }}">
                     </div>
 
@@ -93,7 +100,10 @@
                     </div>
                     <div class="panel panel-border-narrow js-hidden" id="contact-by-phone">
                       <label class="form-label" for="contactPhone">Phone number</label>
-                      <input class="form-control" name="contactPhone" type="text" id="contactPhone" value="{{ data['contactPhone'] }}">
+                      {% if errors['contactPhone'][0] %}
+                        <span class="error-message" id="error-contactPhone">{{ errors['contactPhone'][0] }}</span>
+                      {% endif %}
+                      <input class="form-control" name="contactPhone" type="number" id="contactPhone" value="{{ data['contactPhone'] }}">
                     </div>
 
                     <div class="multiple-choice" data-target="contact-by-text">
@@ -102,7 +112,10 @@
                     </div>
                     <div class="panel panel-border-narrow js-hidden" id="contact-by-text">
                       <label class="form-label" for="contactSmsNumber">Mobile phone number</label>
-                      <input class="form-control" name="contactSmsNumber" type="text" id="contactSmsNumber" value="{{ data['contactSmsNumber'] }}">
+                      {% if errors['contactSmsNumber'][0] %}
+                        <span class="error-message" id="error-contactSmsNumber">{{ errors['contactSmsNumber'][0] }}</span>
+                      {% endif %}
+                      <input class="form-control" name="contactSmsNumber" type="number" id="contactSmsNumber" value="{{ data['contactSmsNumber'] }}">
                     </div>
 
                   </fieldset>

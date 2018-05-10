@@ -1,4 +1,4 @@
-import { MaxLength, IsNotEmpty, IsInt, Min, Max, IsDate } from 'class-validator'
+import { MaxLength, IsNotEmpty, IsInt, Min, Max, IsDate, ValidateIf, IsEmail } from 'class-validator'
 
 export class FormExampleModel {
   @MaxLength(50) // TODO move validation error messages to constants format
@@ -21,19 +21,28 @@ export class FormExampleModel {
   dobYear: number
 
   // TODO extend example to show child date class and display of date validation error messages
-  @IsNotEmpty()
   @IsDate()
+  @IsNotEmpty()
   dob: Date
 
   @IsNotEmpty()
   preferredContactOption: ContactOption
 
-  // TODO extend example to show required-if validation
-  // @IsEmail()
+  @ValidateIf(o => o.preferredContactOption === 'email')
+  @IsEmail()
+  @IsNotEmpty()
   contactEmail: string
 
+  @ValidateIf(o => o.preferredContactOption === 'phone')
+  @Min(1)
+  @Max(20)
+  @IsInt()
   contactPhone: string
 
+  @ValidateIf(o => o.preferredContactOption === 'sms')
+  @Min(1)
+  @Max(20)
+  @IsInt()
   contactSmsNumber: string
 
   public constructor (fullName: string, dobDay: number, dobMonth: number, dobYear: number, preferredContactOption: ContactOption,   contactEmail: string, contactPhone: string, contactSmsNumber: string) {
@@ -75,7 +84,7 @@ export class Form {
 
   contactSmsNumber: string
 
-  public constructor (id: number, fullName: string, dobDay: number, dobMonth: number, dobYear: number, preferredContactOption: ContactOption,   contactEmail: string, contactPhone: string, contactSmsNumber: string) {
+  public constructor (id: number, fullName: string, dobDay: number, dobMonth: number, dobYear: number, preferredContactOption: ContactOption, contactEmail: string, contactPhone: string, contactSmsNumber: string) {
     this.id = id
     this.fullName = fullName
     this.dobDay = dobDay
@@ -92,10 +101,7 @@ export class Form {
       this.dob = null
     }
   }
-
 }
-
-
 
 export enum ContactOption {
   email = 'EMAIL',

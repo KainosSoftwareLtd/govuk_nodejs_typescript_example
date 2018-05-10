@@ -33,15 +33,21 @@ export class FormExampleController {
     )
 
     const createForm = async () => {
-      let formId = await this.formClient.create(formExampleModel)
+      let formId
+      try {
+        formId = await this.formClient.create(formExampleModel)
+      } catch {
+        return next(new Error('Post rejected'))
+      }
       if (formId) {
         res.redirect(`/form-example/${formId}`)
       } else {
-        next(new Error('Problem saving form, please try again'))
+        return next(new Error('Problem saving form, please try again'))
       }
     }
 
-    return validate(formExampleModel).then(errors => {
+    return validate(formExampleModel)
+    .then(errors => {
       if (errors.length > 0) {
         return res.status(400).render('formExample.html', { data: req.body, errors: convertValidationErrorsToViewErrors(errors) })
       } else {

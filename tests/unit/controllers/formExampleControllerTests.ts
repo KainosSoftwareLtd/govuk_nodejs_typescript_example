@@ -50,7 +50,7 @@ describe('FormExampleController', function () {
   })
 
   describe('POST /form-example', function () {
-    it.only('should post form and return redirect', () => {
+    it('should post form and return redirect', () => {
       when(mockFormClient.create(anything())).thenResolve(form1.id)
 
       return request
@@ -71,12 +71,12 @@ describe('FormExampleController', function () {
         .then(res => {
           verify(mockFormClient.create(anything())).once()
           const [mockForm] = capture(mockFormClient.create).last()
-          expect(mockForm['email-address']).to.deep.equal('testemail@testing.com')
-          expect(mockForm['dob']).to.deep.equal('01041997')
+          expect(mockForm['contactEmail']).to.deep.equal('testemail@testing.com')
+          expect(mockForm['fullName']).to.deep.equal('test name')
         })
     })
 
-    it('should respond with 500 client error', () => {
+    it('should respond with 500 client error reject with error', () => {
       when(mockFormClient.create(anything())).thenReject('Error!')
 
       return request
@@ -86,7 +86,7 @@ describe('FormExampleController', function () {
           dobDay: 1,
           dobMonth: '04',
           dobYear: '1997',
-          preferredContactMethod: ContactOption.email,
+          preferredContactOption: ContactOption.email,
           contactEmail: 'testemail@testing.com',
           contactPhone: null,
           contactSmsNumber: null,
@@ -105,7 +105,7 @@ describe('FormExampleController', function () {
           dobDay: 1,
           dobMonth: '04',
           dobYear: '1997',
-          preferredContactMethod: ContactOption.email,
+          preferredContactOption: ContactOption.email,
           contactEmail: 'testemail@testing.com',
           contactPhone: null,
           contactSmsNumber: null,
@@ -114,15 +114,7 @@ describe('FormExampleController', function () {
         .expect(500)
     })
 
-    it.skip('should return redirect for valid post', () => {
-      return request
-        .post('/form-example')
-        .send({ 'fullName': 'Joe Bloggs' })
-        .expect(302)
-        .expect('location', `/`)
-    })
-
-    it.skip('should return form response for invalid post', () => {
+    it('should return form response for invalid post', () => {
       return request
         .post('/form-example')
         .expect(400)

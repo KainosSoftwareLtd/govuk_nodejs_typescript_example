@@ -34,15 +34,11 @@ export class FormExampleModel {
   contactEmail: string
 
   @ValidateIf(o => o.preferredContactOption === 'phone')
-  @Min(1)
-  @Max(20)
-  @IsInt()
+  @IsNotEmpty()
   contactPhone: string
 
   @ValidateIf(o => o.preferredContactOption === 'sms')
-  @Min(1)
-  @Max(20)
-  @IsInt()
+  @IsNotEmpty()
   contactSmsNumber: string
 
   public constructor (fullName: string, dobDay: number, dobMonth: number, dobYear: number, preferredContactOption: ContactOption,   contactEmail: string, contactPhone: string, contactSmsNumber: string) {

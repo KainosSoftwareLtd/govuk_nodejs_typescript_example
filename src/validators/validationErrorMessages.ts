@@ -1,3 +1,3 @@
-export function getIsRequired (displayName) {
+export function getIsRequired (displayName: string) {
     return `${displayName} is required`
 }

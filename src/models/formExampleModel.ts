@@ -1,4 +1,4 @@
-import { MaxLength, IsNotEmpty, IsInt, Min, Max, IsDate, ValidateIf, IsEmail } from 'class-validator'
+import { MaxLength, IsNotEmpty, IsInt, Min, Max, IsDate, MaxDate, ValidateIf, IsEmail, validate, Validate } from 'class-validator'
 import { getIsRequired } from '../validators/validationErrorMessages'
 
 export class FormExampleModel {
@@ -6,22 +6,23 @@ export class FormExampleModel {
   @IsNotEmpty({ message: getIsRequired('Full name') }) // last decorator is first error displayed (FILO stack, only one displayed per field)
   fullName: string
 
-  @IsInt()
-  @Min(1)
-  @Max(31)
+  @IsInt({ message: getIsRequired('Day of birth') })
+  @Min(1, { message: getIsRequired('Day of birth') })
+  @Max(31, { message: getIsRequired('Day of birth') })
   dobDay: number
 
-  @IsInt()
-  @Min(1)
-  @Max(12)
+  @IsInt({ message: getIsRequired('Month of birth') })
+  @Min(1, { message: getIsRequired('Month of birth') })
+  @Max(12, { message: getIsRequired('Month of birth') })
   dobMonth: number
 
-  @IsInt()
-  @Min(1900)
-  @Max(new Date().getFullYear())
+  @IsInt({ message: getIsRequired('Year of birth') })
+  @Min(1900, { message: getIsRequired('Year of birth') })
+  @Max(new Date().getFullYear(), { message: getIsRequired('Year of birth') })
   dobYear: number
 
   // TODO extend example to show child date class and display of date validation error messages
+  @MaxDate(new Date(), { message: 'Date of birth must be in the past' })
   @IsDate({ message: getIsRequired('Date of birth') })
   @IsNotEmpty({ message: getIsRequired('Date of birth') })
   dob: Date
@@ -53,11 +54,13 @@ export class FormExampleModel {
     this.contactSmsNumber = contactSmsNumber
 
     try {
-      this.dob = new Date(this.dobYear, this.dobMonth, this.dobDay)
+      this.dob = new Date(this.dobYear, this.dobMonth - 1, this.dobDay) // month arg is 0-based i.e. January = 0
+      let test = this.dob
     } catch {
       this.dob = null
     }
   }
+
 }
 
 export class Form {

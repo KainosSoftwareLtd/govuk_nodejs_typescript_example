@@ -12,6 +12,13 @@ npm run generate-assets # pulls govuk assets and generates SASS
 npm start # http://localhost:3000
 ```
 
+### Windows 10 Pre-requisites
+
+```
+npm install --global --production windows-build-tools` # from an elevated PowerShell or CMD.exe (run as Administrator).
+npm install -g node-gyp
+```
+
 ## Overview
 
 * `package.json` - dependencies and command scripts

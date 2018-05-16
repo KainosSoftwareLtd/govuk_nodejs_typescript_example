@@ -8,9 +8,21 @@
   <ul class="error-summary-list">
     {% for field, messages in errors %}
       {% if messages[0] %}
+        {% if not field.includes('dob') %}
         <li><a href="#{{ field }}">{{ messages[0] }}</a></li>
+        {% endif %}
       {% endif %}
     {% endfor %}
+
+    {% if 'dobDay' in errors %}
+      <li><a href="#{{ 'dobDay' }}">{{ errors['dobDay'][0] }}</a></li>
+    {% elif 'dobMonth' in errors %}
+      <li><a href="#{{ 'dobMonth' }}">{{ errors['dobMonth'][0] }}</a></li>
+    {% elif 'dobYear' in errors %}
+      <li><a href="#{{ 'dobYear' }}">{{ errors['dobYear'][0] }}</a></li>
+    {% elif 'dob' in errors %}
+      <li><a href="#{{ 'dob' }}">{{ errors['dob'][0] }}</a></li>
+    {% endif %}
   </ul>
 
 </div>

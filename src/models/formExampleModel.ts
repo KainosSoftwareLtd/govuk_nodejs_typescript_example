@@ -2,23 +2,24 @@ import { MaxLength, IsNotEmpty, IsInt, Min, Max, IsDate, MaxDate, ValidateIf, Is
 import { getIsRequired } from '../validators/validationErrorMessages'
 
 export class FormExampleModel {
+
   @MaxLength(50) // TODO move validation error messages to constants format
   @IsNotEmpty({ message: getIsRequired('Full name') }) // last decorator is first error displayed (FILO stack, only one displayed per field)
   fullName: string
 
-  @IsInt({ message: getIsRequired('Day of birth') })
-  @Min(1, { message: getIsRequired('Day of birth') })
-  @Max(31, { message: getIsRequired('Day of birth') })
+  @IsInt({ message: getIsRequired('Date of birth') })
+  @Min(1, { message: getIsRequired('Date of birth') })
+  @Max(31, { message: getIsRequired('Date of birth') })
   dobDay: number
 
-  @IsInt({ message: getIsRequired('Month of birth') })
-  @Min(1, { message: getIsRequired('Month of birth') })
-  @Max(12, { message: getIsRequired('Month of birth') })
+  @IsInt({ message: getIsRequired('Date of birth') })
+  @Min(1, { message: getIsRequired('Date of birth') })
+  @Max(12, { message: getIsRequired('Date of birth') })
   dobMonth: number
 
-  @IsInt({ message: getIsRequired('Year of birth') })
-  @Min(1900, { message: getIsRequired('Year of birth') })
-  @Max(new Date().getFullYear(), { message: getIsRequired('Year of birth') })
+  @IsInt({ message: getIsRequired('Date of birth') })
+  @Min(1900, { message: getIsRequired('Date of birth') })
+  @Max(new Date().getFullYear(), { message: getIsRequired('Date of birth') })
   dobYear: number
 
   // TODO extend example to show child date class and display of date validation error messages
@@ -54,8 +55,7 @@ export class FormExampleModel {
     this.contactSmsNumber = contactSmsNumber
 
     try {
-      this.dob = new Date(this.dobYear, this.dobMonth - 1, this.dobDay) // month arg is 0-based i.e. January = 0
-      let test = this.dob
+      this.dob = new Date(this.dobYear, this.dobMonth - 1, this.dobDay)// month arg is 0-based i.e. January = 0
     } catch {
       this.dob = null
     }

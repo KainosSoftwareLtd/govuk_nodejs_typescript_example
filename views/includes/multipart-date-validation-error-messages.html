@@ -1,5 +1,5 @@
-{% if errors['dob'][0] %} <span class="error-message" id="error-dob">{{ errors['dob'][0] }}</span>
-{% elif errors['dobDay'][0] %} <span class="error-message" id="error-dobDay">{{ errors['dobDay'][0] }}</span>
+{% if errors['dobDay'][0] %} <span class="error-message" id="error-dobDay">{{ errors['dobDay'][0] }}</span>
 {% elif errors['dobMonth'][0] %} <span class="error-message" id="error-dobMonth">{{ errors['dobMonth'][0] }}</span>
 {% elif errors['dobYear'][0] %} <span class="error-message" id="error-dobYear">{{ errors['dobYear'][0] }}</span>
+{% elif errors['dob'][0] %} <span class="error-message" id="error-dob">{{ errors['dob'][0] }}</span>
 {% endif %}

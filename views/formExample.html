@@ -51,17 +51,23 @@
                         
                       <label class="form-label" for="dobDay">Day</label>
                       
-                      <input class="form-control {% if errors['dobDay'][0] %} form-control-error {% endif %}" id="dobDay" name="dobDay" type="number" pattern="[0-9]*" value="{{ data['dobDay'] }}">
+                      <input class="form-control {% if errors['dobDay'][0] or 
+                      not errors['dobDay'][0] and not errors['dobMonth'][0] and not errors['dobYear'][0] and errors['dob'][0] %} form-control-error {% endif %}" 
+                      id="dobDay" name="dobDay" type="number" pattern="[0-9]*" value="{{ data['dobDay'] }}">
                     </div>
                     <div class="form-group form-group-month">
                       <label class="form-label" for="dobMonth">Month</label>
                       
-                      <input class="form-control{% if errors['dobMonth'][0] %} form-control-error {% endif %}" id="dobMonth" name="dobMonth" type="number" pattern="[0-9]*" value="{{ data['dobMonth'] }}">
+                      <input class="form-control{% if errors['dobMonth'][0] or 
+                      not errors['dobDay'][0] and not errors['dobMonth'][0] and not errors['dobYear'][0] and errors['dob'][0] %} form-control-error {% endif %}" 
+                      id="dobMonth" name="dobMonth" type="number" pattern="[0-9]*" value="{{ data['dobMonth'] }}">
                     </div>
                     <div class="form-group form-group-year">
                       <label class="form-label" for="dobYear">Year</label>
                       
-                      <input class="form-control {% if errors['dobYear'][0] %} form-control-error {% endif %}" id="dobYear" name="dobYear" type="number" pattern="[0-9]*" value="{{ data['dobYear'] }}">
+                      <input class="form-control {% if errors['dobYear'][0] or 
+                      not errors['dobDay'][0] and not errors['dobMonth'][0] and not errors['dobYear'][0] and errors['dob'][0] %} form-control-error {% endif %}" 
+                      id="dobYear" name="dobYear" type="number" pattern="[0-9]*" value="{{ data['dobYear'] }}">
                     </div>
                   </div>
                 </fieldset>

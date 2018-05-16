@@ -102,7 +102,7 @@ export class Form {
 }
 
 export enum ContactOption {
-  email = 'EMAIL',
-  phone = 'PHONE',
-  sms = 'SMS'
+  email = 'email',
+  phone = 'phone',
+  sms = 'sms'
 }

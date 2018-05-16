@@ -66,3 +66,4 @@ Clone or copy the source into your own project. There are sections marked with `
 * logging - TODO decorators?
 * metrics - TODO
 * debug - see `.vscode/launch.json`, this is where debug profiles are defined which currently includes profiles to debug the application, run individual mocha tests and run all mocha tests
+* configuration - TODO all application configuration is via environment variables which are defined in a single script `src/config.ts` which gives defaults and documentation if appropiate to help deploy and configure the app (see [here](https://github.com/ministryofjustice/apvs-external-web/blob/develop/config.js) for an example)

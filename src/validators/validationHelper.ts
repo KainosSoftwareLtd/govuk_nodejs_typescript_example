@@ -10,6 +10,5 @@ export function convertValidationErrorsToViewErrors (validationErrors: Validatio
       return viewErrors
     }, {})
   }
-  
   return result
 }

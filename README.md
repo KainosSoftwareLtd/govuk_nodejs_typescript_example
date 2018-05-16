@@ -60,3 +60,10 @@ Clone or copy the source into your own project. There are sections marked with `
 * logging - TODO decorators?
 * metrics - TODO
 * Sample VSCode launch.json - see `.sample-vscode`, copy the `launch.json` to `.vscode` for example build configurations to debug the application and run individual mocha tests
+* Configuration
+
+    TODO see [here](https://github.com/ministryofjustice/apvs-external-web/blob/develop/config.js) for an example, move FormClientUrl env to config.ts and delete me.
+
+    All application configuration is via environment variables which are defined in a single script `src/config.ts`, as this is easy to configure when deploying into docker containers or PAAS.
+
+    As applications grow in size there will be a lot of Environment Variables, so we need to keep them in a single script so the application is self documenting and easier for someone unfamiliar to understand, providing a single file to look at rather than searching the code. The config script should supply defaults and comments to explain the config if appropriate and necessary, so environmental differences are easy to identify.

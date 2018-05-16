@@ -1,4 +1,4 @@
-import { MaxLength, IsNotEmpty, IsInt, Min, Max, IsDate, MaxDate, ValidateIf, IsEmail, validate, Validate } from 'class-validator'
+import { MaxLength, IsNotEmpty, IsInt, Min, Max, IsDate, MaxDate, ValidateIf, IsEmail } from 'class-validator'
 import { getIsRequired } from '../validators/validationErrorMessages'
 
 export class FormExampleModel {
@@ -54,13 +54,10 @@ export class FormExampleModel {
     this.contactPhone = contactPhone
     this.contactSmsNumber = contactSmsNumber
 
-    try {
-      this.dob = new Date(this.dobYear, this.dobMonth - 1, this.dobDay)// month arg is 0-based i.e. January = 0
-    } catch {
-      this.dob = null
+    if (this.dobDay && this.dobMonth && this.dobYear) {
+      this.dob = new Date(this.dobYear, this.dobMonth - 1, this.dobDay)
     }
   }
-
 }
 
 export class Form {

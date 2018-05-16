@@ -27,15 +27,15 @@
             </div>
 
             <form method="POST" action="form-example">
-              <div class="form-group {% if errors['fullName'][0] %} form-group-error {% endif %}">
+              <div class="form-group {% if errors['fullName'] %} form-group-error {% endif %}">
                 <label class="form-label-bold" for="fullName">Full name</label>
-                {% if errors['fullName'][0] %}
-                <span class="error-message" id="error-fullName">{{ errors['fullName'][0] }}</span>
+                {% if errors['fullName'] %}
+                <span class="error-message" id="error-fullName">{{ errors['fullName'] }}</span>
                 {% endif %}
-                <input class="form-control{% if errors['fullName'][0] %} form-control-error {% endif %}" id="fullName" type="text" name="fullName" value="{{ data['fullName'] }}">
+                <input class="form-control{% if errors['fullName'] %} form-control-error {% endif %}" id="fullName" type="text" name="fullName" value="{{ data['fullName'] }}">
               </div>
 
-              <div class="form-group {% if errors['dob'][0] %} form-group-error {% endif %}">
+              <div class="form-group {% if errors['dob'] %} form-group-error {% endif %}">
                 <fieldset>
                   <legend>
                     <span class="form-label-bold" id="dob">
@@ -51,37 +51,37 @@
                         
                       <label class="form-label" for="dobDay">Day</label>
                       
-                      <input class="form-control {% if errors['dobDay'][0] or 
-                      not errors['dobDay'][0] and not errors['dobMonth'][0] and not errors['dobYear'][0] and errors['dob'][0] %} form-control-error {% endif %}" 
+                      <input class="form-control {% if errors['dobDay'] or 
+                      not errors['dobDay'] and not errors['dobMonth'] and not errors['dobYear'] and errors['dob'] %} form-control-error {% endif %}" 
                       id="dobDay" name="dobDay" type="number" pattern="[0-9]*" value="{{ data['dobDay'] }}">
                     </div>
                     <div class="form-group form-group-month">
                       <label class="form-label" for="dobMonth">Month</label>
                       
-                      <input class="form-control{% if errors['dobMonth'][0] or 
-                      not errors['dobDay'][0] and not errors['dobMonth'][0] and not errors['dobYear'][0] and errors['dob'][0] %} form-control-error {% endif %}" 
+                      <input class="form-control{% if errors['dobMonth'] or 
+                      not errors['dobDay'] and not errors['dobMonth'] and not errors['dobYear'] and errors['dob'] %} form-control-error {% endif %}" 
                       id="dobMonth" name="dobMonth" type="number" pattern="[0-9]*" value="{{ data['dobMonth'] }}">
                     </div>
                     <div class="form-group form-group-year">
                       <label class="form-label" for="dobYear">Year</label>
                       
-                      <input class="form-control {% if errors['dobYear'][0] or 
-                      not errors['dobDay'][0] and not errors['dobMonth'][0] and not errors['dobYear'][0] and errors['dob'][0] %} form-control-error {% endif %}" 
+                      <input class="form-control {% if errors['dobYear'] or 
+                      not errors['dobDay'] and not errors['dobMonth'] and not errors['dobYear'] and errors['dob'] %} form-control-error {% endif %}" 
                       id="dobYear" name="dobYear" type="number" pattern="[0-9]*" value="{{ data['dobYear'] }}">
                     </div>
                   </div>
                 </fieldset>
               </div>
 
-              <div class="form-group{% if errors['preferredContactOption'][0] or errors['contactEmail'][0] %} form-group-error {% endif %}">
+              <div class="form-group{% if errors['preferredContactOption'] or errors['contactEmail'] %} form-group-error {% endif %}">
                   <fieldset>
 
                     <legend>
                       <span class="form-label-bold">
                         How do you want to be contacted?
                       </span>
-                      {% if errors['preferredContactOption'][0] %}
-                        <span class="error-message" id="error-preferredContactOption">{{ errors['preferredContactOption'][0] }}</span>
+                      {% if errors['preferredContactOption'] %}
+                        <span class="error-message" id="error-preferredContactOption">{{ errors['preferredContactOption'] }}</span>
                       {% endif %}
                     </legend>
 
@@ -91,10 +91,10 @@
                     </div>
                     <div class="panel panel-border-narrow js-hidden" id="contact-by-email">
                       <label class="form-label" for="contactEmail">Email address</label>
-                      {% if errors['contactEmail'][0] %}
-                        <span class="error-message" id="error-contactEmail">{{ errors['contactEmail'][0] }}</span>
+                      {% if errors['contactEmail'] %}
+                        <span class="error-message" id="error-contactEmail">{{ errors['contactEmail'] }}</span>
                       {% endif %}
-                      <input class="form-control {% if errors['contactEmail'][0] %} form-control-error {% endif %}"name="contactEmail" type="text" id="contactEmail" value="{{ data['contactEmail'] }}">
+                      <input class="form-control {% if errors['contactEmail'] %} form-control-error {% endif %}"name="contactEmail" type="text" id="contactEmail" value="{{ data['contactEmail'] }}">
                     </div>
 
                     <div class="multiple-choice" data-target="contact-by-phone">
@@ -103,10 +103,10 @@
                     </div>
                     <div class="panel panel-border-narrow js-hidden" id="contact-by-phone">
                       <label class="form-label" for="contactPhone">Phone number</label>
-                      {% if errors['contactPhone'][0] %}
-                        <span class="error-message" id="error-contactPhone">{{ errors['contactPhone'][0] }}</span>
+                      {% if errors['contactPhone'] %}
+                        <span class="error-message" id="error-contactPhone">{{ errors['contactPhone'] }}</span>
                       {% endif %}
-                      <input class="form-control {% if errors['contactPhone'][0] %} form-control-error {% endif %}" name="contactPhone" type="number" id="contactPhone" value="{{ data['contactPhone'] }}">
+                      <input class="form-control {% if errors['contactPhone'] %} form-control-error {% endif %}" name="contactPhone" type="number" id="contactPhone" value="{{ data['contactPhone'] }}">
                     </div>
 
                     <div class="multiple-choice" data-target="contact-by-text">
@@ -115,10 +115,10 @@
                     </div>
                     <div class="panel panel-border-narrow js-hidden" id="contact-by-text">
                       <label class="form-label" for="contactSmsNumber">Mobile phone number</label>
-                      {% if errors['contactSmsNumber'][0] %}
-                        <span class="error-message" id="error-contactSmsNumber">{{ errors['contactSmsNumber'][0] }}</span>
+                      {% if errors['contactSmsNumber'] %}
+                        <span class="error-message" id="error-contactSmsNumber">{{ errors['contactSmsNumber'] }}</span>
                       {% endif %}
-                      <input class="form-control {% if errors['contactSmsNumber'][0] %} form-control-error {% endif %}" name="contactSmsNumber" type="number" id="contactSmsNumber" value="{{ data['contactSmsNumber'] }}">
+                      <input class="form-control {% if errors['contactSmsNumber'] %} form-control-error {% endif %}" name="contactSmsNumber" type="number" id="contactSmsNumber" value="{{ data['contactSmsNumber'] }}">
                     </div>
 
                   </fieldset>

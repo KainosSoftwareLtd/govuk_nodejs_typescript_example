@@ -6,10 +6,10 @@ export function convertValidationErrorsToViewErrors (validationErrors: Validatio
   if (validationErrors) {
     // We only care about first error for a given field name
     result = validationErrors.reduce(function(viewErrors, e) {
-      (viewErrors[e.property] = viewErrors[e.property] || []).push(e.constraints[Object.keys(e.constraints)[0]])
+      viewErrors[e.property] = viewErrors[e.property] || e.constraints[Object.keys(e.constraints)[0]]
       return viewErrors
     }, {})
   }
-
+  
   return result
 }

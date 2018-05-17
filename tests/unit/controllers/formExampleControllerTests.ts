@@ -12,7 +12,7 @@ import { FormClient } from '../../../src/services/formClient'
 import { attachErrorHandling } from '../../../src/middleware/errorHandling'
 import { FormExampleController } from '../../../src/controllers/formExampleController'
 import { Form, ContactOption } from '../../../src/models/formExampleModel'
-import { FORM_RECORD, FORM_EXAMPLE_INPUT } from '../../Fixtures'
+import * as fixtures from '../../Fixtures'
 
 describe('FormExampleController', function () {
   let request
@@ -50,19 +50,17 @@ describe('FormExampleController', function () {
 
   describe('POST /form-example', function () {
     it('should post form and return redirect', () => {
-      when(mockFormClient.create(anything())).thenResolve(FORM_RECORD.id)
+      when(mockFormClient.create(anything())).thenResolve(fixtures.VALID_FORM_ID)
 
       return request
         .post('/form-example')
         .send({
-          fullName: FORM_EXAMPLE_INPUT.fullName,
-          dobDay: FORM_EXAMPLE_INPUT.dobDay,
-          dobMonth: FORM_EXAMPLE_INPUT.dobMonth,
-          dobYear: FORM_EXAMPLE_INPUT.dobYear,
-          preferredContactOption: FORM_EXAMPLE_INPUT.preferredContactOption,
-          contactEmail: FORM_EXAMPLE_INPUT.contactEmail,
-          contactPhone: FORM_EXAMPLE_INPUT.contactPhone,
-          contactSmsNumber: FORM_EXAMPLE_INPUT.contactSmsNumber,
+          fullName: fixtures.VALID_FULL_NAME,
+          dobDay: fixtures.VALID_DOB_DAY,
+          dobMonth: fixtures.VALID_DOB_MONTH,
+          dobYear: fixtures.VALID_DOB_YEAR,
+          preferredContactOption: fixtures.VALID_EMAIL_CONTACT_OPTION,
+          contactEmail: fixtures.VALID_CONTACT_EMAIL_ADDRESS
         })
         .type('form')
         .expect(302)
@@ -81,14 +79,12 @@ describe('FormExampleController', function () {
       return request
         .post('/form-example')
         .send({
-          fullName: FORM_EXAMPLE_INPUT.fullName,
-          dobDay: FORM_EXAMPLE_INPUT.dobDay,
-          dobMonth: FORM_EXAMPLE_INPUT.dobMonth,
-          dobYear: FORM_EXAMPLE_INPUT.dobYear,
-          preferredContactOption: FORM_EXAMPLE_INPUT.preferredContactOption,
-          contactEmail: FORM_EXAMPLE_INPUT.contactEmail,
-          contactPhone: FORM_EXAMPLE_INPUT.contactPhone,
-          contactSmsNumber: FORM_EXAMPLE_INPUT.contactSmsNumber,
+          fullName: fixtures.VALID_FULL_NAME,
+          dobDay: fixtures.VALID_DOB_DAY,
+          dobMonth: fixtures.VALID_DOB_MONTH,
+          dobYear: fixtures.VALID_DOB_YEAR,
+          preferredContactOption: fixtures.VALID_EMAIL_CONTACT_OPTION,
+          contactEmail: fixtures.VALID_CONTACT_EMAIL_ADDRESS
         })
         .type('form')
         .expect(500)
@@ -100,38 +96,49 @@ describe('FormExampleController', function () {
       return request
         .post('/form-example')
         .send({
-          fullName: FORM_EXAMPLE_INPUT.fullName,
-          dobDay: FORM_EXAMPLE_INPUT.dobDay,
-          dobMonth: FORM_EXAMPLE_INPUT.dobMonth,
-          dobYear: FORM_EXAMPLE_INPUT.dobYear,
-          preferredContactOption: FORM_EXAMPLE_INPUT.preferredContactOption,
-          contactEmail: FORM_EXAMPLE_INPUT.contactEmail,
-          contactPhone: FORM_EXAMPLE_INPUT.contactPhone,
-          contactSmsNumber: FORM_EXAMPLE_INPUT.contactSmsNumber,
+          fullName: fixtures.VALID_FULL_NAME,
+          dobDay: fixtures.VALID_DOB_DAY,
+          dobMonth: fixtures.VALID_DOB_MONTH,
+          dobYear: fixtures.VALID_DOB_YEAR,
+          preferredContactOption: fixtures.VALID_EMAIL_CONTACT_OPTION,
+          contactEmail: fixtures.VALID_CONTACT_EMAIL_ADDRESS
         })
         .type('form')
         .expect(500)
     })
 
-    it('should return form response for invalid post', () => {
+    it.only('should return form response for invalid post', () => {
       return request
         .post('/form-example')
+        .send({
+          fullName: fixtures.NULL_INPUT,
+          dobDay: fixtures.VALID_DOB_DAY,
+          dobMonth: fixtures.VALID_DOB_MONTH,
+          dobYear: fixtures.VALID_DOB_YEAR,
+          preferredContactOption: fixtures.VALID_EMAIL_CONTACT_OPTION,
+          contactEmail: fixtures.NULL_INPUT
+        })
         .expect(400)
         .then(res => {
           expect(res.text).to.contain('There was a problem')
+          expect(res.text).to.contain('Full name is required')
+          expect(res.text).to.contain('Email address is required')
+          expect(res.text).to.not.contain('Date of birth is required')
+          expect(res.text).to.not.contain('Date of birth must be in the past')
+          expect(res.text).to.not.contain('Preferred contact option is required')
         })
     })
   })
 
   describe('GET /form-example/1', function () {
     it('should return form response', () => {
-      when(mockFormClient.get(1)).thenResolve(FORM_RECORD)
+      when(mockFormClient.get(1)).thenResolve(fixtures.FORM_RECORD)
 
       return request
         .get('/form-example/1')
         .expect(200)
         .then(res => {
-          expect(res.text).to.contain(FORM_RECORD['full-name'])
+          expect(res.text).to.contain(fixtures.FORM_RECORD['full-name'])
           verify(mockFormClient.get(1)).once()
         })
     })

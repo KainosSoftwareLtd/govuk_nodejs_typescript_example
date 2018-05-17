@@ -3,6 +3,7 @@ import { injectable } from 'inversify'
 import { FormExampleModel } from '../models/formExampleModel'
 import { validate } from 'class-validator'
 import { convertValidationErrorsToViewErrors } from '../validators/validationHelper'
+import { sanitizeInputString } from '../utils/input-sanitizer'
 
 @injectable()
 export class FormExampleController {
@@ -13,14 +14,14 @@ export class FormExampleController {
 
   public async post(req, res, next) {
     let formExampleModel = new FormExampleModel(
-      req.body.fullName,
+      sanitizeInputString(req.body.fullName),
       req.body.dobDay,
       req.body.dobMonth,
       req.body.dobYear,
       req.body.preferredContactOption,
-      req.body.contactEmail,
-      req.body.contactPhone,
-      req.body.contactSmsNumber
+      sanitizeInputString(req.body.contactEmail),
+      sanitizeInputString(req.body.contactPhone),
+      sanitizeInputString(req.body.contactSmsNumber)
     )
 
     return validate(formExampleModel).then(errors => {

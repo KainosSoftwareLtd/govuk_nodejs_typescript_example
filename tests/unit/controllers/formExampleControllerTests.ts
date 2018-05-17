@@ -12,13 +12,12 @@ import { FormClient } from '../../../src/services/formClient'
 import { attachErrorHandling } from '../../../src/middleware/errorHandling'
 import { FormExampleController } from '../../../src/controllers/formExampleController'
 import { Form, ContactOption } from '../../../src/models/formExampleModel'
-import { FORM1 } from '../../Fixtures'
+import { FORM_RECORD, FORM_EXAMPLE_INPUT } from '../../Fixtures'
 
 describe('FormExampleController', function () {
   let request
   let formExampleController
   let mockFormClient: FormClient
-  let form1: Form = FORM1
 
   beforeEach(function () {
     const app = express()
@@ -51,19 +50,19 @@ describe('FormExampleController', function () {
 
   describe('POST /form-example', function () {
     it('should post form and return redirect', () => {
-      when(mockFormClient.create(anything())).thenResolve(form1.id)
+      when(mockFormClient.create(anything())).thenResolve(FORM_RECORD.id)
 
       return request
         .post('/form-example')
         .send({
-          fullName: 'test name',
-          dobDay: 1,
-          dobMonth: '04',
-          dobYear: '1997',
-          preferredContactOption: ContactOption.email,
-          contactEmail: 'testemail@testing.com',
-          contactPhone: null,
-          contactSmsNumber: null,
+          fullName: FORM_EXAMPLE_INPUT.fullName,
+          dobDay: FORM_EXAMPLE_INPUT.dobDay,
+          dobMonth: FORM_EXAMPLE_INPUT.dobMonth,
+          dobYear: FORM_EXAMPLE_INPUT.dobYear,
+          preferredContactOption: FORM_EXAMPLE_INPUT.preferredContactOption,
+          contactEmail: FORM_EXAMPLE_INPUT.contactEmail,
+          contactPhone: FORM_EXAMPLE_INPUT.contactPhone,
+          contactSmsNumber: FORM_EXAMPLE_INPUT.contactSmsNumber,
         })
         .type('form')
         .expect(302)
@@ -82,14 +81,14 @@ describe('FormExampleController', function () {
       return request
         .post('/form-example')
         .send({
-          fullName: 'test name',
-          dobDay: 1,
-          dobMonth: '04',
-          dobYear: '1997',
-          preferredContactOption: ContactOption.email,
-          contactEmail: 'testemail@testing.com',
-          contactPhone: null,
-          contactSmsNumber: null,
+          fullName: FORM_EXAMPLE_INPUT.fullName,
+          dobDay: FORM_EXAMPLE_INPUT.dobDay,
+          dobMonth: FORM_EXAMPLE_INPUT.dobMonth,
+          dobYear: FORM_EXAMPLE_INPUT.dobYear,
+          preferredContactOption: FORM_EXAMPLE_INPUT.preferredContactOption,
+          contactEmail: FORM_EXAMPLE_INPUT.contactEmail,
+          contactPhone: FORM_EXAMPLE_INPUT.contactPhone,
+          contactSmsNumber: FORM_EXAMPLE_INPUT.contactSmsNumber,
         })
         .type('form')
         .expect(500)
@@ -101,14 +100,14 @@ describe('FormExampleController', function () {
       return request
         .post('/form-example')
         .send({
-          fullName: 'test name',
-          dobDay: 1,
-          dobMonth: '04',
-          dobYear: '1997',
-          preferredContactOption: ContactOption.email,
-          contactEmail: 'testemail@testing.com',
-          contactPhone: null,
-          contactSmsNumber: null,
+          fullName: FORM_EXAMPLE_INPUT.fullName,
+          dobDay: FORM_EXAMPLE_INPUT.dobDay,
+          dobMonth: FORM_EXAMPLE_INPUT.dobMonth,
+          dobYear: FORM_EXAMPLE_INPUT.dobYear,
+          preferredContactOption: FORM_EXAMPLE_INPUT.preferredContactOption,
+          contactEmail: FORM_EXAMPLE_INPUT.contactEmail,
+          contactPhone: FORM_EXAMPLE_INPUT.contactPhone,
+          contactSmsNumber: FORM_EXAMPLE_INPUT.contactSmsNumber,
         })
         .type('form')
         .expect(500)
@@ -126,13 +125,13 @@ describe('FormExampleController', function () {
 
   describe('GET /form-example/1', function () {
     it('should return form response', () => {
-      when(mockFormClient.get(1)).thenResolve(form1)
+      when(mockFormClient.get(1)).thenResolve(FORM_RECORD)
 
       return request
         .get('/form-example/1')
         .expect(200)
         .then(res => {
-          expect(res.text).to.contain(form1['full-name'])
+          expect(res.text).to.contain(FORM_RECORD['full-name'])
           verify(mockFormClient.get(1)).once()
         })
     })

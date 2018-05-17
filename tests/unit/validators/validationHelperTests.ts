@@ -12,7 +12,12 @@ describe('ValidationHelper', function () {
       return validate(formExampleModel).then(errors => {
         let result = convertValidationErrorsToViewErrors(errors)
 
-        expect(result['fullName'][0]).to.contain('Your full name is required')
+        expect(result['fullName']).to.equal('Full name is required')
+        expect(result['dobDay']).to.equal('Date of birth is required')
+        expect(result['dobMonth']).to.equal('Date of birth is required')
+        expect(result['dobYear']).to.equal('Date of birth is required')
+        expect(result['dob']).to.equal('Date of birth is required')
+        expect(result['preferredContactOption']).to.equal('Preferred contact option is required')
       })
     })
   })

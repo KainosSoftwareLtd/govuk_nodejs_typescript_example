@@ -18,13 +18,13 @@ describe('FormExampleModel', function () {
     it('should not populate the date when date does not exist', async () => {
       let formExampleModel = new FormExampleModel('Joe Bloggs', 31, 9, 1990, ContactOption.email, 'test@test.com', null, null)
 
-      expect(formExampleModel.dob).to.eql(new Date(NaN))
+      expect(formExampleModel.dob).to.eql(null)
     })
 
     it('should not populate the date when no values provided', async () => {
       let formExampleModel = new FormExampleModel('Joe Bloggs', null, null, null, ContactOption.email, 'test@test.com', null, null)
 
-      expect(formExampleModel.dob.getFullYear()).to.eql(NaN)
+      expect(formExampleModel.dob === undefined)
     })
   })
 

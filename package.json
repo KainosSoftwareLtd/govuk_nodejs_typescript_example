@@ -15,10 +15,12 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "@types/csurf": "^1.9.35",
     "body-parser": "~1.18.2",
     "class-validator": "^0.8.5",
     "compression": "^1.7.2",
     "cookie-parser": "~1.4.3",
+    "csurf": "^1.9.0",
     "debug": "~2.6.9",
     "express": "~4.15.5",
     "express-nunjucks": "^2.2.3",

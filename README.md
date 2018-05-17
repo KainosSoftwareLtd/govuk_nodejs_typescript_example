@@ -13,6 +13,13 @@ npm start # http://localhost:3000
 npm run fakeApi # http://localhost:4000
 ```
 
+### Windows 10 Pre-requisites
+
+```
+npm install --global --production windows-build-tools` # from an elevated PowerShell or CMD.exe (run as Administrator).
+npm install -g node-gyp
+```
+
 ## Overview
 
 * `package.json` - dependencies and command scripts
@@ -48,8 +55,8 @@ Clone or copy the source into your own project. There are sections marked with `
 * CI - automated build and deployment via Travis, see `.travis.yml`
 * security
   * headers - added [helmet](https://www.npmjs.com/package/helmet)
-  * CQRS - TODO
   * Request sanitisation - TODO
+  * cross-site scripting - added [csurf](https://github.com/expressjs/csurf) package which uses cookies to protect against [XSS](https://www.owasp.org/index.php/Cross-site_Scripting_(XSS)), see [here](https://github.com/pillarjs/understanding-csrf) for how this works. Any forms with a POST method, see `FormExample.html`, should have the `csurf-token.html` embedded. The token in the view is compared with the token in the cookie. Removing/changing the cookie token before submitting form will produce a csrf error.
   * vulnerbility checks - NSP, see badge and run locally with `npm run audit` (replace with `npm audit` after [NPM 6 release](https://medium.com/npm-inc/announcing-npm-6-5d0b1799a905))
 * gzip - added [compression](https://www.npmjs.com/package/compression)
 * dependency injection - example of service in controller - AM created service that calls fake api (npm server-json). Posts form data and displays a summary of form input. Added service to IOC and used inversify to facilitate dependency injection into formExampleController. Mocked service in tests using npm ts-mockito
@@ -67,3 +74,4 @@ Clone or copy the source into your own project. There are sections marked with `
     All application configuration is via environment variables which are defined in a single script `src/config.ts`, as this is easy to configure when deploying into docker containers or PAAS.
 
     As applications grow in size there will be a lot of Environment Variables, so we need to keep them in a single script so the application is self documenting and easier for someone unfamiliar to understand, providing a single file to look at rather than searching the code. The config script should supply defaults and comments to explain the config if appropriate and necessary, so environmental differences are easy to identify.
+* debug - see `.vscode/launch.json`, this is where debug profiles are defined which currently includes profiles to debug the application, run individual mocha tests and run all mocha tests

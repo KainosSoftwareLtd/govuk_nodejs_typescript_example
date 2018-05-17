@@ -25,9 +25,10 @@
                 Go to <a href="http://govuk-elements.herokuapp.com/form-elements/">govuk-elements</a> for full examples of form controls and validation error display.
               </p>
             </div>
-
+            
             <form method="POST" action="form-example">
               <div class="form-group {% if errors['fullName'] %} form-group-error {% endif %}">
+                  {% include "partials/csurf-token.html" %}
                 <label class="form-label-bold" for="fullName">Full name</label>
                 {% if errors['fullName'] %}
                 <span class="error-message" id="error-fullName">{{ errors['fullName'] }}</span>

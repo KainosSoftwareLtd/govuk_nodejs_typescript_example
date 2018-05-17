@@ -54,9 +54,8 @@ Clone or copy the source into your own project. There are sections marked with `
 * CI - automated build and deployment via Travis, see `.travis.yml`
 * security
   * headers - added [helmet](https://www.npmjs.com/package/helmet)
-  * CQRS - TODO
   * Request sanitisation - TODO
-  * cross-site scripting - added [csurf](https://github.com/expressjs/csurf) package which uses cookies to protect against [XSS](https://www.owasp.org/index.php/Cross-site_Scripting_(XSS)), see [here](https://github.com/pillarjs/understanding-csrf) for how this works
+  * cross-site scripting - added [csurf](https://github.com/expressjs/csurf) package which uses cookies to protect against [XSS](https://www.owasp.org/index.php/Cross-site_Scripting_(XSS)), see [here](https://github.com/pillarjs/understanding-csrf) for how this works. Any forms with a POST method, see `FormExample.html`, should have the `csurf-token.html` embedded. The token in the view is compared with the token in the cookie. Removing/changing the cookie token before submitting form with produce a csrf error.
   * vulnerbility checks - NSP, see badge and run locally with `npm run audit` (replace with `npm audit` after [NPM 6 release](https://medium.com/npm-inc/announcing-npm-6-5d0b1799a905))
 * gzip - added [compression](https://www.npmjs.com/package/compression)
 * dependency injection - TODO example of service in controller

@@ -28,6 +28,7 @@
 
             <form method="POST">
               <div class="form-group">
+                  {% include "partials/csurf-token.html" %}
                 <label class="form-label-bold" for="fullName">Full name</label>
                 {% if errors['fullName'][0] %}
                 <span class="error-message" id="error-fullName">{{ errors['fullName'][0] }}</span>

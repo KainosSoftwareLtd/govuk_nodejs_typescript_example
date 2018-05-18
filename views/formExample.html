@@ -25,83 +25,108 @@
                 Go to <a href="http://govuk-elements.herokuapp.com/form-elements/">govuk-elements</a> for full examples of form controls and validation error display.
               </p>
             </div>
-
-            <form method="POST">
-              <div class="form-group">
+            
+            <form method="POST" action="form-example">
+              <div class="form-group {% if errors['fullName'] %} form-group-error {% endif %}">
                   {% include "partials/csurf-token.html" %}
                 <label class="form-label-bold" for="fullName">Full name</label>
-                {% if errors['fullName'][0] %}
-                <span class="error-message" id="error-fullName">{{ errors['fullName'][0] }}</span>
+                {% if errors['fullName'] %}
+                <span class="error-message" id="error-fullName">{{ errors['fullName'] }}</span>
                 {% endif %}
-                <input class="form-control" id="fullName" type="text" name="fullName" value="{{ data['fullName'] }}">
+                <input class="form-control{% if errors['fullName'] %} form-control-error {% endif %}" id="fullName" type="text" name="fullName" value="{{ data['fullName'] }}">
               </div>
 
-              <div class="form-group">
+              <div class="form-group {% if errors['dob'] %} form-group-error {% endif %}">
                 <fieldset>
                   <legend>
-                    <span class="form-label-bold">
+                    <span class="form-label-bold" id="dob">
                       What is your date of birth?
                     </span>
                     <span class="form-hint">For example, 31 3 1980</span>
                   </legend>
+
+                  {% include "includes/multipart-date-validation-error-messages.html" %}
+
                   <div class="form-date">
                     <div class="form-group form-group-day">
+                        
                       <label class="form-label" for="dobDay">Day</label>
-                      <input class="form-control" id="dobDay" name="dobDay" type="number" pattern="[0-9]*">
+                      
+                      <input class="form-control {% if errors['dobDay'] or 
+                      not errors['dobDay'] and not errors['dobMonth'] and not errors['dobYear'] and errors['dob'] %} form-control-error {% endif %}" 
+                      id="dobDay" name="dobDay" type="number" pattern="[0-9]*" value="{{ data['dobDay'] }}">
                     </div>
                     <div class="form-group form-group-month">
                       <label class="form-label" for="dobMonth">Month</label>
-                      <input class="form-control" id="dobMonth" name="dobMonth" type="number" pattern="[0-9]*">
+                      
+                      <input class="form-control{% if errors['dobMonth'] or 
+                      not errors['dobDay'] and not errors['dobMonth'] and not errors['dobYear'] and errors['dob'] %} form-control-error {% endif %}" 
+                      id="dobMonth" name="dobMonth" type="number" pattern="[0-9]*" value="{{ data['dobMonth'] }}">
                     </div>
                     <div class="form-group form-group-year">
                       <label class="form-label" for="dobYear">Year</label>
-                      <input class="form-control" id="dobYear" name="dobYear" type="number" pattern="[0-9]*">
+                      
+                      <input class="form-control {% if errors['dobYear'] or 
+                      not errors['dobDay'] and not errors['dobMonth'] and not errors['dobYear'] and errors['dob'] %} form-control-error {% endif %}" 
+                      id="dobYear" name="dobYear" type="number" pattern="[0-9]*" value="{{ data['dobYear'] }}">
                     </div>
                   </div>
                 </fieldset>
               </div>
 
-              <div class="form-group">
+              <div class="form-group{% if errors['preferredContactOption'] or errors['contactEmail'] %} form-group-error {% endif %}">
                   <fieldset>
 
                     <legend>
                       <span class="form-label-bold">
                         How do you want to be contacted?
                       </span>
+                      {% if errors['preferredContactOption'] %}
+                        <span class="error-message" id="error-preferredContactOption">{{ errors['preferredContactOption'] }}</span>
+                      {% endif %}
                     </legend>
 
                     <div class="multiple-choice" data-target="contact-by-email">
-                      <input id="example-contact-by-email" type="radio" name="preferredContactOption" value="email">
+                      <input id="example-contact-by-email" type="radio" name="preferredContactOption" value="email" {% if data.preferredContactOption == "email" %} checked {% endif %}>
                       <label for="example-contact-by-email">Email</label>
                     </div>
                     <div class="panel panel-border-narrow js-hidden" id="contact-by-email">
                       <label class="form-label" for="contactEmail">Email address</label>
-                      <input class="form-control" name="contactEmail" type="text" id="contactEmail">
+                      {% if errors['contactEmail'] %}
+                        <span class="error-message" id="error-contactEmail">{{ errors['contactEmail'] }}</span>
+                      {% endif %}
+                      <input class="form-control {% if errors['contactEmail'] %} form-control-error {% endif %}"name="contactEmail" type="text" id="contactEmail" value="{{ data['contactEmail'] }}">
                     </div>
 
                     <div class="multiple-choice" data-target="contact-by-phone">
-                      <input id="example-contact-by-phone" type="radio" name="preferredContactOption" value="phone">
+                      <input id="example-contact-by-phone" type="radio" name="preferredContactOption" value="phone" {% if data.preferredContactOption == "phone" %} checked {% endif %}>
                       <label for="example-contact-by-phone">Phone</label>
                     </div>
                     <div class="panel panel-border-narrow js-hidden" id="contact-by-phone">
                       <label class="form-label" for="contactPhone">Phone number</label>
-                      <input class="form-control" name="contactPhone" type="text" id="contactPhone">
+                      {% if errors['contactPhone'] %}
+                        <span class="error-message" id="error-contactPhone">{{ errors['contactPhone'] }}</span>
+                      {% endif %}
+                      <input class="form-control {% if errors['contactPhone'] %} form-control-error {% endif %}" name="contactPhone" type="number" id="contactPhone" value="{{ data['contactPhone'] }}">
                     </div>
 
                     <div class="multiple-choice" data-target="contact-by-text">
-                      <input id="example-contact-by-text" type="radio" name="preferredContactOption" value="sms">
+                      <input id="example-contact-by-text" type="radio" name="preferredContactOption" value="sms" {% if data.preferredContactOption == "sms" %} checked {% endif %}>
                       <label for="example-contact-by-text">Text message</label>
                     </div>
                     <div class="panel panel-border-narrow js-hidden" id="contact-by-text">
                       <label class="form-label" for="contactSmsNumber">Mobile phone number</label>
-                      <input class="form-control" name="contactSmsNumber" type="text" id="contactSmsNumber">
+                      {% if errors['contactSmsNumber'] %}
+                        <span class="error-message" id="error-contactSmsNumber">{{ errors['contactSmsNumber'] }}</span>
+                      {% endif %}
+                      <input class="form-control {% if errors['contactSmsNumber'] %} form-control-error {% endif %}" name="contactSmsNumber" type="number" id="contactSmsNumber" value="{{ data['contactSmsNumber'] }}">
                     </div>
 
                   </fieldset>
                 </div>
 
                 <div class="form-group">
-                  <button id="save-and-continue" class="button">Save and continue</button>
+                  <button class="button" type="submit" id="save-and-continue">Save and continue</button>
                 </div>
             </form>
 

@@ -1,7 +1,6 @@
 import * as express from 'express'
 import * as expressNunjucks from 'express-nunjucks'
 import * as path from 'path'
-import * as logger from 'morgan'
 import * as cookieParser from 'cookie-parser'
 import * as bodyParser from 'body-parser'
 import * as favicon from 'serve-favicon'
@@ -15,6 +14,8 @@ import { attachSecurityHeaders } from './middleware/securityHeaders'
 
 const app = express()
 const isDev = app.get('env') === 'development'
+const log = require('./middleware/logging/log')
+const onFinished = require('on-finished')
 
 // view engine setup
 app.set('views', path.join(__dirname, '../views'))
@@ -26,7 +27,6 @@ expressNunjucks(app, {
 attachSecurityHeaders(app) // Helmet security headers and CSP
 
 app.use(compression()) // GZIP compression
-app.use(logger('dev'))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cookieParser())
@@ -35,11 +35,23 @@ app.use('/public', express.static(path.join(__dirname, '../govuk_modules', 'govu
 app.use('/public', express.static(path.join(__dirname, '../govuk_modules', 'govuk_frontend_toolkit')))
 app.use(favicon(path.join(__dirname, '../govuk_modules', 'govuk_template', 'images', 'favicon.ico')))
 
-// Add variables that are available in all views.
+// Add variables thlat are available in all views.
 app.use(function (req, res, next) {
   res.locals.asset_path = '/public/'
   res.locals.serviceName = 'Example service' // TODO replace with service name
   res.locals.releaseVersion = 'v0.1' // TODO replace with package.json version
+  next()
+})
+
+//Route Logging
+app.use(function (req, res, next) {
+  // Log response started.
+  log.info({ request: req }, 'Route Started.')
+
+  // Log response finished.
+  onFinished(res, function () {
+    log.info({ response: res }, 'Route Complete.')
+  })
   next()
 })
 

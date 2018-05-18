@@ -50,3 +50,6 @@ views/govuk_template.html
 
 # generated styles
 public/stylesheets
+
+# fakeApi
+db.json

@@ -12,9 +12,19 @@ describe('Example flow test', () => {
       // FormExample
       .waitForExist('#fullName')
       .setValue('#fullName', 'Joe Bloggs')
+      .waitForExist('#dobDay')
+      .setValue('#dobDay', 1)
+      .waitForExist('#dobMonth')
+      .setValue('#dobMonth', 2)
+      .waitForExist('#dobYear')
+      .setValue('#dobYear', 2015)
+      .waitForExist('#example-contact-by-email')
+      .click('#example-contact-by-email')
+      .waitForExist('#contactEmail')
+      .setValue('#contactEmail', 'testemail@email.com')
       .click('#save-and-continue')
 
-      // Index
-      .waitForExist('#start')
+    // Index
+      .waitForExist('#summaryTable')
   })
 })

@@ -107,7 +107,7 @@ describe('FormExampleController', function () {
         .expect(500)
     })
 
-    it.only('should return form response for invalid post', () => {
+    it('should return 400 with form validation errors for invalid post', () => {
       return request
         .post('/form-example')
         .send({

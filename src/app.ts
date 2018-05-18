@@ -2,6 +2,7 @@ import * as express from 'express'
 import * as expressNunjucks from 'express-nunjucks'
 import * as path from 'path'
 import * as cookieParser from 'cookie-parser'
+import * as csrf from 'csurf'
 import * as bodyParser from 'body-parser'
 import * as favicon from 'serve-favicon'
 import * as compression from 'compression'
@@ -30,6 +31,7 @@ app.use(compression()) // GZIP compression
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cookieParser())
+app.use(csrf({ cookie: true }))
 app.use('/public', express.static(path.join(__dirname, '../public')))
 app.use('/public', express.static(path.join(__dirname, '../govuk_modules', 'govuk_template')))
 app.use('/public', express.static(path.join(__dirname, '../govuk_modules', 'govuk_frontend_toolkit')))
@@ -40,6 +42,8 @@ app.use(function (req, res, next) {
   res.locals.asset_path = '/public/'
   res.locals.serviceName = 'Example service' // TODO replace with service name
   res.locals.releaseVersion = 'v0.1' // TODO replace with package.json version
+  res.locals.csrfToken = req.csrfToken()
+
   next()
 })
 

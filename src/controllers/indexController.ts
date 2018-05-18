@@ -1,10 +1,13 @@
 import * as express from 'express'
 import { injectable } from 'inversify'
 
+const log = require('../middleware/logging/log')
+
 @injectable()
 export class IndexController {
 
   public async get(req, res, next) {
+    log.info({request: req},"Getting the landing page")
     return await res.render('index.html')
   }
 

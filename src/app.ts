@@ -1,7 +1,8 @@
 import * as express from 'express'
 import * as expressNunjucks from 'express-nunjucks'
 import * as path from 'path'
-import * as logger from 'morgan'
+import * as morgan from 'morgan'
+import { winstonLogger }from './middleware/logger'
 import * as cookieParser from 'cookie-parser'
 import * as csrf from 'csurf'
 import * as bodyParser from 'body-parser'
@@ -27,7 +28,7 @@ expressNunjucks(app, {
 attachSecurityHeaders(app) // Helmet security headers and CSP
 
 app.use(compression()) // GZIP compression
-app.use(logger('dev'))
+// app.use(morgan('dev'))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cookieParser())
@@ -44,6 +45,13 @@ app.use(function (req, res, next) {
   res.locals.releaseVersion = 'v0.1' // TODO replace with package.json version
   res.locals.csrfToken = req.csrfToken()
 
+  next()
+})
+
+// Log each HTML request and its response.
+app.use(function (req, res, next) {
+  // Log response started.
+  winstonLogger.info('winston logger info')
   next()
 })
 

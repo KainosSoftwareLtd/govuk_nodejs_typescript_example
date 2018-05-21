@@ -7,6 +7,8 @@ import { TYPES } from '../types'
 
 import { FormClientInterface } from '../services/formClient'
 
+import { winstonLogger } from '../middleware/logger'
+
 @injectable()
 export class FormExampleController {
   private formClient: FormClientInterface
@@ -17,10 +19,12 @@ export class FormExampleController {
 
   // display the form
   public async get(req, res, next) {
+    winstonLogger.info('GET formExampleController')
     return await res.render('formExample.html', { data: {} })
   }
 
   public async post(req, res, next) {
+    winstonLogger.info('POST formExampleController')
     let formExampleModel = new FormExampleModel(
       req.body.fullName,
       parseInt(req.body.dobDay, 10),

@@ -51,6 +51,7 @@
     "nsp": "^3.2.1",
     "selenium-standalone": "^6.14.0",
     "supertest": "^3.0.0",
+    "ts-log-class": "^1.0.19",
     "ts-mockito": "^2.3.0",
     "ts-node": "^6.0.2",
     "tslint": "^5.9.1",

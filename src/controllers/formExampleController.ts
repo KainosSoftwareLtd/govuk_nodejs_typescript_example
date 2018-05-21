@@ -7,7 +7,10 @@ import { TYPES } from '../types'
 
 import { FormClientInterface } from '../services/formClient'
 
+import log from 'ts-log-class'
+
 @injectable()
+@log()
 export class FormExampleController {
   private formClient: FormClientInterface
 

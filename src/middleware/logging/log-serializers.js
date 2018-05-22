@@ -2,7 +2,8 @@ module.exports.requestSerializer = function (request) {
     return {
       url: request.url,
       method: request.method,
-      params: request.params
+      params: request.params,
+      clientAddress: request.connection.remoteAddress
     }
   }
   

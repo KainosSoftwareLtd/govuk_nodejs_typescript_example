@@ -24,6 +24,18 @@ const expressLogger = new (logger)({
     }
 })
 
+const errorLoggerOptions = {
+    transports: [
+        new transports.Console({
+            json: true
+        }),
+    ],
+    msg: '{{err.message}}',
+    level: function() {
+      return 'warn'
+    }
+}
+
 requestWhitelist.push('body') // whitelist the body of the request object
 
-export { expressLogger }
+export { expressLogger, errorLoggerOptions }

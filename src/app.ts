@@ -3,8 +3,8 @@ import * as expressNunjucks from 'express-nunjucks'
 import * as path from 'path'
 import * as morgan from 'morgan'
 import { logger } from './middleware/logger'
-import { expressWinston } from 'express-winston'
-import { expressLogger } from './middleware/expressLogger'
+import { expressWinston, errorLogger } from 'express-winston'
+import { expressLogger, errorLoggerOptions } from './middleware/expressLogger'
 import * as cookieParser from 'cookie-parser'
 import * as csrf from 'csurf'
 import * as bodyParser from 'body-parser'
@@ -31,7 +31,6 @@ expressNunjucks(app, {
 attachSecurityHeaders(app) // Helmet security headers and CSP
 
 app.use(compression()) // GZIP compression
-// app.use(morgan('dev'))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cookieParser())
@@ -68,6 +67,10 @@ const formExampleController = iocContainer.get<FormExampleController>(TYPES.Form
 
 indexController.attachRoutes(app)
 formExampleController.attachRoutes(app)
+
+// try out error handling
+// Create a winston instance, can be configured however you want.
+app.use(errorLogger(errorLoggerOptions))
 
 attachErrorHandling(app)
 

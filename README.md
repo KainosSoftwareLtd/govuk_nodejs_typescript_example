@@ -64,6 +64,7 @@ Clone or copy the source into your own project. There are sections marked with `
 * testing
   * unit testing including mocking dependencies - unit testing of formExampleController with service mocked using mokito
   * browser testing - using [webdriver.io](http://webdriver.io/) to create browser tests, the configuration can be extended to call into remote selenium grids and services like [Saucelabs](https://saucelabs.com/) and [BrowserStack](https://www.browserstack.com/)
+  * Code Coverage - TODO ability to generate test coverage reports for application. See [here](https://istanbul.js.org/docs/tutorials/mocha/) for details on integrating  [Istanbul](https://istanbul.js.org/) with Mocha. Bonus if example of integration with [CoverAlls](https://coveralls.io/)
 * logging - TODO decorators?
 * metrics - TODO
 * Sample VSCode launch.json - see `.sample-vscode`, copy the `launch.json` to `.vscode` for example build configurations to debug the application and run individual mocha tests
@@ -75,3 +76,4 @@ Clone or copy the source into your own project. There are sections marked with `
 
     As applications grow in size there will be a lot of Environment Variables, so we need to keep them in a single script so the application is self documenting and easier for someone unfamiliar to understand, providing a single file to look at rather than searching the code. The config script should supply defaults and comments to explain the config if appropriate and necessary, so environmental differences are easy to identify.
 * debug - see `.vscode/launch.json`, this is where debug profiles are defined which currently includes profiles to debug the application, run individual mocha tests and run all mocha tests
+* Healthchecks - TODO Implement Healthcheck controller, see [here](https://stevenwilliamalexander.wordpress.com/2017/09/19/service-healthcheck-pattern/) for details

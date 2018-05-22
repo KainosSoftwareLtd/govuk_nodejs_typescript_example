@@ -8,6 +8,7 @@ import { TYPES } from '../types'
 import { FormClientInterface } from '../services/formClient'
 
 import { winstonLogger } from '../middleware/logger'
+import { expressLogger } from '../middleware/expressLogger'
 
 @injectable()
 export class FormExampleController {
@@ -24,7 +25,8 @@ export class FormExampleController {
   }
 
   public async post(req, res, next) {
-    winstonLogger.info('POST formExampleController')
+    req._routeWhitelists.body = ['fullName', 'preferredContactOption']
+    req._routeWhitelists.res = ['_headers']
     let formExampleModel = new FormExampleModel(
       req.body.fullName,
       parseInt(req.body.dobDay, 10),

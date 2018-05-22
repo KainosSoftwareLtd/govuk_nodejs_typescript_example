@@ -24,6 +24,7 @@
     "debug": "~2.6.9",
     "express": "~4.15.5",
     "express-nunjucks": "^2.2.3",
+    "express-winston": "^2.5.1",
     "govuk-elements-sass": "^3.1.2",
     "govuk_frontend_toolkit": "^7.5.0",
     "govuk_template_jinja": "^0.24.0",

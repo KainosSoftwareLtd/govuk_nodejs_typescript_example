@@ -2,7 +2,9 @@ import * as express from 'express'
 import * as expressNunjucks from 'express-nunjucks'
 import * as path from 'path'
 import * as morgan from 'morgan'
-import { winstonLogger }from './middleware/logger'
+import { winstonLogger } from './middleware/logger'
+import { expressWinston } from 'express-winston'
+import { expressLogger } from './middleware/expressLogger'
 import * as cookieParser from 'cookie-parser'
 import * as csrf from 'csurf'
 import * as bodyParser from 'body-parser'
@@ -49,11 +51,7 @@ app.use(function (req, res, next) {
 })
 
 // Log each HTML request and its response.
-app.use(function (req, res, next) {
-  // Log response started.
-  winstonLogger.info('winston logger info')
-  next()
-})
+app.use(expressLogger)
 
 // Attach routes
 const indexController = iocContainer.get<IndexController>(TYPES.IndexController)

@@ -2,11 +2,7 @@ import { transports }  from 'winston' // for transports.Console
 import { logger, expressWinston, requestWhitelist } from 'express-winston'
 import { get } from 'express-http-context'
 
-// Wrap Winston logger to print reqId in each log
-const formatMessage = function() {
-    let reqId = get('reqId')
-    return reqId
-}
+const level = process.env.LOG_LEVEL || 'debug'
 
 const expressLogger = new (logger)({
     transports: [
@@ -15,13 +11,19 @@ const expressLogger = new (logger)({
                 return (new Date()).toISOString()
             },
             json: true,
-            colorize: true,
+            colorize: true
         })
     ],
-    msg: 'my custom message: ',
+    msg: 'my custom message - write it here',
+    meta: true,
+    dynamicMeta: function(req, res) {
+        return {
+          reqId: get('reqId'),
+          appName: get('appName')
+      }
+    }
 })
 
 requestWhitelist.push('body') // whitelist the body of the request object
-requestWhitelist.push('reqId')
 
 export { expressLogger }

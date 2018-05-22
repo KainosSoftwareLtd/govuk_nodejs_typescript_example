@@ -55,7 +55,8 @@ app.use(middleware) // use the express-http-request middleware in order to set a
 
 // Log each HTML request and its response.
 app.use(function(req, res, next) {
-  set('reqId', 'MY REQUEST ID')
+  set('reqId', 'MY NEW REQUEST ID')
+  set('appName', 'govuk_nodejs_typescript_example')
   next()
 })
 

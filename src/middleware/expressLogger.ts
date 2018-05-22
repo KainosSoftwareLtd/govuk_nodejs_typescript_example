@@ -32,7 +32,7 @@ const errorLoggerOptions = {
     ],
     msg: '{{err.message}}',
     level: function() {
-      return 'warn'
+      return 'error'
     }
 }
 

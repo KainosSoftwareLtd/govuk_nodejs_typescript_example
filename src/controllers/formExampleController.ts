@@ -20,7 +20,7 @@ export class FormExampleController {
 
   // display the form
   public async get(req, res, next) {
-    logger.log('GET formExampleController hopefully with a unique id')
+    logger.debug('GET formExampleController hopefully with a unique id')
     return await res.render('formExample.html', { data: {} })
   }
 

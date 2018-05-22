@@ -1,9 +1,12 @@
+var _ = require('lodash')
+
 module.exports.requestSerializer = function (request) {
     return {
       url: request.url,
       method: request.method,
       params: request.params,
-      clientAddress: request.connection.remoteAddress
+      clientAddress: request.connection.remoteAddress,
+      body : _.omit(request.body, ['dobDay', 'dobMonth', 'dobYear'])
     }
   }
   

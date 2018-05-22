@@ -1,12 +1,12 @@
 import * as express from 'express'
 import { injectable } from 'inversify'
-import { winstonLogger } from '../middleware/logger'
+import { logger } from '../middleware/logger'
 
 @injectable()
 export class IndexController {
 
   public async get(req, res, next) {
-    winstonLogger.info('Getting the landing page')
+    logger.info('Getting the landing page hopefully with request id')
     return await res.render('index.html')
   }
 

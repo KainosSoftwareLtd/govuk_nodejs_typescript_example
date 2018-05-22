@@ -2,7 +2,7 @@ import * as express from 'express'
 import * as expressNunjucks from 'express-nunjucks'
 import * as path from 'path'
 import * as morgan from 'morgan'
-import { winstonLogger } from './middleware/logger'
+import { logger } from './middleware/logger'
 import { expressWinston } from 'express-winston'
 import { expressLogger } from './middleware/expressLogger'
 import * as cookieParser from 'cookie-parser'
@@ -16,6 +16,7 @@ import { IndexController } from './controllers/indexController'
 import { FormExampleController } from './controllers/formExampleController'
 import { attachErrorHandling } from './middleware/errorHandling'
 import { attachSecurityHeaders } from './middleware/securityHeaders'
+import { middleware, set } from 'express-http-context'
 
 const app = express()
 const isDev = app.get('env') === 'development'
@@ -50,7 +51,14 @@ app.use(function (req, res, next) {
   next()
 })
 
+app.use(middleware) // use the express-http-request middleware in order to set a unique request id
+
 // Log each HTML request and its response.
+app.use(function(req, res, next) {
+  set('reqId', 'MY REQUEST ID')
+  next()
+})
+
 app.use(expressLogger)
 
 // Attach routes

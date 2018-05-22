@@ -1,5 +1,4 @@
 import * as express from 'express'
-import { winstonLogger } from './logger'
 
 export function attachErrorHandling (app: express.Application) {
   app.use(function(req, res, next) {

@@ -7,7 +7,7 @@ import { TYPES } from '../types'
 
 import { FormClientInterface } from '../services/formClient'
 
-import { winstonLogger } from '../middleware/logger'
+import { logger } from '../middleware/logger'
 import { expressLogger } from '../middleware/expressLogger'
 
 @injectable()
@@ -20,13 +20,14 @@ export class FormExampleController {
 
   // display the form
   public async get(req, res, next) {
-    winstonLogger.info('GET formExampleController')
+    logger.info('GET formExampleController hopefully with a unique id')
     return await res.render('formExample.html', { data: {} })
   }
 
   public async post(req, res, next) {
-    req._routeWhitelists.body = ['fullName', 'preferredContactOption']
-    req._routeWhitelists.res = ['_headers']
+    req._routeBlacklists.body = ['fullName'] // hide personally identifiable info from the logs
+    // req._routeWhitelists.body = ['fullName', 'preferredContactOption']
+    req._routeWhitelists.res = ['_headers', 'reqId']
     let formExampleModel = new FormExampleModel(
       req.body.fullName,
       parseInt(req.body.dobDay, 10),

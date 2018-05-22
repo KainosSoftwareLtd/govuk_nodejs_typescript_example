@@ -125,6 +125,14 @@
                   </fieldset>
                 </div>
 
+                <div class="form-group {% if errors['bio'] %} form-group-error {% endif %}">
+                  <label class="form-label-bold" for="bio">Bio</label>
+                  {% if errors['bio'] %}
+                  <span class="error-message" id="error-bio">{{ errors['bio'] }}</span>
+                  {% endif %}
+                  <textarea class="form-control{% if errors['bio'] %} form-control-error {% endif %}" name="bio" id="bio" rows="5" value="{{ data['bio'] }}"></textarea>
+                </div>
+
                 <div class="form-group">
                   <button class="button" type="submit" id="save-and-continue">Save and continue</button>
                 </div>

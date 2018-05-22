@@ -1,9 +1,31 @@
-import { escape, trim } from 'validator'
+import { escape, unescape, trim, whitelist, normalizeEmail } from 'validator'
 
-export function sanitizeInputString(inputString: string) {
-    let sanitizedInput = inputString || ''
-    sanitizedInput = trim(sanitizedInput)
-    sanitizedInput = escape(sanitizedInput)
+const REGEX_LETTERS_AND_SPACE = 'a-zA-Z\" \"\''
 
-    return sanitizedInput
+export function lettersAndSpaceInputString(inputString: string) {
+    if ( inputString ) {
+        return whitelist(trim(inputString), REGEX_LETTERS_AND_SPACE)
+    }
+    return inputString
+}
+
+export function normalizeEmailInput(inputString: string) {
+    if ( inputString ) {
+        return normalizeEmail(inputString)
+    }
+    return inputString
+}
+
+export function escapeInputString(inputString: string) {
+    if ( inputString ) {
+        return escape(inputString)
+    }
+    return inputString
+}
+
+export function unescapeInputString(inputString: string) {
+    if ( inputString ) {
+        return unescape(inputString)
+    }
+    return inputString
 }

@@ -21,6 +21,5 @@ export function attachSecurityHeaders (app: express.Application) {
       imgSrc: ['\'self\'']
     }
   }))
-  
 }
 

@@ -3,8 +3,8 @@
     "tasks": [
         {
             "label": "build",
-            "type": "shell",
-            "command": "npm run build"
+            "type": "npm",
+            "script": "build"
         }
     ]
 }

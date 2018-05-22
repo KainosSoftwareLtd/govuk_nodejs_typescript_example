@@ -3,7 +3,7 @@ import { Form, ContactOption } from '../src/models/formExampleModel'
 
 export const FORM_RECORD: Form = {
   id: 1,
-  fullName: 'test name',
+  fullName: 'test name>',
   dobDay: 31,
   dobMonth: 3,
   dobYear: 1980,
@@ -11,7 +11,8 @@ export const FORM_RECORD: Form = {
   preferredContactOption: ContactOption.email,
   contactEmail: 'testemail@testing.com',
   contactPhone: '',
-  contactSmsNumber: ''
+  contactSmsNumber: '',
+  bio: 'I am using &lt;special&gt; characters, escaping &amp; unescaping them!'
 }
 
 export const VALID_FORM_ID = 1
@@ -25,7 +26,7 @@ export const VALID_CONTACT_EMAIL_ADDRESS = 'testemail@testing.com'
 
 // Unsanitized values used to test input sanitization
 export const UNSANITIZED_FULL_NAME = ' test<>& name'
-export const UNSANITIZED_CONTACT_EMAIL_ADDRESS = ' testemail@testing.com '
+export const UNSANITIZED_BIO = 'I am using <special> characters, escaping & unescaping them!'
 
 export const NULL_INPUT = null
 

@@ -22,7 +22,7 @@ describe('FormExampleController', function () {
   beforeEach(function () {
     const app = express()
     app.set('views', path.join(__dirname, '../../../views'))
-    expressNunjucks(app, { noCache: true })
+    expressNunjucks(app, { noCache: true, autoescape: false })
     app.use(bodyParser.json())
     app.use(bodyParser.urlencoded({ extended: false }))
 
@@ -84,7 +84,8 @@ describe('FormExampleController', function () {
           dobMonth: fixtures.VALID_DOB_MONTH,
           dobYear: fixtures.VALID_DOB_YEAR,
           preferredContactOption: fixtures.VALID_EMAIL_CONTACT_OPTION,
-          contactEmail: fixtures.UNSANITIZED_CONTACT_EMAIL_ADDRESS
+          contactEmail: fixtures.VALID_CONTACT_EMAIL_ADDRESS,
+          bio: fixtures.UNSANITIZED_BIO
         })
         .type('form')
         .expect(302)
@@ -93,7 +94,8 @@ describe('FormExampleController', function () {
           verify(mockFormClient.create(anything())).once()
           const [mockForm] = capture(mockFormClient.create).last()
           expect(mockForm['contactEmail']).to.deep.equal('testemail@testing.com')
-          expect(mockForm['fullName']).to.deep.equal('test&lt;&gt;&amp; name')
+          expect(mockForm['fullName']).to.deep.equal('test name')
+          expect(mockForm['bio']).to.deep.equal('I am using &lt;special&gt; characters, escaping &amp; unescaping them!')
         })
     })
 
@@ -163,6 +165,7 @@ describe('FormExampleController', function () {
         .expect(200)
         .then(res => {
           expect(res.text).to.contain(fixtures.FORM_RECORD['full-name'])
+          expect(res.text).to.contain(fixtures.UNSANITIZED_BIO)
           verify(mockFormClient.get(1)).once()
         })
     })

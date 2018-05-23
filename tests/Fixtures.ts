@@ -3,7 +3,7 @@ import { Form, ContactOption } from '../src/models/formExampleModel'
 
 export const FORM_RECORD: Form = {
   id: 1,
-  fullName: 'test name>',
+  fullName: 'test name',
   dobDay: 31,
   dobMonth: 3,
   dobYear: 1980,

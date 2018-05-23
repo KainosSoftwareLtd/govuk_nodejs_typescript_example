@@ -21,8 +21,7 @@ const isDev = app.get('env') === 'development'
 app.set('views', path.join(__dirname, '../views'))
 expressNunjucks(app, {
   watch: isDev,
-  noCache: isDev,
-  autoescape: true
+  noCache: isDev
 })
 
 attachSecurityHeaders(app) // Helmet security headers and CSP

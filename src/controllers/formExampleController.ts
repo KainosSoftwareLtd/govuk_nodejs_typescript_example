@@ -20,14 +20,12 @@ export class FormExampleController {
 
   // display the form
   public async get(req, res, next) {
-    logger.debug('GET formExampleController hopefully with a unique id')
+    logger.info('using Winston logger GET formExampleController. Unique request id: ')
     return await res.render('formExample.html', { data: {} })
   }
 
   public async post(req, res, next) {
-    req._routeBlacklists.body = ['fullName'] // hide personally identifiable info from the logs
-    // req._routeWhitelists.body = ['fullName', 'preferredContactOption']
-    req._routeWhitelists.res = ['_headers', 'reqId']
+    logger.info('using Winston logger POST formExampleController. Full name: ' + req.body.fullName)
     let formExampleModel = new FormExampleModel(
       req.body.fullName,
       parseInt(req.body.dobDay, 10),
@@ -65,6 +63,7 @@ export class FormExampleController {
 
   // display the results of the input
   public async getSummary(req, res, next) {
+    logger.info('using Winston logger GET :id formExampleController. id: ' + req.params.id)
     try {
       let form = await this.formClient.get(+req.params.id)
       if (form) {

@@ -59,18 +59,12 @@ app.use(function(req, res, next) {
   next()
 })
 
-app.use(expressLogger)
-
 // Attach routes
 const indexController = iocContainer.get<IndexController>(TYPES.IndexController)
 const formExampleController = iocContainer.get<FormExampleController>(TYPES.FormExampleController)
 
 indexController.attachRoutes(app)
 formExampleController.attachRoutes(app)
-
-// try out error handling
-// Create a winston instance, can be configured however you want.
-app.use(errorLogger(errorLoggerOptions))
 
 attachErrorHandling(app)
 

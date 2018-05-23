@@ -1,6 +1,7 @@
 import * as winston  from 'winston'
 import { json } from 'body-parser'
 import { get } from 'express-http-context'
+import { Stream } from 'stream'
 
 const level = process.env.LOG_LEVEL || 'debug'
 
@@ -15,6 +16,12 @@ const winstonLogger = new (winston.Logger) ({
             }
         })
     ]
+})
+
+winstonLogger.stream = (options?: any) => new Stream.Duplex({
+    write: function (message: string, encoding: any) {
+        logger.info(message)
+    }
 })
 
 // Wrap Winston logger to print reqId in each log

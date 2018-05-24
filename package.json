@@ -9,6 +9,7 @@
     "start": "npm run build && node ./bin/www",
     "fakeApi": "json-server -p 4000 db.json",
     "test": "npm run lint && mocha tests/unit/**/*.ts --require ts-node/register",
+    "test-coverage": "nyc npm test",
     "test-e2e": "gulp --gulpfile gulpfile-e2e.js",
     "generate-assets": "gulp generate-assets",
     "audit": "nsp check"
@@ -49,6 +50,7 @@
     "mocha": "^5.1.1",
     "node-sass": "^4.9.0",
     "nsp": "^3.2.1",
+    "nyc": "^11.8.0",
     "selenium-standalone": "^6.14.0",
     "supertest": "^3.0.0",
     "ts-mockito": "^2.3.0",

@@ -1,23 +1,24 @@
+// winston logger for adding logging statements
+
 import * as winston  from 'winston'
-import { json } from 'body-parser'
 import { get } from 'express-http-context'
 
 const level = process.env.LOG_LEVEL || 'debug'
-
-// tslint:disable-next-line:no-console
-console.log('inside logger.ts')
 
 const winstonLogger = new (winston.Logger) ({
     transports: [
         new (winston.transports.Console)({
             timestamp: function() {
                 return (new Date()).toISOString()
-            }
+            },
+            json: true,
+            colorize: true,
+            level: level,
         })
-    ]
+    ],
 })
 
-// Wrap Winston logger to print reqId in each log
+// (Optional) Wrap Winston logger to print UUID in each log
 const formatMessage = function(message) {
     let reqId = get('reqId')
     message = reqId ? message + ' reqId: ' + reqId : message

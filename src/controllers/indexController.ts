@@ -8,10 +8,7 @@ export class IndexController {
     return await res.render('index.html')
   }
 
-  public attachRoutes(app: express.Application) {
-    const router = express.Router()
-    app.use('/', router)
-
+  public attachRoutes(router: express.Router) {
     router.get('/', this.get.bind(this)) // needed so function can access instance of controller variables
   }
 }

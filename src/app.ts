@@ -17,6 +17,7 @@ const app = express()
 const isDev = app.get('env') === 'development'
 const log = require('./middleware/logging/log')
 const onFinished = require('on-finished')
+const responseTime = require('response-time')
 
 // view engine setup
 app.set('views', path.join(__dirname, '../views'))
@@ -36,6 +37,7 @@ app.use('/public', express.static(path.join(__dirname, '../public')))
 app.use('/public', express.static(path.join(__dirname, '../govuk_modules', 'govuk_template')))
 app.use('/public', express.static(path.join(__dirname, '../govuk_modules', 'govuk_frontend_toolkit')))
 app.use(favicon(path.join(__dirname, '../govuk_modules', 'govuk_template', 'images', 'favicon.ico')))
+app.use(responseTime())
 
 // Add variables thlat are available in all views.
 app.use(function (req, res, next) {
@@ -50,7 +52,7 @@ app.use(function (req, res, next) {
 //Route Logging
 app.use(function (req, res, next) {
   // Log response started.
-  log.info({ request: req }, 'Route Started.')
+  log.info({request: req}, 'Route Started.')
 
   // Log response finished.
   onFinished(res, function () {

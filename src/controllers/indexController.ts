@@ -7,7 +7,7 @@ const log = require('../middleware/logging/log')
 export class IndexController {
 
   public async get(req, res, next) {
-    log.info({request: req},"Getting the landing page")
+    log.info("Getting the landing page")
     return await res.render('index.html')
   }
 

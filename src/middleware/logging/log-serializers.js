@@ -5,14 +5,14 @@ module.exports.requestSerializer = function (request) {
       url: request.url,
       method: request.method,
       params: request.params,
-      clientAddress: request.connection.remoteAddress,
-      body : _.omit(request.body, ['dobDay', 'dobMonth', 'dobYear'])
+      clientAddress: request.connection.remoteAddress
     }
   }
   
   module.exports.responseSerializer = function (response) {
     return {
-      statusCode: response.statusCode
+      statusCode: response.statusCode,
+      responseTime: response.get('X-Response-Time')
     }
   }
   
@@ -22,4 +22,9 @@ module.exports.requestSerializer = function (request) {
       name: error.name,
       stack: error.stack
     }
+  }
+
+  module.exports.bodySerializer = function (body){
+    return _.omit(body, ['dobDay', 'dobMonth', 'dobYear', '_csrf'])
+  
   }

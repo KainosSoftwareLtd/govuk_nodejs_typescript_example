@@ -5,7 +5,7 @@ module.exports.consoleStream = function () {
     prettyStream.pipe(process.stdout)
   
     return {
-      level: 'DEBUG',
+      level: (process.env.LOG_LEVEL || 'DEBUG'),
       stream: prettyStream
     }
   }

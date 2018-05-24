@@ -7,6 +7,8 @@ import { TYPES } from '../types'
 
 import { FormClientInterface } from '../services/formClient'
 
+const log = require('../middleware/logging/log')
+
 @injectable()
 export class FormExampleController {
   private formClient: FormClientInterface
@@ -21,6 +23,8 @@ export class FormExampleController {
   }
 
   public async post(req, res, next) {
+    log.debug({body: req.body}, "Request Body")
+
     let formExampleModel = new FormExampleModel(
       req.body.fullName,
       parseInt(req.body.dobDay, 10),

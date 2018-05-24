@@ -8,7 +8,8 @@ var log = bunyan.createLogger({
   serializers: {
     'request': serializers.requestSerializer,
     'response': serializers.responseSerializer,
-    'error': serializers.errorSerializer
+    'error': serializers.errorSerializer, 
+    'body': serializers.bodySerializer
   }
 })
 

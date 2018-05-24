@@ -6,7 +6,7 @@ import { logger } from '../middleware/logger'
 export class IndexController {
 
   public async get(req, res, next) {
-    logger.info('Using the winston logger to get the landing page. Unique request id: ')
+    logger.log('Using the winston logger to get the landing page. Unique request id: ')
     return await res.render('index.html')
   }
 

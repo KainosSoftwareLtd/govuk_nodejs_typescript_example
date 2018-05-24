@@ -10,6 +10,7 @@ const winstonLogger = new (winston.Logger) ({
                 return (new Date()).toISOString()
             },
             json: true,
+            level: level,
         })
     ]
 })

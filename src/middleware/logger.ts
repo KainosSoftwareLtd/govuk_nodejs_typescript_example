@@ -18,16 +18,11 @@ const winstonLogger = new (winston.Logger) ({
     ]
 })
 
-winstonLogger.stream = (options?: any) => new Stream.Duplex({
-    write: function (message: string, encoding: any) {
-        logger.info(message)
-    }
-})
-
 // Wrap Winston logger to print reqId in each log
 const formatMessage = function(message) {
     let reqId = get('reqId')
-    message = reqId ? message + ' reqId: ' + reqId : message
+    let appName = get('appName')
+    message = reqId ? message + ' reqId: ' + reqId + ' '  + appName : message
     return message
 }
 
@@ -55,4 +50,4 @@ const logger = {
     }
 }
 
-export { logger }
+export { logger, winstonLogger }

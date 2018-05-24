@@ -2,9 +2,8 @@ import * as express from 'express'
 import * as expressNunjucks from 'express-nunjucks'
 import * as path from 'path'
 import * as morgan from 'morgan'
-import { logger } from './middleware/logger'
+import { logger, winstonLogger } from './middleware/logger'
 import { expressWinston, errorLogger } from 'express-winston'
-import { expressLogger, errorLoggerOptions } from './middleware/expressLogger'
 import * as cookieParser from 'cookie-parser'
 import * as csrf from 'csurf'
 import * as bodyParser from 'body-parser'
@@ -31,6 +30,7 @@ expressNunjucks(app, {
 attachSecurityHeaders(app) // Helmet security headers and CSP
 
 app.use(compression()) // GZIP compression
+app.use(morgan('combined', { stream: { write: message => logger.info(message) }}))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cookieParser())
@@ -54,7 +54,7 @@ app.use(middleware) // use the express-http-request middleware in order to set a
 
 // Log each HTML request and its response.
 app.use(function(req, res, next) {
-  set('reqId', 'MY NEW REQUEST ID')
+  set('reqId', '12345')
   set('appName', 'govuk_nodejs_typescript_example')
   next()
 })

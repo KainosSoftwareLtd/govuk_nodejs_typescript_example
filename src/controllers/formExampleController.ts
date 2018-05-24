@@ -8,7 +8,6 @@ import { TYPES } from '../types'
 import { FormClientInterface } from '../services/formClient'
 
 import { logger } from '../middleware/logger'
-import { expressLogger } from '../middleware/expressLogger'
 
 @injectable()
 export class FormExampleController {

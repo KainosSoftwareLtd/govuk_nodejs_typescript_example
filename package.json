@@ -9,7 +9,8 @@
     "start": "npm run build && node ./bin/www",
     "fakeApi": "json-server -p 4000 db.json",
     "test": "npm run lint && mocha tests/unit/**/*.ts --require ts-node/register",
-    "test-coverage": "nyc npm test",
+    "coverage": "nyc npm test",
+    "check-coverage": "npm run test-coverage && nyc check-coverage --lines 70",
     "test-e2e": "gulp --gulpfile gulpfile-e2e.js",
     "generate-assets": "gulp generate-assets",
     "audit": "nsp check"

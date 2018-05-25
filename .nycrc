@@ -1,0 +1,15 @@
+{
+    "extension": [
+      ".ts",
+      ".tsx"
+    ],
+    "exclude": [
+      "**/*.d.ts"
+    ],
+    "reporter": [
+      "text-summary",
+      "text",
+      "html"
+    ],
+    "temp-directory": "./coverage/.nyc_output"
+}

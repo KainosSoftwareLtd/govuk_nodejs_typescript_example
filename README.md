@@ -40,6 +40,7 @@ npm install -g node-gyp
 * `tsconfig.json` - TypeScript config for `tsc` compile used to generate Javascript
 * `tslint.json` - TypeScript linting config setup to mimic [StandardJS](https://standardjs.com/)
 * `tsoa.json` - TSOA config, see [here](https://github.com/lukeautry/tsoa) for details
+* `.nycrc` - NYC/Istanbul config for code coverage, run with `npm run coverage` and `npm run check-coverage` to measure code coverage against predefined metric
 
 ### Why TypeScript?
 

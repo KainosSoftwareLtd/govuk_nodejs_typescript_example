@@ -4,7 +4,9 @@
       ".tsx"
     ],
     "exclude": [
-      "**/*.d.ts"
+      "**/*.d.ts",
+      "./src/models",
+      "./src/middleware"
     ],
     "reporter": [
       "text-summary",

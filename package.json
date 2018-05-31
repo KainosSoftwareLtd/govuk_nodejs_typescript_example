@@ -11,7 +11,8 @@
     "test": "npm run lint && mocha tests/unit/**/*.ts --require ts-node/register",
     "test-e2e": "gulp --gulpfile gulpfile-e2e.js",
     "generate-assets": "gulp generate-assets",
-    "audit": "nsp check"
+    "audit": "nsp check",
+    "test-pa11y": "node ./tests/accessibility/pa11y.js"
   },
   "dependencies": {
     "axios": "^0.18.0",
@@ -41,6 +42,7 @@
     "@types/mocha": "^5.2.0",
     "@types/node": "^10.0.2",
     "@types/supertest": "^2.0.4",
+    "archiver": "^2.1.1",
     "chai": "^4.1.2",
     "gulp": "^3.9.1",
     "gulp-sass": "^4.0.1",
@@ -49,6 +51,8 @@
     "mocha": "^5.1.1",
     "node-sass": "^4.9.0",
     "nsp": "^3.2.1",
+    "pa11y": "^5.0.4",
+    "pa11y-reporter-html": "^1.0.0",
     "selenium-standalone": "^6.14.0",
     "supertest": "^3.0.0",
     "ts-mockito": "^2.3.0",

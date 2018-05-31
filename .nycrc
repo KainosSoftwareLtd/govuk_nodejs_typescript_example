@@ -1,0 +1,17 @@
+{
+    "extension": [
+      ".ts",
+      ".tsx"
+    ],
+    "exclude": [
+      "**/*.d.ts",
+      "./src/models",
+      "./src/middleware"
+    ],
+    "reporter": [
+      "text-summary",
+      "text",
+      "html"
+    ],
+    "temp-directory": "./coverage/.nyc_output"
+}

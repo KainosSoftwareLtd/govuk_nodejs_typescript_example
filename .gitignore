@@ -56,3 +56,4 @@ db.json
 
 # pa11y reports
 tests/accessibility/reports.zip
+tests/accessibility/*.html

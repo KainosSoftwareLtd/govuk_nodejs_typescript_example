@@ -34,6 +34,7 @@ npm install -g node-gyp
 * `views` - folder for nunjunks views
 -* `tests/unit` - unit tests using mocha, chai and supertest, run with `npm test`
 -* `tests/e2e` - browser tests using [webdriver.io](http://webdriver.io/), gulp and mocha, run with `npm run test-e2e` (needs application and fakeApi running locally)
+-* `tests/accessibility` - accessibility tests and failure reports using [Pa11y](http://pa11y.org/), run with `npm run test-pa11y` (needs application and fakeApi running locally)
 -* `tests/wdio.conf` - e2e browser tests configuration file
 * `dist` - folder for Javascript compiled from TypeScript
 * `gulpfile.js` - [gulp](https://gulpjs.com/) tasks to generate assets from govuk resources
@@ -65,6 +66,7 @@ Clone or copy the source into your own project. There are sections marked with `
 * testing
   * unit testing including mocking dependencies - unit testing of formExampleController with service mocked using mokito
   * browser testing - using [webdriver.io](http://webdriver.io/) to create browser tests, the configuration can be extended to call into remote selenium grids and services like [Saucelabs](https://saucelabs.com/) and [BrowserStack](https://www.browserstack.com/)
+  * accessibility testing - using [Pa11y](http://pa11y.org/) to test supplied URLs and generate HTML reports for any failures. [Wave Toolbar](https://wave.webaim.org/extension/) also should be used to manually test pages in-browser - different tools catch different issues!
   * Code Coverage - TODO ability to generate test coverage reports for application. See [here](https://istanbul.js.org/docs/tutorials/mocha/) for details on integrating  [Istanbul](https://istanbul.js.org/) with Mocha. Bonus if example of integration with [CoverAlls](https://coveralls.io/)
 * logging - TODO decorators?
 * metrics - TODO

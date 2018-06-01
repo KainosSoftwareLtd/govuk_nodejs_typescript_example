@@ -22,35 +22,35 @@
                     <caption class="heading-small">Example form summary</caption>
                     <tbody>
                         <tr>
-                           <td>Full name</td>
+                           <th>Full name</th>
                            <td>{{ form.fullName }}</td>
                         </tr>
                         <tr>
-                            <td>Date of birth</td>
+                            <th>Date of birth</th>
                             <td>{{ form.dob }}</td>
                         </tr>
                         <tr>
-                            <td>How do you want to be contacted?</td>
+                            <th>How do you want to be contacted?</th>
                             <td>{{ form.preferredContactOption }}</td>
                         </tr>
 
                         {% if form.preferredContactOption == "email" %}
                         <tr>
-                            <td>Email address</td>
+                            <th>Email address</th>
                             <td>{{ form.contactEmail }}</td>
                         </tr>
                         {% endif %}
-                    
+
                         {% if form.preferredContactOption == "phone" %}
                         <tr>
-                            <td>Phone number</td>
+                            <th>Phone number</th>
                             <td>{{ form.contactPhone }}</td>
                         </tr>
                         {% endif %}
-                        
+
                         {% if form.preferredContactOption == "sms" %}
                         <tr>
-                            <td>Mobile phone number</td>
+                            <th>Mobile phone number</th>
                             <td>{{ form.contactSmsNumber }}</td>
                         </tr>
                         {% endif %}

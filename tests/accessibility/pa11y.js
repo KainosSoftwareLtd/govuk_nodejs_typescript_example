@@ -61,7 +61,7 @@ async function createAndAppendReport(archive, results) {
 }
 
 function initArchive() {
-  archive = archiver('zip')
+  let archive = archiver('zip')
   let output = fs.createWriteStream(reportsPath)
 
   archive.pipe(output)

@@ -9,7 +9,7 @@ const reportsPath = path.join(__dirname, 'reports.zip')
 
 const tests = [
   pa11y('http://localhost:3000'),
-  pa11y('http://localhost:3000/form-example')
+  pa11y('http://localhost:3000/form-example'),
   pa11y('http://localhost:3000/form-example/1')
 ]
 

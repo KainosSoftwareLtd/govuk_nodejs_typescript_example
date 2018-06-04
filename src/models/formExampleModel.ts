@@ -1,4 +1,4 @@
-import { MaxLength, IsNotEmpty, IsInt, Min, Max, IsDate, MaxDate, ValidateIf, IsEmail } from 'class-validator'
+import { MaxLength, IsNotEmpty, IsInt, Min, Max, IsDate, MaxDate, ValidateIf, IsEmail, IsMobilePhone } from 'class-validator'
 import { getIsRequired } from '../validators/validationErrorMessages'
 
 export class FormExampleModel {
@@ -41,10 +41,13 @@ export class FormExampleModel {
   contactPhone: string
 
   @ValidateIf(o => o.preferredContactOption === 'sms')
+  @IsMobilePhone('en-GB')
   @IsNotEmpty({ message: getIsRequired('Mobile phone number') })
   contactSmsNumber: string
 
-  public constructor (fullName: string, dobDay: number, dobMonth: number, dobYear: number, preferredContactOption: ContactOption, contactEmail: string, contactPhone: string, contactSmsNumber: string) {
+  bio: string
+
+  public constructor (fullName: string, dobDay: number, dobMonth: number, dobYear: number, preferredContactOption: ContactOption, contactEmail: string, contactPhone: string, contactSmsNumber: string, bio: string) {
     this.fullName = fullName
     this.dobDay = dobDay
     this.dobMonth = dobMonth
@@ -53,6 +56,7 @@ export class FormExampleModel {
     this.contactEmail = contactEmail
     this.contactPhone = contactPhone
     this.contactSmsNumber = contactSmsNumber
+    this.bio = bio
 
     if (this.dobDay && this.dobMonth && this.dobYear) {
       this.dob = new Date(this.dobYear, this.dobMonth - 1, this.dobDay) // month arg is 0-based i.e. January = 0
@@ -85,7 +89,9 @@ export class Form {
 
   contactSmsNumber: string
 
-  public constructor (id: number, fullName: string, dobDay: number, dobMonth: number, dobYear: number, preferredContactOption: ContactOption, contactEmail: string, contactPhone: string, contactSmsNumber: string) {
+  bio: string
+
+  public constructor (id: number, fullName: string, dobDay: number, dobMonth: number, dobYear: number, preferredContactOption: ContactOption, contactEmail: string, contactPhone: string, contactSmsNumber: string, bio: string) {
     this.id = id
     this.fullName = fullName
     this.dobDay = dobDay
@@ -95,6 +101,7 @@ export class Form {
     this.contactEmail = contactEmail
     this.contactPhone = contactPhone
     this.contactSmsNumber = contactSmsNumber
+    this.bio = bio
 
     try {
       this.dob = new Date(this.dobYear, this.dobMonth, this.dobDay)

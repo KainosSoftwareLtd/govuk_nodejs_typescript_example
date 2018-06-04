@@ -7,7 +7,7 @@ import { validate } from 'class-validator'
 describe('ValidationHelper', function () {
   describe('convertValidationErrorsToViewErrors', function () {
     it('should return object with first error per property', () => {
-      let formExampleModel = new FormExampleModel(null, null, null, null, null, null, null, null)
+      let formExampleModel = new FormExampleModel(null, null, null, null, null, null, null, null, null)
 
       return validate(formExampleModel).then(errors => {
         let result = convertValidationErrorsToViewErrors(errors)

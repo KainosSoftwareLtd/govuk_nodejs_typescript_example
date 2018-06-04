@@ -1,6 +1,7 @@
 import * as express from 'express'
 import { injectable, inject } from 'inversify'
 import { FormExampleModel } from '../models/formExampleModel'
+import { lettersAndSpaceInputString, normalizeEmailInput, escapeInputString, unescapeInputString } from '../utils/input-sanitizer'
 import { validate } from 'class-validator'
 import { convertValidationErrorsToViewErrors } from '../validators/validationHelper'
 import { TYPES } from '../types'
@@ -22,14 +23,15 @@ export class FormExampleController {
 
   public async post(req, res, next) {
     let formExampleModel = new FormExampleModel(
-      req.body.fullName,
+      lettersAndSpaceInputString(req.body.fullName),
       parseInt(req.body.dobDay, 10),
       parseInt(req.body.dobMonth, 10),
       parseInt(req.body.dobYear, 10),
       req.body.preferredContactOption,
-      req.body.contactEmail,
+      normalizeEmailInput(req.body.contactEmail),
       req.body.contactPhone,
-      req.body.contactSmsNumber
+      req.body.contactSmsNumber,
+      escapeInputString(req.body.bio)
     )
 
     const createForm = async () => {
@@ -61,6 +63,7 @@ export class FormExampleController {
     try {
       let form = await this.formClient.get(+req.params.id)
       if (form) {
+        form.bio = unescapeInputString(form.bio)
         return res.render('summaryFormExample.html', { form })
       } else {
         res.status(404)

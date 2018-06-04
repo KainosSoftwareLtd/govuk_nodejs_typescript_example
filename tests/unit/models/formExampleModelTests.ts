@@ -10,19 +10,19 @@ describe('FormExampleModel', function () {
   describe('constructor', function () {
 
     it('should populate the date', async () => {
-      let formExampleModel = new FormExampleModel('Joe Bloggs', 1, 2, 1990, ContactOption.email, 'test@test.com', null, null)
+      let formExampleModel = new FormExampleModel('Joe Bloggs', 1, 2, 1990, ContactOption.email, 'test@test.com', null, null, null)
 
       expect(formExampleModel.dob.getFullYear()).to.equal(1990)
     })
 
     it('should not populate the date when date does not exist', async () => {
-      let formExampleModel = new FormExampleModel('Joe Bloggs', 31, 9, 1990, ContactOption.email, 'test@test.com', null, null)
+      let formExampleModel = new FormExampleModel('Joe Bloggs', 31, 9, 1990, ContactOption.email, 'test@test.com', null, null, null)
 
       expect(formExampleModel.dob).to.eql(null)
     })
 
     it('should not populate the date when no values provided', async () => {
-      let formExampleModel = new FormExampleModel('Joe Bloggs', null, null, null, ContactOption.email, 'test@test.com', null, null)
+      let formExampleModel = new FormExampleModel('Joe Bloggs', null, null, null, ContactOption.email, 'test@test.com', null, null, null)
 
       expect(formExampleModel.dob === undefined)
     })
@@ -32,7 +32,7 @@ describe('FormExampleModel', function () {
 
     it('should return one validation error if full name exceeds allowed text size', async () => {
       let testName = 'a'.repeat(52)
-      let formExampleModel = new FormExampleModel(testName, 1, 2, 1990, ContactOption.sms, null, null, '11111')
+      let formExampleModel = new FormExampleModel(testName, 1, 2, 1990, ContactOption.email, 'test@test.com', null, null, null)
 
       const validationErrors = await validator.validate(formExampleModel)
 
@@ -42,7 +42,7 @@ describe('FormExampleModel', function () {
     })
 
     it('should return no validation errors when valid input', async () => {
-      let formExampleModel = new FormExampleModel('Joe Bloggs', 1, 2, 1990, ContactOption.email, 'test@test.com', null, null)
+      let formExampleModel = new FormExampleModel('Joe Bloggs', 1, 2, 1990, ContactOption.email, 'test@test.com', null, null, null)
 
       const validationErrors = await validator.validate(formExampleModel)
 
@@ -51,7 +51,7 @@ describe('FormExampleModel', function () {
     })
 
     it('should return one validation error when date does not exist', async () => {
-      let formExampleModel = new FormExampleModel('Joe Bloggs', 31, 9, 1990, ContactOption.email, 'test@test.com', null, null)
+      let formExampleModel = new FormExampleModel('Joe Bloggs', 31, 9, 1990, ContactOption.email, 'test@test.com', null, null, null)
 
       const validationErrors = await validator.validate(formExampleModel)
 
@@ -61,7 +61,7 @@ describe('FormExampleModel', function () {
     })
 
     it('should return one validation error when date is in the future', async () => {
-      let formExampleModel = new FormExampleModel('Joe Bloggs', new Date().getDate(), new Date().getMonth() + 2, new Date().getFullYear(), ContactOption.email, 'test@test.com', null, null)
+      let formExampleModel = new FormExampleModel('Joe Bloggs', new Date().getDate(), new Date().getMonth() + 2, new Date().getFullYear(), ContactOption.email, 'test@test.com', null, null, null)
 
       const validationErrors = await validator.validate(formExampleModel)
 
@@ -71,7 +71,7 @@ describe('FormExampleModel', function () {
     })
 
     it('should return two validation errors when year is in the future', async () => {
-      let formExampleModel = new FormExampleModel('Joe Bloggs', 30, 9, new Date().getFullYear() + 1, ContactOption.email, 'test@test.com', null, null)
+      let formExampleModel = new FormExampleModel('Joe Bloggs', 30, 9, new Date().getFullYear() + 1, ContactOption.email, 'test@test.com', null, null, null)
 
       const validationErrors = await validator.validate(formExampleModel)
 
@@ -82,7 +82,7 @@ describe('FormExampleModel', function () {
     })
 
     it('should return two validation errors when month is not a valid month', async () => {
-      let formExampleModel = new FormExampleModel('Joe Bloggs', 30, 14, 2018, ContactOption.email, 'test@test.com', null, null)
+      let formExampleModel = new FormExampleModel('Joe Bloggs', 30, 14, 2018, ContactOption.email, 'test@test.com', null, null, null)
 
       const validationErrors = await validator.validate(formExampleModel)
 
@@ -93,7 +93,7 @@ describe('FormExampleModel', function () {
     })
 
     it('should return four validation errors when no values provided', async () => {
-      let formExampleModel = new FormExampleModel('Joe Bloggs', null, null, null, ContactOption.email, 'test@test.com', null, null)
+      let formExampleModel = new FormExampleModel('Joe Bloggs', null, null, null, ContactOption.email, 'test@test.com', null, null, null)
 
       const validationErrors = await validator.validate(formExampleModel)
 
@@ -106,7 +106,7 @@ describe('FormExampleModel', function () {
     })
 
     it('should not validate email input if email contact option is not selected', async () => {
-      let formExampleModel = new FormExampleModel('Joe Bloggs', 1, 2, 1990, ContactOption.phone, 'skdfjldks', '11111', null)
+      let formExampleModel = new FormExampleModel('Joe Bloggs', 1, 2, 1990, ContactOption.phone, 'skdfjldks', '11111', null, null)
 
       const validationErrors = await validator.validate(formExampleModel)
 
@@ -114,7 +114,7 @@ describe('FormExampleModel', function () {
     })
 
     it('should validate email input if email contact option is selected', async () => {
-      let formExampleModel = new FormExampleModel('Joe Bloggs', 1, 2, 1990, ContactOption.email, 'skdfjldks', null, null)
+      let formExampleModel = new FormExampleModel('Joe Bloggs', 1, 2, 1990, ContactOption.email, 'skdfjldks', null, null, null)
 
       const validationErrors = await validator.validate(formExampleModel)
 
@@ -124,13 +124,23 @@ describe('FormExampleModel', function () {
     })
 
     it('should validate sms input if sms contact option is selected', async () => {
-      let formExampleModel = new FormExampleModel('Joe Bloggs', 1, 2, 1990, ContactOption.sms, null, null, null)
+      let formExampleModel = new FormExampleModel('Joe Bloggs', 1, 2, 1990, ContactOption.sms, null, null, null, null)
 
       const validationErrors = await validator.validate(formExampleModel)
 
       expect(validationErrors.length).to.be.equal(1)
       expect(validationErrors[0].property).to.equal('contactSmsNumber')
       expect(validationErrors[0].constraints['isNotEmpty']).to.equal('Mobile phone number is required')
+    })
+
+    it('should error for invalid phone number', async () => {
+      let formExampleModel = new FormExampleModel('Joe Bloggs', 1, 2, 1990, ContactOption.sms, null, null, '08367', null)
+
+      const validationErrors = await validator.validate(formExampleModel)
+
+      expect(validationErrors.length).to.be.equal(1)
+      expect(validationErrors[0].property).to.equal('contactSmsNumber')
+      expect(validationErrors[0].constraints['isMobilePhone']).to.equal('contactSmsNumber must be a phone number')
     })
   })
 })

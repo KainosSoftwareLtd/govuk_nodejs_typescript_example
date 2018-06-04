@@ -29,6 +29,7 @@
             "type": "node",
             "request": "launch",
             "name": "debug",
+            "preLaunchTask": "build",
             "program": "${workspaceFolder}/bin/www",
             "args": ["--inspect"],
             "protocol": "inspector"

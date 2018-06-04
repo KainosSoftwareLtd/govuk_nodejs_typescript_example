@@ -54,6 +54,13 @@
                             <td>{{ form.contactSmsNumber }}</td>
                         </tr>
                         {% endif %}
+
+                        {% if form.bio %}
+                        <tr>
+                            <td>Bio</td>
+                            <td>{{ form.bio }}</td>
+                        </tr>
+                        {% endif %}
                     </tbody>
                 </table>
         </div>

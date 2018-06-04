@@ -34,12 +34,14 @@ npm install -g node-gyp
 * `views` - folder for nunjunks views
 -* `tests/unit` - unit tests using mocha, chai and supertest, run with `npm test`
 -* `tests/e2e` - browser tests using [webdriver.io](http://webdriver.io/), gulp and mocha, run with `npm run test-e2e` (needs application and fakeApi running locally)
+-* `tests/accessibility` - accessibility tests and failure reports using [Pa11y](http://pa11y.org/), run with `npm run test-pa11y` (needs application and fakeApi running locally)
 -* `tests/wdio.conf` - e2e browser tests configuration file
 * `dist` - folder for Javascript compiled from TypeScript
 * `gulpfile.js` - [gulp](https://gulpjs.com/) tasks to generate assets from govuk resources
 * `tsconfig.json` - TypeScript config for `tsc` compile used to generate Javascript
 * `tslint.json` - TypeScript linting config setup to mimic [StandardJS](https://standardjs.com/)
 * `tsoa.json` - TSOA config, see [here](https://github.com/lukeautry/tsoa) for details
+* `.nycrc` - NYC/Istanbul config for code coverage, run with `npm run coverage` and `npm run check-coverage` to measure code coverage against predefined metric
 
 ### Why TypeScript?
 
@@ -64,6 +66,8 @@ Clone or copy the source into your own project. There are sections marked with `
 * testing
   * unit testing including mocking dependencies - unit testing of formExampleController with service mocked using mokito
   * browser testing - using [webdriver.io](http://webdriver.io/) to create browser tests, the configuration can be extended to call into remote selenium grids and services like [Saucelabs](https://saucelabs.com/) and [BrowserStack](https://www.browserstack.com/)
+  * accessibility testing - using [Pa11y](http://pa11y.org/) to test supplied URLs and generate HTML reports for any failures. [Wave Toolbar](https://wave.webaim.org/extension/) also should be used to manually test pages in-browser - different tools catch different issues!
+  * Code Coverage - TODO ability to generate test coverage reports for application. See [here](https://istanbul.js.org/docs/tutorials/mocha/) for details on integrating  [Istanbul](https://istanbul.js.org/) with Mocha. Bonus if example of integration with [CoverAlls](https://coveralls.io/)
 * logging - TODO decorators?
 * metrics - TODO
 * Sample VSCode launch.json - see `.sample-vscode`, copy the `launch.json` to `.vscode` for example build configurations to debug the application and run individual mocha tests
@@ -75,3 +79,4 @@ Clone or copy the source into your own project. There are sections marked with `
 
     As applications grow in size there will be a lot of Environment Variables, so we need to keep them in a single script so the application is self documenting and easier for someone unfamiliar to understand, providing a single file to look at rather than searching the code. The config script should supply defaults and comments to explain the config if appropriate and necessary, so environmental differences are easy to identify.
 * debug - see `.vscode/launch.json`, this is where debug profiles are defined which currently includes profiles to debug the application, run individual mocha tests and run all mocha tests
+* Healthchecks - TODO Implement Healthcheck controller, see [here](https://stevenwilliamalexander.wordpress.com/2017/09/19/service-healthcheck-pattern/) for details

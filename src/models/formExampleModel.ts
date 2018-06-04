@@ -1,4 +1,4 @@
-import { MaxLength, IsNotEmpty, IsInt, Min, Max, IsDate, MaxDate, ValidateIf, IsEmail } from 'class-validator'
+import { MaxLength, IsNotEmpty, IsInt, Min, Max, IsDate, MaxDate, ValidateIf, IsEmail, IsMobilePhone } from 'class-validator'
 import { getIsRequired } from '../validators/validationErrorMessages'
 
 export class FormExampleModel {
@@ -41,6 +41,7 @@ export class FormExampleModel {
   contactPhone: string
 
   @ValidateIf(o => o.preferredContactOption === 'sms')
+  @IsMobilePhone('en-GB')
   @IsNotEmpty({ message: getIsRequired('Mobile phone number') })
   contactSmsNumber: string
 

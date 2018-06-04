@@ -32,7 +32,7 @@ describe('FormExampleModel', function () {
 
     it('should return one validation error if full name exceeds allowed text size', async () => {
       let testName = 'a'.repeat(52)
-      let formExampleModel = new FormExampleModel(testName, 1, 2, 1990, ContactOption.sms, null, null, '11111', null)
+      let formExampleModel = new FormExampleModel(testName, 1, 2, 1990, ContactOption.email, 'test@test.com', null, null, null)
 
       const validationErrors = await validator.validate(formExampleModel)
 
@@ -131,6 +131,16 @@ describe('FormExampleModel', function () {
       expect(validationErrors.length).to.be.equal(1)
       expect(validationErrors[0].property).to.equal('contactSmsNumber')
       expect(validationErrors[0].constraints['isNotEmpty']).to.equal('Mobile phone number is required')
+    })
+
+    it('should error for invalid phone number', async () => {
+      let formExampleModel = new FormExampleModel('Joe Bloggs', 1, 2, 1990, ContactOption.sms, null, null, '08367', null)
+
+      const validationErrors = await validator.validate(formExampleModel)
+
+      expect(validationErrors.length).to.be.equal(1)
+      expect(validationErrors[0].property).to.equal('contactSmsNumber')
+      expect(validationErrors[0].constraints['isMobilePhone']).to.equal('contactSmsNumber must be a phone number')
     })
   })
 })

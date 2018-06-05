@@ -71,11 +71,8 @@ export class FormExampleController {
     }
   }
 
-  public attachRoutes(app: express.Application) {
-    const router = express.Router()
-    app.use('/', router)
-
-    router.get('/form-example', this.get.bind(this)) // needed so function can access instance of controller variables
+  public attachRoutes(router: express.Router) {
+    router.get('/form-example', this.get.bind(this))
     router.post('/form-example', this.post.bind(this))
     router.get('/form-example/:id', this.getSummary.bind(this))
   }

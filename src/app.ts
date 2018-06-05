@@ -7,12 +7,9 @@ import * as csrf from 'csurf'
 import * as bodyParser from 'body-parser'
 import * as favicon from 'serve-favicon'
 import * as compression from 'compression'
-import { TYPES } from './types'
-import { iocContainer } from './ioc'
-import { IndexController } from './controllers/indexController'
-import { FormExampleController } from './controllers/formExampleController'
 import { attachErrorHandling } from './middleware/errorHandling'
 import { attachSecurityHeaders } from './middleware/securityHeaders'
+import { attachRoutes } from './routes'
 
 const app = express()
 const isDev = app.get('env') === 'development'
@@ -47,12 +44,7 @@ app.use(function (req, res, next) {
   next()
 })
 
-// Attach routes
-const indexController = iocContainer.get<IndexController>(TYPES.IndexController)
-const formExampleController = iocContainer.get<FormExampleController>(TYPES.FormExampleController)
-
-indexController.attachRoutes(app)
-formExampleController.attachRoutes(app)
+attachRoutes(app)
 
 attachErrorHandling(app)
 

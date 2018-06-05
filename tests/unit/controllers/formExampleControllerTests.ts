@@ -29,8 +29,11 @@ describe('FormExampleController', function () {
     mockFormClient = mock(FormClient)
     iocContainer.rebind(TYPES.FormClientInterface).toConstantValue(instance(mockFormClient))
 
+    const router = express.Router()
+    app.use('/', router)
+
     formExampleController = iocContainer.get<FormExampleController>(TYPES.FormExampleController)
-    formExampleController.attachRoutes(app)
+    formExampleController.attachRoutes(router)
 
     request = supertest(app)
 

@@ -21,8 +21,11 @@ describe('IndexController', function () {
     app.use(bodyParser.json())
     app.use(bodyParser.urlencoded({ extended: false }))
 
+    const router = express.Router()
+    app.use('/', router)
+
     indexController = iocContainer.get<IndexController>(TYPES.IndexController)
-    indexController.attachRoutes(app)
+    indexController.attachRoutes(router)
 
     request = supertest(app)
 

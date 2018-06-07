@@ -11,7 +11,6 @@ import { iocContainer } from '../../../src/ioc'
 import { FormClient } from '../../../src/services/formClient'
 import { attachErrorHandling } from '../../../src/middleware/errorHandling'
 import { FormExampleController } from '../../../src/controllers/formExampleController'
-import { Form, ContactOption } from '../../../src/models/formExampleModel'
 import * as fixtures from '../../Fixtures'
 
 describe('FormExampleController', function () {

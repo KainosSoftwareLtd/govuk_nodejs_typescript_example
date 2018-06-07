@@ -79,4 +79,4 @@ Clone or copy the source into your own project. There are sections marked with `
 
     As applications grow in size there will be a lot of Environment Variables, so we need to keep them in a single script so the application is self documenting and easier for someone unfamiliar to understand, providing a single file to look at rather than searching the code. The config script should supply defaults and comments to explain the config if appropriate and necessary, so environmental differences are easy to identify.
 * debug - see `.vscode/launch.json`, this is where debug profiles are defined which currently includes profiles to debug the application, run individual mocha tests and run all mocha tests
-* Healthchecks - TODO Implement Healthcheck controller, see [here](https://stevenwilliamalexander.wordpress.com/2017/09/19/service-healthcheck-pattern/) for details
+* Healthchecks - Example Healthcheck controller `src/controllers/HealthcheckController.ts` exposes two endpoints `/status` and `/healthcheck`, see [here](https://stevenwilliamalexander.wordpress.com/2017/09/19/service-healthcheck-pattern/) for details

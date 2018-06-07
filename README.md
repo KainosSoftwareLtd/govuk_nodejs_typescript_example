@@ -67,7 +67,7 @@ Clone or copy the source into your own project. There are sections marked with `
   * unit testing including mocking dependencies - unit testing of formExampleController with service mocked using mokito
   * browser testing - using [webdriver.io](http://webdriver.io/) to create browser tests, the configuration can be extended to call into remote selenium grids and services like [Saucelabs](https://saucelabs.com/) and [BrowserStack](https://www.browserstack.com/)
   * accessibility testing - using [Pa11y](http://pa11y.org/) to test supplied URLs and generate HTML reports for any failures. [Wave Toolbar](https://wave.webaim.org/extension/) also should be used to manually test pages in-browser - different tools catch different issues!
-  * Code Coverage - TODO ability to generate test coverage reports for application. See [here](https://istanbul.js.org/docs/tutorials/mocha/) for details on integrating  [Istanbul](https://istanbul.js.org/) with Mocha. Bonus if example of integration with [CoverAlls](https://coveralls.io/)
+  * Code Coverage - generate test coverage reports for application using `npm run coverage` or `npm run check-coverage` (fails on <70%). See [here](https://istanbul.js.org/docs/tutorials/mocha/) for details
 * logging - TODO decorators?
 * metrics - TODO
 * Sample VSCode launch.json - see `.sample-vscode`, copy the `launch.json` to `.vscode` for example build configurations to debug the application and run individual mocha tests

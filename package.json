@@ -53,7 +53,7 @@
     "gulp-webdriver": "^2.0.3",
     "json-server": "^0.12.2",
     "mocha": "^5.2.0",
-    "node-sass": "^4.9.0",
+    "node-sass": "^4.9.4",
     "nyc": "^11.9.0",
     "pa11y": "^5.0.4",
     "pa11y-reporter-html": "^1.0.0",
@@ -64,6 +64,6 @@
     "tslint": "^5.10.0",
     "typescript": "^2.9.1",
     "wdio-mocha-framework": "^0.5.13",
-    "webdriverio": "^4.12.0"
+    "webdriverio": "^4.13.2"
   }
 }

@@ -13,7 +13,6 @@
     "check-coverage": "npm run coverage && nyc check-coverage --lines 70",
     "test-e2e": "gulp --gulpfile gulpfile-e2e.js",
     "generate-assets": "gulp generate-assets",
-    "audit": "nsp check",
     "test-pa11y": "node ./tests/accessibility/pa11y.js"
   },
   "dependencies": {
@@ -55,7 +54,6 @@
     "json-server": "^0.12.2",
     "mocha": "^5.2.0",
     "node-sass": "^4.9.0",
-    "nsp": "^3.2.1",
     "nyc": "^11.9.0",
     "pa11y": "^5.0.4",
     "pa11y-reporter-html": "^1.0.0",

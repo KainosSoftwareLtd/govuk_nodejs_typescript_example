@@ -1,6 +1,6 @@
 # Example gov.uk TypeScript web application
 
-[![Build Status](https://travis-ci.org/KainosSoftwareLtd/govuk_nodejs_typescript_example.svg?branch=master)](https://travis-ci.org/KainosSoftwareLtd/govuk_nodejs_typescript_example) [![NSP Status](https://nodesecurity.io/orgs/kainosnodeexamples/projects/9cbfc674-5539-4e40-bea0-c088fbfe4581/badge)](https://nodesecurity.io/orgs/kainosnodeexamples/projects/9cbfc674-5539-4e40-bea0-c088fbfe4581)
+[![Build Status](https://travis-ci.org/KainosSoftwareLtd/govuk_nodejs_typescript_example.svg?branch=master)](https://travis-ci.org/KainosSoftwareLtd/govuk_nodejs_typescript_example)
 
 This is an example NodeJS [TypeScript](https://www.typescriptlang.org/) application which includes the [GOV.UK front-end toolkit](https://github.com/alphagov/govuk_frontend_toolkit) but has been modified to be production ready. It is intended as an example and template for gov.uk beta node applications.
 
@@ -59,7 +59,7 @@ Clone or copy the source into your own project. There are sections marked with `
   * headers - added [helmet](https://www.npmjs.com/package/helmet)
   * Request sanitisation - TODO
   * cross-site scripting - added [csurf](https://github.com/expressjs/csurf) package which uses cookies to protect against [XSS](https://www.owasp.org/index.php/Cross-site_Scripting_(XSS)), see [here](https://github.com/pillarjs/understanding-csrf) for how this works. Any forms with a POST method, see `FormExample.html`, should have the `csurf-token.html` embedded. The token in the view is compared with the token in the cookie. Removing/changing the cookie token before submitting form will produce a csrf error.
-  * vulnerbility checks - NSP, see badge and run locally with `npm run audit` (replace with `npm audit` after [NPM 6 release](https://medium.com/npm-inc/announcing-npm-6-5d0b1799a905))
+  * vulnerbility checks - [NPM security check](https://docs.npmjs.com/getting-started/running-a-security-audit), vulnerble packages will be flagged during `npm install`, run `npm audit` to get more details
 * gzip - added [compression](https://www.npmjs.com/package/compression)
 * dependency injection - example of service in controller - AM created service that calls fake api (npm server-json). Posts form data and displays a summary of form input. Added service to IOC and used inversify to facilitate dependency injection into formExampleController. Mocked service in tests using npm ts-mockito
 * validation - see `FormExampleController.ts`, `FormExampleModel.ts` and `formExample.html` for example of form post endpoint that displays GDS styled validation errors against fields (with links) using validation decorators ([class-validator](https://www.npmjs.com/package/class-validator))

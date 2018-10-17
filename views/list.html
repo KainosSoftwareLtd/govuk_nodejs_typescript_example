@@ -1,0 +1,44 @@
+{% extends "includes/layout.html" %}
+
+{% block page_title %}
+{% if serviceName %} {{ serviceName }} {% endif %}
+{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+
+    {% include "includes/phase_banner_beta.html" %}
+
+    <div class="grid-row">
+      <h1 class="heading-xlarge">
+        List page example
+      </h1>
+
+      <table id="listTable">
+        <thead>
+          <tr>
+            <th scope="col">Full name</th>
+            <th scope="col">Date of birth</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        {% if data %}
+        <tbody>
+
+          {% for item in data %}
+          <tr>
+            <th scope="row">{{ item.fullName }}</th>
+            <td scope="row">{{ item.dob }}</td><!-- Use a nunjucks custom filter to format date -->
+            <td><a href="/form-example/{{ item.id }}">view</a></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+        {% endif %}
+      </table>
+
+    </div>
+
+</main>
+
+{% endblock %}

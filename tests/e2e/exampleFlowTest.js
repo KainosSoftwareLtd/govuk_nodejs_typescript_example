@@ -24,7 +24,11 @@ describe('Example flow test', () => {
       .setValue('#contactEmail', 'testemail@email.com')
       .click('#save-and-continue')
 
-    // Index
+    // Summary
       .waitForExist('#summaryTable')
+      .click('#list-link')
+
+    // List
+    .waitForExist('#listTable')
   })
 })

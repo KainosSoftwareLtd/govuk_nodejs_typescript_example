@@ -63,6 +63,7 @@ Clone or copy the source into your own project. There are sections marked with `
 * gzip - added [compression](https://www.npmjs.com/package/compression)
 * dependency injection - example of service in controller - AM created service that calls fake api (npm server-json). Posts form data and displays a summary of form input. Added service to IOC and used inversify to facilitate dependency injection into formExampleController. Mocked service in tests using npm ts-mockito
 * validation - see `FormExampleController.ts`, `FormExampleModel.ts` and `formExample.html` for example of form post endpoint that displays GDS styled validation errors against fields (with links) using validation decorators ([class-validator](https://www.npmjs.com/package/class-validator))
+* list view - see `ListExampleController.ts` for example of displaying tabular data, examples of GDS patterns for this are available in the [design system](https://design-system.service.gov.uk/components/table/) and on the [performance platform](https://www.gov.uk/performance/services?sortby=number_of_transactions&sortorder=descending)
 * testing
   * unit testing including mocking dependencies - unit testing of formExampleController with service mocked using mokito
   * browser testing - using [webdriver.io](http://webdriver.io/) to create browser tests, the configuration can be extended to call into remote selenium grids and services like [Saucelabs](https://saucelabs.com/) and [BrowserStack](https://www.browserstack.com/)

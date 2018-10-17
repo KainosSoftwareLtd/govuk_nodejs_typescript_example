@@ -2,10 +2,12 @@ import { injectable, inject } from 'inversify'
 import axios from 'axios'
 import { TYPES } from '../types'
 import { FormExampleModel } from '../models/formExampleModel'
+import { FormExampleModelList } from '../models/formExampleModelList'
 
 export interface FormClientInterface {
     create(formExampleModel: FormExampleModel)
     get(id: number)
+    getList(start: number, length: number, orderColumn: string, orderAscending: boolean): Promise<FormExampleModelList>
 }
 
 @injectable()
@@ -27,5 +29,13 @@ export class FormClient implements FormClientInterface {
           .then((response) => {
             return response.data
           })
-      }
+    }
+
+    public async getList(start: number, length: number, orderColumn: string, orderAscending: boolean): Promise<FormExampleModelList> {
+      return axios.get(`${this.url}/exampleForm?_start=${start}&_end=${start + length}`)
+          .then((response) => {
+            let total = +response.headers['X-Total-Count']
+            return new FormExampleModelList(response.data, start, length, orderColumn, orderAscending, total, total)
+          })
+    }
 }

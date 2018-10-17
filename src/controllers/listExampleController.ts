@@ -1,11 +1,24 @@
 import * as express from 'express'
-import { injectable } from 'inversify'
+import { inject, injectable } from 'inversify'
+import { TYPES } from '../types'
+import { FormClientInterface } from '../services/formClient'
 
 @injectable()
 export class ListExampleController {
+  private formClient: FormClientInterface
+
+  public constructor(@inject(TYPES.FormClientInterface) formClient: FormClientInterface) {
+    this.formClient = formClient
+  }
 
   public async get(req, res, next) {
-    return await res.render('list.html')
+    try {
+      // TODO get page/sort/filter details from request
+      let list = await this.formClient.getList(0, 100, null, true)
+      return res.render('list.html', list)
+    } catch (error) {
+      next(error)
+    }
   }
 
   public attachRoutes(router: express.Router) {

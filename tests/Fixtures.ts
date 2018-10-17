@@ -1,5 +1,5 @@
 import { Form, ContactOption } from '../src/models/formExampleModel'
-
+import { FormExampleModelList } from '../src/models/formExampleModelList'
 
 export const FORM_RECORD: Form = {
   id: 1,
@@ -12,6 +12,16 @@ export const FORM_RECORD: Form = {
   contactEmail: 'testemail@testing.com',
   contactPhone: '',
   contactSmsNumber: ''
+}
+
+export const FORM_LIST: FormExampleModelList = {
+  data: [FORM_RECORD],
+  start: 0,
+  length: 1,
+  orderColumn: '',
+  orderAscending: true,
+  recordsTotal: 1,
+  recordsFiltered: 0
 }
 
 export const VALID_FORM_ID = 1

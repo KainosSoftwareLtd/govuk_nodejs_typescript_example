@@ -1,0 +1,54 @@
+{% extends "includes/layout.html" %}
+
+{% block page_title %}
+{% if serviceName %} {{ serviceName }} {% endif %}
+{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+
+    {% include "includes/phase_banner_beta.html" %}
+
+    <div class="grid-row">
+      <h1 class="heading-xlarge">
+        List page example
+      </h1>
+
+      <table id="listTable">
+        <thead>
+          <tr>
+            <th scope="col">Month you apply</th>
+            <th class="numeric" scope="col">Rate for vehicles</th>
+            <th class="numeric" scope="col">Rate for bicycles</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">January</th>
+            <td class="numeric">£165.00</td>
+            <td class="numeric">£85.00</td>
+          </tr>
+          <tr>
+            <th scope="row">February</th>
+            <td class="numeric">£165.00</td>
+            <td class="numeric">£85.00</td>
+          </tr>
+          <tr>
+            <th scope="row">March</th>
+            <td class="numeric">£151.25</td>
+            <td class="numeric">£77.90</td>
+          </tr>
+          <tr>
+            <th scope="row">April</th>
+            <td class="numeric">£136.10</td>
+            <td class="numeric">£70.10</td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+
+</main>
+
+{% endblock %}

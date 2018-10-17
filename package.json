@@ -11,7 +11,7 @@
     "test": "npm run lint && mocha tests/unit/**/*.ts --require ts-node/register",
     "coverage": "nyc npm test",
     "check-coverage": "npm run coverage && nyc check-coverage --lines 70",
-    "test-e2e": "gulp --gulpfile gulpfile-e2e.js",
+    "test-e2e": "gulp --gulpfile gulpfile-e2e.js e2e",
     "generate-assets": "gulp generate-assets",
     "test-pa11y": "node ./tests/accessibility/pa11y.js"
   },
@@ -48,12 +48,12 @@
     "archiver": "^2.1.1",
     "chai": "^4.1.2",
     "chalk": "^2.4.1",
-    "gulp": "^3.9.1",
+    "gulp": "^4.0.0",
     "gulp-sass": "^4.0.1",
     "gulp-webdriver": "^2.0.3",
-    "json-server": "^0.12.2",
+    "json-server": "^0.14.0",
     "mocha": "^5.2.0",
-    "node-sass": "^4.9.0",
+    "node-sass": "^4.9.4",
     "nyc": "^11.9.0",
     "pa11y": "^5.0.4",
     "pa11y-reporter-html": "^1.0.0",
@@ -64,6 +64,6 @@
     "tslint": "^5.10.0",
     "typescript": "^2.9.1",
     "wdio-mocha-framework": "^0.5.13",
-    "webdriverio": "^4.12.0"
+    "webdriverio": "^4.13.2"
   }
 }

@@ -2,23 +2,21 @@ var gulp = require('gulp')
 var sass = require('gulp-sass')
 
 gulp.task('assets', function () {
-  gulp.src('node_modules/govuk_frontend_toolkit/javascripts/**/*')
+  return gulp.src('node_modules/govuk_frontend_toolkit/javascripts/**/*')
     .pipe(gulp.dest('govuk_modules/govuk_frontend_toolkit/javascripts', { overwrite: true }))
-
-  gulp.src('node_modules/govuk_frontend_toolkit/images/**/*')
+    .pipe(gulp.src('node_modules/govuk_frontend_toolkit/images/**/*', {passthrough: true}))
     .pipe(gulp.dest('govuk_modules/govuk_frontend_toolkit/images', { overwrite: true }))
-
-  gulp.src('node_modules/govuk_template_jinja/assets/**/*')
+    .pipe(gulp.src('node_modules/govuk_template_jinja/assets/**/*', {passthrough: true}))
     .pipe(gulp.dest('govuk_modules/govuk_template/', { overwrite: true }))
 })
 
 gulp.task('templates', function () {
-  gulp.src('node_modules/govuk_template_jinja/views/layouts/govuk_template.html')
+  return gulp.src('node_modules/govuk_template_jinja/views/layouts/govuk_template.html')
     .pipe(gulp.dest('views/', { overwrite: true }))
 })
 
 gulp.task('sass', function () {
-  gulp.src('assets/sass/**/*.scss')
+  return gulp.src('assets/sass/**/*.scss')
     .pipe(sass({
       style: 'expanded',
       sourcemap: true,
@@ -34,6 +32,6 @@ gulp.task('sass', function () {
     .pipe(gulp.dest('public/stylesheets'))
 })
 
-gulp.task('generate-assets', ['assets', 'templates', 'sass'])
+gulp.task('generate-assets', gulp.series('assets', 'templates', 'sass'))
 
-gulp.task('default', ['generate-assets'])
+gulp.task('default', gulp.series('generate-assets'))

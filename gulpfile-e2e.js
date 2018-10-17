@@ -7,14 +7,14 @@ let seleniumServer
 gulp.task('selenium', (done) => {
   selenium.install({logger: console.log}, () => {
     selenium.start((err, child) => {
-      if (err) { return done(err) }
+      if (err) { done(err) }
       seleniumServer = child
       done()
     })
   })
 })
 
-gulp.task('e2e', ['selenium'], () => {
+gulp.task('e2e', gulp.series('selenium', () => {
   return gulp.src('tests/wdio.conf.js')
     .pipe(webdriver()).on('error', () => {
       seleniumServer.kill()
@@ -26,8 +26,7 @@ gulp.task('e2e', ['selenium'], () => {
     })
     .once('end', function () {
       seleniumServer.kill()
-      process.exit()
     })
-})
+}))
 
-gulp.task('default', ['e2e'])
+gulp.task('default', gulp.series('e2e'))

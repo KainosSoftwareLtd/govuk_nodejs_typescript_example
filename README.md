@@ -88,7 +88,7 @@ The prototype was updated to use the new [GDS design system](https://design-syst
 
 The majority of the effort is identifying the css changes in your views and manually testing that they still display correctly. This is because the names of css classes have changed and it is now necessary to add classes to tags were previously styles were inherited (e.g. `<p class="govuk-body>` and table tags). This effort will scale linearly with the amount and complexity of your views.
 
-For detailed changes see here TODO git commit diff.
+For detailed changes see [here](https://github.com/KainosSoftwareLtd/govuk_nodejs_typescript_example/commit/30e148795572961cb638b0904c73058482afa107) for git commit diff.
 
 *Assets*
 * Minor changes to how gulp is used in `generate-assets` task, no longer moving template as it is used directly from nunjucks in `node_modules`

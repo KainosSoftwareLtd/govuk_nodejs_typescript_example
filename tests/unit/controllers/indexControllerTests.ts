@@ -2,7 +2,7 @@ import 'mocha'
 import { expect } from 'chai'
 import * as supertest from 'supertest'
 import * as express from 'express'
-import * as expressNunjucks from 'express-nunjucks'
+import * as nunjucks from 'nunjucks'
 import * as path from 'path'
 import * as bodyParser from 'body-parser'
 import { TYPES } from '../../../src/types'
@@ -16,8 +16,19 @@ describe('IndexController', function () {
 
   beforeEach(function () {
     const app = express()
-    app.set('views', path.join(__dirname, '../../../views'))
-    expressNunjucks(app, { noCache: true })
+    let appViews = [
+      path.join(__dirname, '../../../node_modules/govuk-frontend/'),
+      path.join(__dirname, '../../../node_modules/govuk-frontend/components'),
+      path.join(__dirname, '../../../views')
+    ]
+    let nunjucksConfig = {
+      autoescape: true,
+      noCache: true,
+      express: app
+    }
+    nunjucks.configure(appViews, nunjucksConfig)
+    app.set('view engine', 'html')
+
     app.use(bodyParser.json())
     app.use(bodyParser.urlencoded({ extended: false }))
 

@@ -2,7 +2,7 @@ import 'mocha'
 import { expect } from 'chai'
 import * as supertest from 'supertest'
 import * as express from 'express'
-import * as expressNunjucks from 'express-nunjucks'
+import * as nunjucks from 'nunjucks'
 import * as path from 'path'
 import * as bodyParser from 'body-parser'
 import { mock, instance, when, verify, anything, capture } from 'ts-mockito'
@@ -20,8 +20,19 @@ describe('FormExampleController', function () {
 
   beforeEach(function () {
     const app = express()
-    app.set('views', path.join(__dirname, '../../../views'))
-    expressNunjucks(app, { noCache: true })
+    let appViews = [
+      path.join(__dirname, '../../../node_modules/govuk-frontend/'),
+      path.join(__dirname, '../../../node_modules/govuk-frontend/components'),
+      path.join(__dirname, '../../../views')
+    ]
+    let nunjucksConfig = {
+      autoescape: true,
+      noCache: true,
+      express: app
+    }
+    nunjucks.configure(appViews, nunjucksConfig)
+    app.set('view engine', 'html')
+
     app.use(bodyParser.json())
     app.use(bodyParser.urlencoded({ extended: false }))
 
@@ -140,7 +151,7 @@ describe('FormExampleController', function () {
         .get('/form-example/1')
         .expect(200)
         .then(res => {
-          expect(res.text).to.contain(fixtures.FORM_RECORD['full-name'])
+          expect(res.text).to.contain(fixtures.FORM_RECORD['fullName'])
           verify(mockFormClient.get(1)).once()
         })
     })

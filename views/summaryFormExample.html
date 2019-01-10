@@ -1,57 +1,52 @@
 {% extends "includes/layout.html" %}
 
-{% block page_title %}
+{% block pageTitle %}
 {% if serviceName %} {{ serviceName }} {% endif %}
 {% endblock %}
 
 {% block content %}
+    <div class="govuk-grid-row">
+        <div class="govuk-grid-column-two-thirds">
 
-<main id="content" role="main">
-
-    {% include "includes/phase_banner_beta.html" %}
-
-    <div class="grid-row">
-        <div class="column-two-thirds">
-
-                <h1 class="heading-xlarge">
-                        <span class="heading-secondary">Example summary</span>
-                        Summary details
+                <h1 class="govuk-heading-xl">
+                    <span class="govuk-caption-xl">Example summary</span>
+                    Summary details
                 </h1>
 
-                <table id="summaryTable">
-                    <caption class="heading-small">Example form summary</caption>
-                    <tbody>
-                        <tr>
-                           <th>Full name</th>
-                           <td>{{ form.fullName }}</td>
+                <table id="summaryTable" class="govuk-table">
+                    <caption class="govuk-table__caption">Example form summary</caption>
+                    <tbody class="govuk-table__body">
+                        <tr class="govuk-table__row">
+                           <th class="govuk-table__header" scope="row">Full name</th>
+                           <td class="govuk-table__cell">{{ form.fullName }}</td>
                         </tr>
-                        <tr>
-                            <th>Date of birth</th>
-                            <td>{{ form.dob }}</td>
+                        <tr class="govuk-table__row">
+                            <th class="govuk-table__header" scope="row">Date of birth</th>
+                            <td class="govuk-table__cell">{{ form.dob }}</td>
                         </tr>
-                        <tr>
-                            <th>How do you want to be contacted?</th>
-                            <td>{{ form.preferredContactOption }}</td>
+                        <tr class="govuk-table__row">
+                            <th class="govuk-table__header" scope="row">How do you want to be contacted?</th>
+                            <td class="govuk-table__cell">{{ form.preferredContactOption }}</td>
                         </tr>
 
                         {% if form.preferredContactOption == "email" %}
-                        <tr>
-                            <th>Email address</th>
-                            <td>{{ form.contactEmail }}</td>
+                        <tr class="govuk-table__row">
+                            <th class="govuk-table__header" scope="row">Email address</th>
+                            <td class="govuk-table__cell">{{ form.contactEmail }}</td>
                         </tr>
                         {% endif %}
 
                         {% if form.preferredContactOption == "phone" %}
-                        <tr>
-                            <th>Phone number</th>
-                            <td>{{ form.contactPhone }}</td>
+                        <tr class="govuk-table__row">
+                            <th class="govuk-table__header" scope="row">Phone number</th>
+                            <td class="govuk-table__cell">{{ form.contactPhone }}</td>
                         </tr>
                         {% endif %}
 
                         {% if form.preferredContactOption == "sms" %}
-                        <tr>
-                            <th>Mobile phone number</th>
-                            <td>{{ form.contactSmsNumber }}</td>
+                        <tr class="govuk-table__row">
+                            <th class="govuk-table__header" scope="row">Mobile phone number</th>
+                            <td class="govuk-table__cell">{{ form.contactSmsNumber }}</td>
                         </tr>
                         {% endif %}
                     </tbody>
@@ -59,9 +54,5 @@
         </div>
     </div>
 
-    <div class="grid-row">
-        <a id="list-link" href="/list-example">View in list</a>
-    </div>
-</main>
-
+    <a id="list-link" class="govuk-link" href="/list-example">View in list</a>
 {% endblock %}

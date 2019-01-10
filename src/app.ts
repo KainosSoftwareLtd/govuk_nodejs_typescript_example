@@ -1,25 +1,31 @@
 import * as express from 'express'
-import * as expressNunjucks from 'express-nunjucks'
+import * as nunjucks from 'nunjucks'
 import * as path from 'path'
 import * as logger from 'morgan'
 import * as cookieParser from 'cookie-parser'
 import * as csrf from 'csurf'
 import * as bodyParser from 'body-parser'
-import * as favicon from 'serve-favicon'
 import * as compression from 'compression'
 import { attachErrorHandling } from './middleware/errorHandling'
 import { attachSecurityHeaders } from './middleware/securityHeaders'
 import { attachRoutes } from './routes'
 
 const app = express()
-const isDev = app.get('env') === 'development'
+// const isDev = app.get('env') === 'development' // Use for caching etc. in development
 
 // view engine setup
-app.set('views', path.join(__dirname, '../views'))
-expressNunjucks(app, {
-  watch: isDev,
-  noCache: isDev
-})
+let appViews = [
+  path.join(__dirname, '../node_modules/govuk-frontend/'),
+  path.join(__dirname, '../node_modules/govuk-frontend/components'),
+  path.join(__dirname, '../views')
+]
+let nunjucksConfig = {
+  autoescape: true,
+  noCache: true,
+  express: app
+}
+nunjucks.configure(appViews, nunjucksConfig)
+app.set('view engine', 'html')
 
 attachSecurityHeaders(app) // Helmet security headers and CSP
 
@@ -30,9 +36,6 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cookieParser())
 app.use(csrf({ cookie: true }))
 app.use('/public', express.static(path.join(__dirname, '../public')))
-app.use('/public', express.static(path.join(__dirname, '../govuk_modules', 'govuk_template')))
-app.use('/public', express.static(path.join(__dirname, '../govuk_modules', 'govuk_frontend_toolkit')))
-app.use(favicon(path.join(__dirname, '../govuk_modules', 'govuk_template', 'images', 'favicon.ico')))
 
 // Add variables that are available in all views.
 app.use(function (req, res, next) {

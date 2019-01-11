@@ -45,8 +45,7 @@ errorShots
 dist
 
 # govuk assets
-govuk_modules
-views/govuk_template.html
+public/govuk-frontend
 
 # generated styles
 public/stylesheets

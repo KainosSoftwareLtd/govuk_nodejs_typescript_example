@@ -1,139 +1,147 @@
 {% extends "includes/layout.html" %}
 
-{% block page_title %}
+{% block pageTitle %}
 {% if serviceName %} {{ serviceName }} {% endif %}
 {% endblock %}
 
 {% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
 
-<main id="content" role="main">
+      {% include "includes/validation-error-messages.html" %}
 
-    {% include "includes/phase_banner_beta.html" %}
+      <h1 class="govuk-heading-xl">
+        <span class="govuk-caption-xl">Example form</span>
+        Enter your details
+      </h1>
 
-    <div class="grid-row">
-        <div class="column-two-thirds">
+      <div class="govuk-inset-text">
+          Go to <a href="https://design-system.service.gov.uk">design-system.service.gov.uk</a> for full examples of form controls and validation error display.
+      </div>
 
-            {% include "includes/validation-error-messages.html" %}
-
-            <h1 class="heading-xlarge">
-              <span class="heading-secondary">Example form</span>
-              Enter your details
-            </h1>
-
-            <div class="panel panel-border-wide">
-              <p>
-                Go to <a href="http://govuk-elements.herokuapp.com/form-elements/">govuk-elements</a> for full examples of form controls and validation error display.
-              </p>
-            </div>
-            
-            <form method="POST" action="form-example">
-              <div class="form-group {% if errors['fullName'] %} form-group-error {% endif %}">
-                  {% include "partials/csurf-token.html" %}
-                <label class="form-label-bold" for="fullName">Full name</label>
-                {% if errors['fullName'] %}
-                <span class="error-message" id="error-fullName">{{ errors['fullName'] }}</span>
-                {% endif %}
-                <input class="form-control{% if errors['fullName'] %} form-control-error {% endif %}" id="fullName" type="text" name="fullName" value="{{ data['fullName'] }}">
-              </div>
-
-              <div class="form-group {% if errors['dob'] %} form-group-error {% endif %}">
-                <fieldset>
-                  <legend>
-                    <span class="form-label-bold" id="dob">
-                      What is your date of birth?
-                    </span>
-                    <span class="form-hint">For example, 31 3 1980</span>
-                  </legend>
-
-                  {% include "includes/multipart-date-validation-error-messages.html" %}
-
-                  <div class="form-date">
-                    <div class="form-group form-group-day">
-                        
-                      <label class="form-label" for="dobDay">Day</label>
-                      
-                      <input class="form-control {% if errors['dobDay'] or 
-                      not errors['dobDay'] and not errors['dobMonth'] and not errors['dobYear'] and errors['dob'] %} form-control-error {% endif %}" 
-                      id="dobDay" name="dobDay" type="number" pattern="[0-9]*" value="{{ data['dobDay'] }}">
-                    </div>
-                    <div class="form-group form-group-month">
-                      <label class="form-label" for="dobMonth">Month</label>
-                      
-                      <input class="form-control{% if errors['dobMonth'] or 
-                      not errors['dobDay'] and not errors['dobMonth'] and not errors['dobYear'] and errors['dob'] %} form-control-error {% endif %}" 
-                      id="dobMonth" name="dobMonth" type="number" pattern="[0-9]*" value="{{ data['dobMonth'] }}">
-                    </div>
-                    <div class="form-group form-group-year">
-                      <label class="form-label" for="dobYear">Year</label>
-                      
-                      <input class="form-control {% if errors['dobYear'] or 
-                      not errors['dobDay'] and not errors['dobMonth'] and not errors['dobYear'] and errors['dob'] %} form-control-error {% endif %}" 
-                      id="dobYear" name="dobYear" type="number" pattern="[0-9]*" value="{{ data['dobYear'] }}">
-                    </div>
-                  </div>
-                </fieldset>
-              </div>
-
-              <div class="form-group{% if errors['preferredContactOption'] or errors['contactEmail'] %} form-group-error {% endif %}">
-                  <fieldset>
-
-                    <legend>
-                      <span class="form-label-bold">
-                        How do you want to be contacted?
-                      </span>
-                      {% if errors['preferredContactOption'] %}
-                        <span class="error-message" id="error-preferredContactOption">{{ errors['preferredContactOption'] }}</span>
-                      {% endif %}
-                    </legend>
-
-                    <div class="multiple-choice" data-target="contact-by-email">
-                      <input id="example-contact-by-email" type="radio" name="preferredContactOption" value="email" {% if data.preferredContactOption == "email" %} checked {% endif %}>
-                      <label for="example-contact-by-email">Email</label>
-                    </div>
-                    <div class="panel panel-border-narrow js-hidden" id="contact-by-email">
-                      <label class="form-label" for="contactEmail">Email address</label>
-                      {% if errors['contactEmail'] %}
-                        <span class="error-message" id="error-contactEmail">{{ errors['contactEmail'] }}</span>
-                      {% endif %}
-                      <input class="form-control {% if errors['contactEmail'] %} form-control-error {% endif %}"name="contactEmail" type="text" id="contactEmail" value="{{ data['contactEmail'] }}">
-                    </div>
-
-                    <div class="multiple-choice" data-target="contact-by-phone">
-                      <input id="example-contact-by-phone" type="radio" name="preferredContactOption" value="phone" {% if data.preferredContactOption == "phone" %} checked {% endif %}>
-                      <label for="example-contact-by-phone">Phone</label>
-                    </div>
-                    <div class="panel panel-border-narrow js-hidden" id="contact-by-phone">
-                      <label class="form-label" for="contactPhone">Phone number</label>
-                      {% if errors['contactPhone'] %}
-                        <span class="error-message" id="error-contactPhone">{{ errors['contactPhone'] }}</span>
-                      {% endif %}
-                      <input class="form-control {% if errors['contactPhone'] %} form-control-error {% endif %}" name="contactPhone" type="number" id="contactPhone" value="{{ data['contactPhone'] }}">
-                    </div>
-
-                    <div class="multiple-choice" data-target="contact-by-text">
-                      <input id="example-contact-by-text" type="radio" name="preferredContactOption" value="sms" {% if data.preferredContactOption == "sms" %} checked {% endif %}>
-                      <label for="example-contact-by-text">Text message</label>
-                    </div>
-                    <div class="panel panel-border-narrow js-hidden" id="contact-by-text">
-                      <label class="form-label" for="contactSmsNumber">Mobile phone number</label>
-                      {% if errors['contactSmsNumber'] %}
-                        <span class="error-message" id="error-contactSmsNumber">{{ errors['contactSmsNumber'] }}</span>
-                      {% endif %}
-                      <input class="form-control {% if errors['contactSmsNumber'] %} form-control-error {% endif %}" name="contactSmsNumber" type="number" id="contactSmsNumber" value="{{ data['contactSmsNumber'] }}">
-                    </div>
-
-                  </fieldset>
-                </div>
-
-                <div class="form-group">
-                  <button class="button" type="submit" id="save-and-continue">Save and continue</button>
-                </div>
-            </form>
-
+      <form method="POST" action="form-example">
+        {% include "partials/csurf-token.html" %}
+        <div class="govuk-form-group {% if errors['fullName'] %} govuk-form-group--error {% endif %}">
+          <label class="govuk-label" for="fullName">Full name</label>
+          {% if errors['fullName'] %}
+          <span class="govuk-error-message" id="error-fullName">{{ errors['fullName'] }}</span>
+          {% endif %}
+          <input class="govuk-input {% if errors['fullName'] %} govuk-input--error {% endif %}" id="fullName" type="text" name="fullName" value="{{ data['fullName'] }}">
         </div>
 
+        <div class="govuk-form-group {% if errors['dob'] %} govuk-form-group--error {% endif %}">
+          <fieldset class="govuk-fieldset" aria-describedby="dob-hint {% if errors['dob'] %} dob-error {% endif %}" role="group">
+            <legend class="govuk-fieldset__legend">
+              What is your date of birth?
+            </legend>
+            <span id="dob-hint" class="govuk-hint">
+              For example, 31 3 1980
+            </span>
+            {% include "includes/multipart-date-validation-error-messages.html" %}
+            <div class="govuk-date-input" id="dob">
+              <div class="govuk-date-input__item">
+                <div class="govuk-form-group">
+                  <label class="govuk-label govuk-date-input__label" for="dob-day">
+                    Day
+                  </label>
+                  <input class="govuk-input govuk-date-input__input govuk-input--width-2 {% if errors['dobDay'] or
+                  not errors['dobDay'] and not errors['dobMonth'] and not errors['dobYear'] and errors['dob'] %} govuk-input--error {% endif %}" id="dobDay" name="dobDay" type="number" value="{{ data['dobDay'] }}" pattern="[0-9]*">
+                </div>
+              </div>
+              <div class="govuk-date-input__item">
+                <div class="govuk-form-group">
+                  <label class="govuk-label govuk-date-input__label" for="dob-month">
+                    Month
+                  </label>
+                  <input class="govuk-input govuk-date-input__input govuk-input--width-2 {% if errors['dobMonth'] or
+                  not errors['dobDay'] and not errors['dobMonth'] and not errors['dobYear'] and errors['dob'] %} govuk-input--error {% endif %}" id="dobMonth" name="dobMonth" type="number" value="{{ data['dobMonth'] }}" pattern="[0-9]*">
+                </div>
+              </div>
+              <div class="govuk-date-input__item">
+                <div class="govuk-form-group">
+                  <label class="govuk-label govuk-date-input__label" for="dob-year">
+                    Year
+                  </label>
+                  <input class="govuk-input govuk-date-input__input govuk-input--width-4 {% if errors['dobYear'] or
+                  not errors['dobDay'] and not errors['dobMonth'] and not errors['dobYear'] and errors['dob'] %} govuk-input--error {% endif %}" id="dobYear" name="dobYear" type="number" value="{{ data['dobYear'] }}" pattern="[0-9]*">
+                </div>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+
+        <div id="preferredContactOption" class="govuk-form-group {% if errors['preferredContactOption'] or errors['contactEmail'] or errors['contactPhone'] or errors['contactSmsNumber'] %} govuk-form-group--error {% endif %}">
+          <fieldset class="govuk-fieldset" aria-describedby="how-contacted-conditional-hint">
+            <legend class="govuk-fieldset__legend">
+              How would you prefer to be contacted?
+            </legend>
+            <span id="how-contacted-conditional-hint" class="govuk-hint">
+              Select one option.
+            </span>
+            {% if errors['preferredContactOption'] %}
+            <span class="govuk-error-message" id="error-preferredContactOption">{{ errors['preferredContactOption'] }}</span>
+            {% endif %}
+            <div class="govuk-radios govuk-radios--conditional" data-module="radios">
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="example-contact-by-email" name="preferredContactOption" type="radio" value="email" data-aria-controls="conditional-example-contact-by-email" {% if data.preferredContactOption == "email" %} checked {% endif %}>
+                <label class="govuk-label govuk-radios__label" for="example-contact-by-email">
+                  Email
+                </label>
+              </div>
+              <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="conditional-example-contact-by-email">
+                <div class="govuk-form-group">
+                  <label class="govuk-label" for="contactEmail">
+                    Email address
+                  </label>
+                  {% if errors['contactEmail'] %}
+                  <span class="govuk-error-message" id="error-contactEmail">{{ errors['contactEmail'] }}</span>
+                  {% endif %}
+                  <input class="govuk-input govuk-!-width-two-thirds {% if errors['contactEmail'] %} govuk-input--error {% endif %}" id="contactEmail" name="contactEmail" type="email" value="{{ data['contactEmail'] }}">
+                </div>
+
+              </div>
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="example-contact-by-phone" name="preferredContactOption" type="radio" value="phone" data-aria-controls="conditional-example-contact-by-phone" {% if data.preferredContactOption == "phone" %} checked {% endif %}>
+                <label class="govuk-label govuk-radios__label" for="example-contact-by-phone">
+                  Phone
+                </label>
+              </div>
+              <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="conditional-example-contact-by-phone">
+                <div class="govuk-form-group">
+                  <label class="govuk-label" for="contactPhone">
+                    Phone number
+                  </label>
+                  {% if errors['contactPhone'] %}
+                  <span class="govuk-error-message" id="error-contactPhone">{{ errors['contactPhone'] }}</span>
+                  {% endif %}
+                  <input class="govuk-input govuk-!-width-one-third {% if errors['contactSmsNumber'] %} govuk-input--error {% endif %}" id="contactPhone" name="contactPhone" type="tel" value="{{ data['contactPhone'] }}">
+                </div>
+
+              </div>
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="how-contacted-conditional-3" name="preferredContactOption" type="radio" value="sms" data-aria-controls="example-contact-by-text" {% if data.preferredContactOption == "sms" %} checked {% endif %}>
+                <label class="govuk-label govuk-radios__label" for="how-contacted-conditional-3">
+                  Text message
+                </label>
+              </div>
+              <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="example-contact-by-text">
+                <div class="govuk-form-group">
+                  <label class="govuk-label" for="contactSmsNumber">
+                    Mobile phone number
+                  </label>
+                  {% if errors['contactSmsNumber'] %}
+                  <span class="govuk-error-message" id="error-contactSmsNumber">{{ errors['contactSmsNumber'] }}</span>
+                  {% endif %}
+                  <input class="govuk-input govuk-!-width-one-third {% if errors['contactSmsNumber'] %} govuk-input--error {% endif %}" id="contactSmsNumber" name="contactSmsNumber" type="tel"  value="{{ data['contactSmsNumber'] }}">
+                </div>
+
+              </div>
+            </div>
+          </fieldset>
+        </div>
+
+        <button class="govuk-button" type="submit" id="save-and-continue">Save and continue</button>
+      </form>
     </div>
-
-</main>
-
+  </div>
 {% endblock %}

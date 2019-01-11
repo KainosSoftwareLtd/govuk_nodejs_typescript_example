@@ -81,3 +81,41 @@ Clone or copy the source into your own project. There are sections marked with `
     As applications grow in size there will be a lot of Environment Variables, so we need to keep them in a single script so the application is self documenting and easier for someone unfamiliar to understand, providing a single file to look at rather than searching the code. The config script should supply defaults and comments to explain the config if appropriate and necessary, so environmental differences are easy to identify.
 * debug - see `.vscode/launch.json`, this is where debug profiles are defined which currently includes profiles to debug the application, run individual mocha tests and run all mocha tests
 * Healthchecks - Example Healthcheck controller `src/controllers/HealthcheckController.ts` exposes two endpoints `/status` and `/healthcheck`, see [here](https://stevenwilliamalexander.wordpress.com/2017/09/19/service-healthcheck-pattern/) for details
+
+## Updating to new govuk-frontend
+
+The prototype was updated to use the new [GDS design system](https://design-system.service.gov.uk) which has different SASS styles and static assets. Below is some notes on the steps used to update the application. See [here](https://design-system.service.gov.uk/get-started/updating-your-code/) and [here](https://github.com/alphagov/govuk-frontend/blob/master/docs/installation/installing-with-npm.md) for more details.
+
+The majority of the effort is identifying the css changes in your views and manually testing that they still display correctly. This is because the names of css classes have changed and it is now necessary to add classes to tags were previously styles were inherited (e.g. `<p class="govuk-body>` and table tags). This effort will scale linearly with the amount and complexity of your views.
+
+For detailed changes see [here](https://github.com/KainosSoftwareLtd/govuk_nodejs_typescript_example/commit/30e148795572961cb638b0904c73058482afa107) for git commit diff.
+
+*Assets*
+* Minor changes to how gulp is used in `generate-assets` task, no longer moving template as it is used directly from nunjucks in `node_modules`
+
+*Package.json*
+* Removed `govuk-elements-sass`, `govuk_frontend_toolkit` and `govuk_template_jinja`, replaced with `govuk-frontend`
+* Removed `express-nunjucks` and added `nunjucks` so could use `govuk-frontend` components directly as templates, this also requires changes to app.ts and tests to add view engine
+
+*Javascript*
+* Moved initialising Javascript from `application.js` into `views/layout.html` for hide/show sections as it is now in a single `govuk-frontend/all.js`
+
+*SASS*
+* Explicitly set asset path variable to match new location of gov-frontend assets
+* Update import to new nodemodules path
+
+*JavaScript*
+* Include new govuk `all.js` in layout and remove initiation from application script
+
+*Template and layouts*
+* Replace phase banner with new component and move into layout, see [here](https://design-system.service.gov.uk/components/phase-banner/)
+* Replace footer links with new component, see [here](https://design-system.service.gov.uk/components/footer/)
+* In layouts, Nunjucks variable names have been updated from snake_case to camelCase, e.g. `page_title` to `pageTitle`.
+* Removed cooke warning banner, as there is no supplied template for this. An example is available [here](https://github.com/alphagov/govuk-design-system/blob/0128dac77fe8510428c027fa6cf80ffaa646fecd/views/partials/_cookie-banner.njk) but it is not part of `govuk-frontend` yet and needs a custom implementation.
+
+*Views*
+* Remove `<main id="content" role="main">` tag, this is now included in `{% block main%}` in supplied `template.njk`
+* Find/replace header classes to new class names, e.g. `heading-xlarge` to `govuk-heading-xl`, see [here](https://design-system.service.gov.uk/get-started/updating-your-code/) for details
+* Append `govuk-` to specifc css classes, e.g. `grid-row` to `govuk-grid-row`, see [here](https://design-system.service.gov.uk/get-started/updating-your-code/) for details. This affects multiple elements, such as button/lists, and some classes have `--` on last part of class name.
+* Add `class="govuk-body"` to all `<p>` tags (previously they inherited correct styles)
+* Add table specific classes to all table/thead/tbody/tr/th/td tags (much more verbose than previously needed), e.g. `govuk-table__body`, see [here](https://design-system.service.gov.uk/components/table/)
